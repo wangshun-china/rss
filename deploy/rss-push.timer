@@ -1,0 +1,11 @@
+[Unit]
+Description=Hourly RSS pull and Feishu push
+
+[Timer]
+OnCalendar=*-*-* *:17:00
+RandomizedDelaySec=60
+Persistent=true
+Unit=rss-push.service
+
+[Install]
+WantedBy=timers.target

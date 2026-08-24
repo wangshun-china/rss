@@ -1,0 +1,29 @@
+# 订阅的 X (Twitter) 账号
+twitter_accounts:
+  - thsottiaux
+  - sunyuchentron
+  - SunNeverSetsX
+  - levelsio
+  - lidangzzz
+
+# 订阅的 Reddit 版块（AI / 编程类）
+reddit_subreddits:
+  - MachineLearning
+  - LocalLLaMA
+  - programming
+  - rust
+
+push:
+  # 单张卡片最多展示条数，超出部分折叠为"+N"
+  max_items_per_card: 10
+  # 推文正文最大长度（字符），超出截断
+  tweet_text_max_chars: 500
+
+filters:
+  # 不推送回复别人的推文
+  twitter_skip_replies: false
+  # 不推送转推
+  twitter_skip_retweets: false
+
+# 展示时间用的时区偏移小时数（8 = 北京时间）
+timezone_offset_hours: 8

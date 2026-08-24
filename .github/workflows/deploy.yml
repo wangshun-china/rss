@@ -1,0 +1,79 @@
+# 部署流程（沿用 G:\project\template 的思路做适配）：
+# GitHub Actions 决定发布哪一版 -> 通过 SSH 同步到服务器 ~/deployments/rss
+# -> 服务器上由 systemd 定时器每小时执行一次。
+#
+# 所需 Repository Secrets：
+#   DEPLOY_SSH_KEY    部署专用 SSH 私钥（公钥已装入服务器 root 的 authorized_keys）
+#   SERVER_HOST       服务器地址，如 120.26.186.0
+#   TWITTER_API_KEY   twitterapi.io 的 Key
+#   FEISHU_WEBHOOK    飞书群机器人 webhook
+#   FEISHU_SECRET     飞书签名密钥（未开启可留空）
+
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-rss
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 准备 SSH
+        env:
+          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          SSH_HOST: ${{ secrets.SERVER_HOST }}
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: 生成运行时 .env
+        env:
+          TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+          FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
+          FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
+        run: |
+          umask 077
+          {
+            echo "TWITTER_API_KEY=$TWITTER_API_KEY"
+            echo "FEISHU_WEBHOOK=$FEISHU_WEBHOOK"
+            echo "FEISHU_SECRET=$FEISHU_SECRET"
+          } > .env
+
+      - name: 同步代码到服务器
+        env:
+          SSH_HOST: ${{ secrets.SERVER_HOST }}
+        run: |
+          rsync -az --delete \
+            --exclude '.git' --exclude '.github' \
+            --exclude '.env.example' --exclude '.gitignore' --exclude 'README.md' \
+            --exclude 'state.json' --exclude '__pycache__' \
+            -e "ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes" \
+            ./ "root@$SSH_HOST:deployments/rss/"
+
+      - name: 安装依赖并重启定时器
+        env:
+          SSH_HOST: ${{ secrets.SERVER_HOST }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes "root@$SSH_HOST" '
+            set -e
+            cd ~/deployments/rss
+            [ -d .venv ] || python3 -m venv .venv
+            .venv/bin/pip install -q -r requirements.txt
+            cp deploy/rss-push.service deploy/rss-push.timer /etc/systemd/system/
+            systemctl daemon-reload
+            systemctl enable --now rss-push.timer >/dev/null
+            echo "--- timer 状态 ---"
+            systemctl list-timers rss-push.timer --no-pager | head -4
+          '
