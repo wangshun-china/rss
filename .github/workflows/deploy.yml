@@ -69,7 +69,11 @@ jobs:
           ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes "root@$SSH_HOST" '
             set -e
             cd ~/deployments/rss
-            [ -d .venv ] || python3 -m venv .venv
+            [ -d .venv ] || python3 -m venv .venv || {
+              apt-get update -qq
+              DEBIAN_FRONTEND=noninteractive apt-get install -y -qq python3-venv
+              python3 -m venv .venv
+            }
             .venv/bin/pip install -q -r requirements.txt
             cp deploy/rss-push.service deploy/rss-push.timer /etc/systemd/system/
             systemctl daemon-reload
