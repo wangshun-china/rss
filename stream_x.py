@@ -63,9 +63,16 @@ def api(method, path, payload=None):
     return r.json()
 
 
+def _rule_value(accounts):
+    """构造规则值：账号 + since 日期过滤，确保旧推文（置顶/热门/精选）
+    在匹配阶段就被排除，不会投递计费。窗口与客户端 72h 龄期过滤对齐。"""
+    since = (datetime.now(timezone.utc) - timedelta(hours=72)).strftime("%Y-%m-%d")
+    return " OR ".join(f"from:{a}" for a in accounts) + f" since:{since}"
+
+
 def ensure_rule(accounts):
     """保证服务端存在一条覆盖全部账号的激活规则；返回是否新建/有变更。"""
-    value = " OR ".join(f"from:{a}" for a in accounts)
+    value = _rule_value(accounts)
     rules = api("GET", "/oapi/tweet_filter/get_rules").get("rules") or []
     mine = next((r for r in rules if r.get("tag") == RULE_TAG), None)
 
