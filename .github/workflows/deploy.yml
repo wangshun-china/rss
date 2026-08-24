@@ -81,6 +81,8 @@ jobs:
           labels: |
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
             org.opencontainers.image.revision=${{ github.sha }}
+          # 阿里云 ACR 个人版不支持 buildx 默认的 provenance 附件清单（oci.empty.v1）
+          provenance: false
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
