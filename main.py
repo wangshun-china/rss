@@ -15,7 +15,7 @@ import yaml
 
 import ai
 from feishu import build_card, send
-from sources import reddit, twitter, twitter_synd
+from sources import reddit, twitter_synd
 import store
 
 log = logging.getLogger("rss")
@@ -82,10 +82,6 @@ def collect(cfg):
     scope = os.environ.get("RSS_SOURCES", "all")  # all / twitter / reddit
     x_stats = {"attempted": 0, "failed": []}
 
-    api_key = os.environ.get("TWITTER_API_KEY")
-    if not api_key:
-        log.info("未配置 TWITTER_API_KEY，仅使用 syndication 免费通道")
-
     filters = cfg.get("filters", {})
     skip_reply = filters.get("twitter_skip_replies", False)
     skip_rt = filters.get("twitter_skip_retweets", False)
@@ -96,25 +92,20 @@ def collect(cfg):
         for name in cfg.get("twitter_accounts", []):
             key = f"twitter:{name}"
             x_stats["attempted"] += 1
-            # 主通道：syndication 嵌入接口（免费）；备用：twitterapi.io
-            tweets = None
             try:
-                tweets = twitter_synd.fetch_user_tweets(name)
+                tweets, profile = twitter_synd.fetch_user_tweets(name)
             except Exception as e:
                 log.warning("syndication 拉 @%s 失败: %s", name, e)
-                if api_key:
-                    try:
-                        tweets = twitter.fetch_user_tweets(api_key, name)
-                    except Exception as e2:
-                        log.warning("twitterapi.io 拉 @%s 也失败: %s", name, e2)
-            if tweets is None:
                 x_stats["failed"].append(name)
                 continue
-            buckets[key] = [
-                t for t in tweets
-                if not (skip_reply and t["is_reply"])
-                and not (skip_rt and t["type"] == "retweet")
-            ]
+            buckets[key] = {
+                "tweets": [
+                    t for t in tweets
+                    if not (skip_reply and t["is_reply"])
+                    and not (skip_rt and t["type"] == "retweet")
+                ],
+                "profile": profile,
+            }
             _time.sleep(3)  # 轻微间隔，避免触发上游风控
 
     if scope not in ("all", "reddit"):
@@ -139,7 +130,7 @@ def split_new(store_data, key, items):
     return fresh, key not in store_data
 
 
-def build_tweet_card(name, items, fmt, sort_key, max_items, text_max):
+def build_tweet_card(name, items, profile, fmt, sort_key, max_items, text_max):
     ordered = sorted(items, key=sort_key)[:15]
 
     ai_result = None
@@ -152,6 +143,17 @@ def build_tweet_card(name, items, fmt, sort_key, max_items, text_max):
 
     trans = (ai_result or {}).get("translations") or {}
     lines = []
+
+    # 作者简介行：让人一眼知道这个账号是干什么的
+    if profile:
+        head = f"**{profile['name']}** · {profile['followers']:,} 粉丝"
+        if profile["bio"]:
+            head += f"\n{profile['bio']}"
+        lines.append(head)
+        insert_at = 1
+    else:
+        insert_at = 0
+
     for i, t in enumerate(ordered[:max_items]):
         meta = fmt(t["time"])
         if t["is_reply"]:
@@ -167,7 +169,7 @@ def build_tweet_card(name, items, fmt, sort_key, max_items, text_max):
         )
     summary = (ai_result or {}).get("summary")
     if summary:
-        lines.insert(0, f"**AI 总结**：{summary}")
+        lines.insert(insert_at, f"**AI 总结**：{summary}")
     return build_card(f"X · @{name} · {len(items)} 条更新", "blue", lines)
 
 
@@ -228,7 +230,12 @@ def run(dry_run=False):
     total_new = 0
 
     for key in sorted(buckets):
-        items = buckets[key]
+        bucket = buckets[key]
+        # twitter 源带作者档案，reddit 源是纯列表
+        if isinstance(bucket, dict) and "tweets" in bucket:
+            items, profile = bucket["tweets"], bucket["profile"]
+        else:
+            items, profile = bucket, None
         fresh, first_run = split_new(store_data, key, items)
         if first_run:
             log.info("[%s] 首次运行，记录 %d 条基线，本次不推送", key, len(items))
@@ -240,7 +247,7 @@ def run(dry_run=False):
         total_new += len(fresh)
         source, name = key.split(":", 1)
         card = (
-            build_tweet_card(name, fresh, fmt, sort_key, max_items, text_max)
+            build_tweet_card(name, fresh, profile, fmt, sort_key, max_items, text_max)
             if source == "twitter"
             else build_reddit_card(name, fresh, fmt, sort_key, max_items)
         )

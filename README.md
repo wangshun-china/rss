@@ -12,7 +12,7 @@ X 订阅（服务器容器）
 git push master
    └> Actions 构建 SHA 镜像双推 GHCR+ACR
        └> aliyun Runner compose 启动 rss-push 容器
-           └> 每整点 :17 拉 twitterapi.io -> AI 翻译总结 -> 飞书卡片
+            └> 每整点 :17 拉 X 时间线（syndication）-> AI 翻译总结 -> 飞书卡片
            去重状态：宿主机 ~/deployments/rss/data/state.json（挂载卷）
 
 Reddit 订阅（GitHub Actions）
@@ -33,17 +33,16 @@ Reddit 订阅（GitHub Actions）
 |---|---|---|---|
 | 组织 vars | `ALIYUN_ACR_REGISTRY` / `ALIYUN_ACR_USERNAME` | 是 | ACR 地址与用户名 |
 | 组织 secret | `ALIYUN_ACR_PASSWORD` | 是 | ACR 登录密码 |
-| 本仓库 secret | `TWITTER_API_KEY` | 是 | twitterapi.io 的 Key |
 | 本仓库 secret | `FEISHU_WEBHOOK` | 是 | 飞书群机器人 webhook |
 | 本仓库 secret | `FEISHU_SECRET` | 否 | 飞书签名校验密钥 |
 | 本仓库 secret | `AI_API_BASE` / `AI_API_KEY` | 否 | OpenAI 兼容接口，启用推文中文翻译与 AI 总结 |
 | 本仓库 secret | `AI_MODEL` | 否 | 模型名，默认 `deepseek-v4-flash-0731` |
 | 本仓库 secret | `REDDIT_PROXY` | 否 | Reddit 出站代理，如 `http://host.docker.internal:7890` |
 
-X 订阅主通道是 **syndication 嵌入接口**（官方给网页组件用的公开端点，无需任何认证），
-twitterapi.io 仅作为备用（配置了 Key 且 syndication 失败时才走）。
-国内服务器访问该接口需经代理：容器默认 `TWITTER_PROXY=http://host.docker.internal:7890`
-（即宿主机 sing-box mixed 端口），可在 Secrets 覆盖。
+X 订阅主通道是 **syndication 嵌入接口**（官方给网页组件用的公开端点，无需任何认证、
+无需任何账号）。国内服务器访问该接口需经代理：容器默认
+`TWITTER_PROXY=http://host.docker.internal:7890`（即宿主机 sing-box mixed 端口），
+可在 Secrets 覆盖。
 
 X 推文卡片默认带 **AI 总结**（整批内容概括），非中文推文自动附中文译文（保留原文）。
 未配置 AI 或调用失败时自动降级为只推原文。

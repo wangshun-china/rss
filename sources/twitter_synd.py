@@ -15,6 +15,7 @@ import re
 import time
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
+from urllib.parse import urlparse
 
 import requests
 
@@ -25,6 +26,37 @@ MAX_AGE_HOURS = float(os.environ.get("TWITTER_MAX_AGE_HOURS") or 72)
 
 _proxy = os.environ.get("TWITTER_PROXY") or None
 PROXIES = {"http": _proxy, "https": _proxy} if _proxy else None
+
+
+def _expand_links(text, entities):
+    """把文本里的 t.co 短链还原为真实链接（含图片/视频占位链）。"""
+    if not isinstance(entities, dict):
+        return text
+    for group in ("urls", "media"):
+        for u in entities.get(group) or []:
+            short, exp = u.get("url"), u.get("expanded_url")
+            if short and exp:
+                text = text.replace(short, exp)
+    return text
+
+
+def _domain(url):
+    try:
+        return urlparse(url).netloc.removeprefix("www.")
+    except Exception:
+        return url
+
+
+def _clean_bio(user):
+    """清理作者简介：展开短链为域名、合并换行、截断。"""
+    desc = htmllib.unescape(user.get("description") or "").strip()
+    ent = user.get("entities") or {}
+    for u in ((ent.get("description") or {}).get("urls") or []) + (ent.get("urls") or []):
+        short, exp = u.get("url"), u.get("expanded_url")
+        if short and exp:
+            desc = desc.replace(short, _domain(exp))
+    desc = re.sub(r"\s*\n\s*", " ｜ ", desc)
+    return re.sub(r"\s{2,}", " ", desc).strip("｜ ").strip()[:160]
 
 
 def _fetch_html(username):
@@ -46,20 +78,8 @@ def _fetch_html(username):
     raise RuntimeError(f"syndication 拉取失败: {last_err}")
 
 
-def _expand_links(text, entities):
-    """把正文里的 t.co 短链还原为真实链接（含图片/视频占位链）。"""
-    if not isinstance(entities, dict):
-        return text
-    for group in ("urls", "media"):
-        for u in entities.get(group) or []:
-            short, exp = u.get("url"), u.get("expanded_url")
-            if short and exp:
-                text = text.replace(short, exp)
-    return text
-
-
 def fetch_user_tweets(username, limit=20):
-    """返回该用户最新推文（最新在前），兼容原 twitterapi.io 的字段结构。"""
+    """返回 (推文列表, 作者档案)。推文最新在前，字段兼容原卡片构建逻辑。"""
     page = _fetch_html(username)
     m = re.search(r'<script id="__NEXT_DATA__" type="application/json"[^>]*>(.*?)</script>',
                   page, re.S)
@@ -70,6 +90,7 @@ def fetch_user_tweets(username, limit=20):
 
     now = datetime.now(timezone.utc)
     parsed = []
+    profile = None
     for e in entries:
         if e.get("type") != "tweet":
             continue
@@ -78,6 +99,14 @@ def fetch_user_tweets(username, limit=20):
         text = htmllib.unescape(t.get("full_text") or "").strip()
         if not tid or not text:
             continue
+        if profile is None:
+            u = t.get("user") or {}
+            profile = {
+                "name": htmllib.unescape(u.get("name") or username),
+                "screen_name": u.get("screen_name") or username,
+                "bio": _clean_bio(u),
+                "followers": int(u.get("followers_count") or 0),
+            }
         is_retweet = text.startswith("RT @") or "retweeted_status_result" in t
         text = _expand_links(text, t.get("entities"))
         try:
@@ -98,5 +127,9 @@ def fetch_user_tweets(username, limit=20):
     # 按发布时间倒序取最新，并丢弃超龄条目（置顶/热门等历史内容）
     parsed.sort(key=lambda x: x[0].timestamp() if x[0] else 0, reverse=True)
     cutoff = now.timestamp() - MAX_AGE_HOURS * 3600
-    return [t for dt, t in parsed[:limit * 2]
-            if dt is None or dt.timestamp() >= cutoff][:limit]
+    tweets = [t for dt, t in parsed[:limit * 2]
+              if dt is None or dt.timestamp() >= cutoff][:limit]
+    if profile is None:
+        profile = {"name": username, "screen_name": username,
+                   "bio": "", "followers": 0}
+    return tweets, profile
