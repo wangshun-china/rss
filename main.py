@@ -185,6 +185,7 @@ def build_reddit_card(sub, items, fmt, sort_key, max_items):
 
 def run(dry_run=False):
     load_env()
+    scope = os.environ.get("RSS_SOURCES", "all")  # all / twitter / reddit
     with open(os.path.join(BASE, "config.yaml"), encoding="utf-8") as f:
         cfg = yaml.safe_load(f)
 
