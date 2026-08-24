@@ -21,10 +21,11 @@ PROXIES = {"http": _proxy, "https": _proxy} if _proxy else None
 
 
 def _fetch_html(username):
-    """带重试地抓取时间线页面 HTML。"""
+    """带重试地抓取时间线页面 HTML；syndication 对 IP 有短窗口限流，需长退避。"""
     url = BASE.format(user=username)
     resp = None
-    for attempt in range(3):
+    last_err = ""
+    for attempt in range(4):
         try:
             resp = requests.get(url, headers={"User-Agent": UA},
                                 timeout=30, proxies=PROXIES)
@@ -33,7 +34,8 @@ def _fetch_html(username):
             last_err = f"HTTP {resp.status_code}"
         except requests.RequestException as e:
             last_err = str(e)
-        time.sleep(4 * (attempt + 1))
+        if attempt < 3:
+            time.sleep((10, 25, 45)[attempt])
     raise RuntimeError(f"syndication 拉取失败: {last_err}")
 
 
