@@ -258,6 +258,7 @@ def handle_tweet_event(payload):
             username = user_info.get("screen_name") or ""
             seen = set(store.load().get(f"twitter:{username}", []))
             if t["id"] in seen:
+                log.info("[去重] @%s 重复推文 %s，丢弃", username, t["id"])
                 continue
             bucket = buffer.setdefault(username, {"tweets": [], "profile": None})
             if bucket["profile"] is None:
