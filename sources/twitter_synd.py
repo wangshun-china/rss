@@ -46,6 +46,18 @@ def _fetch_html(username):
     raise RuntimeError(f"syndication 拉取失败: {last_err}")
 
 
+def _expand_links(text, entities):
+    """把正文里的 t.co 短链还原为真实链接（含图片/视频占位链）。"""
+    if not isinstance(entities, dict):
+        return text
+    for group in ("urls", "media"):
+        for u in entities.get(group) or []:
+            short, exp = u.get("url"), u.get("expanded_url")
+            if short and exp:
+                text = text.replace(short, exp)
+    return text
+
+
 def fetch_user_tweets(username, limit=20):
     """返回该用户最新推文（最新在前），兼容原 twitterapi.io 的字段结构。"""
     page = _fetch_html(username)
@@ -67,6 +79,7 @@ def fetch_user_tweets(username, limit=20):
         if not tid or not text:
             continue
         is_retweet = text.startswith("RT @") or "retweeted_status_result" in t
+        text = _expand_links(text, t.get("entities"))
         try:
             dt = parsedate_to_datetime(t.get("created_at") or "")
         except (TypeError, ValueError):

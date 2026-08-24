@@ -77,9 +77,10 @@ def truncate(text, limit):
 
 
 def collect(cfg):
-    """拉取源集合，返回 {key: items}；RSS_SOURCES 环境变量可限定只跑 twitter 或 reddit。"""
+    """拉取源集合，返回 (buckets, x_stats)；RSS_SOURCES 环境变量可限定只跑 twitter 或 reddit。"""
     buckets = {}
     scope = os.environ.get("RSS_SOURCES", "all")  # all / twitter / reddit
+    x_stats = {"attempted": 0, "failed": []}
 
     api_key = os.environ.get("TWITTER_API_KEY")
     if not api_key:
@@ -94,6 +95,7 @@ def collect(cfg):
 
         for name in cfg.get("twitter_accounts", []):
             key = f"twitter:{name}"
+            x_stats["attempted"] += 1
             # 主通道：syndication 嵌入接口（免费）；备用：twitterapi.io
             tweets = None
             try:
@@ -106,6 +108,7 @@ def collect(cfg):
                     except Exception as e2:
                         log.warning("twitterapi.io 拉 @%s 也失败: %s", name, e2)
             if tweets is None:
+                x_stats["failed"].append(name)
                 continue
             buckets[key] = [
                 t for t in tweets
@@ -115,7 +118,7 @@ def collect(cfg):
             _time.sleep(3)  # 轻微间隔，避免触发上游风控
 
     if scope not in ("all", "reddit"):
-        return buckets
+        return buckets, x_stats
 
     cid = os.environ.get("REDDIT_CLIENT_ID") or None
     csec = os.environ.get("REDDIT_CLIENT_SECRET") or None
@@ -126,7 +129,7 @@ def collect(cfg):
         except Exception as e:
             log.warning("拉取 r/%s 失败: %s", sub, e)
 
-    return buckets
+    return buckets, x_stats
 
 
 def split_new(store_data, key, items):
@@ -194,7 +197,31 @@ def run(dry_run=False):
         raise SystemExit("缺少 FEISHU_WEBHOOK（.env 或 GitHub Secrets）")
 
     store_data = store.load()
-    buckets = collect(cfg)
+    buckets, x_stats = collect(cfg)
+
+    # X 拉取连续整轮全失败时发告警卡片（第 4 轮触发一次，不重复刷屏）
+    if scope in ("all", "twitter") and cfg.get("twitter_accounts"):
+        streak_key = "_twitter_fail_streak"
+        prev = int(store_data.get(streak_key) or 0)
+        if x_stats["attempted"] == 0:
+            cur = prev
+        elif len(x_stats["failed"]) == x_stats["attempted"]:
+            cur = prev + 1
+        else:
+            cur = 0
+        store_data[streak_key] = cur
+        if cur >= 4 > prev and not dry_run:
+            names = "、".join(f"@{n}" for n in x_stats["failed"]) or "全部账号"
+            try:
+                send(webhook, secret, build_card(
+                    "X 订阅拉取异常",
+                    "red",
+                    [f"已连续 {cur} 轮全部账号拉取失败：{names}\n"
+                     f"推文不会永久丢失（恢复后会自动补拉），但请检查服务器代理与接口可用性。"],
+                ))
+                log.warning("已发送 X 拉取异常告警（连续失败 %d 轮）", cur)
+            except Exception as e:
+                log.warning("告警卡片发送失败: %s", e)
 
     pending = []      # (key, ids, card)
     baselines = {}    # 首运行只记基线不推送
