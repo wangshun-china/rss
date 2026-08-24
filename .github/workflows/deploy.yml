@@ -101,6 +101,8 @@ jobs:
       TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
       FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
       FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
+      # 可选：X 走 syndication 接口时的代理，如 http://host.docker.internal:7890
+      TWITTER_PROXY: ${{ secrets.TWITTER_PROXY }}
       # 可选：Reddit 被墙时走服务器本地代理，如 http://host.docker.internal:7890
       REDDIT_PROXY: ${{ secrets.REDDIT_PROXY }}
       # AI 翻译与总结（OpenAI 兼容接口），不配则只推原文
@@ -115,7 +117,6 @@ jobs:
           set -euo pipefail
 
           missing=()
-          [[ -n "$TWITTER_API_KEY" ]] || missing+=(TWITTER_API_KEY)
           [[ -n "$FEISHU_WEBHOOK" ]] || missing+=(FEISHU_WEBHOOK)
 
           if (( ${#missing[@]} > 0 )); then
@@ -163,7 +164,9 @@ jobs:
                 TZ: Asia/Shanghai
                 # 服务器只负责 X 源；Reddit 由 Actions 直连拉取（见 reddit.yml）
                 RSS_SOURCES: twitter
-                TWITTER_API_KEY: ${TWITTER_API_KEY:?TWITTER_API_KEY is required}
+                # X 走 syndication 免费接口，国内需经代理（sing-box）；留空则直连
+                TWITTER_PROXY: ${TWITTER_PROXY:-http://host.docker.internal:7890}
+                TWITTER_API_KEY: ${TWITTER_API_KEY:-}
                 FEISHU_WEBHOOK: ${FEISHU_WEBHOOK:?FEISHU_WEBHOOK is required}
                 FEISHU_SECRET: ${FEISHU_SECRET:-}
                 REDDIT_PROXY: ${REDDIT_PROXY:-}

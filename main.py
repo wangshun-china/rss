@@ -15,7 +15,7 @@ import yaml
 
 import ai
 from feishu import build_card, send
-from sources import reddit, twitter
+from sources import reddit, twitter, twitter_synd
 import store
 
 log = logging.getLogger("rss")
@@ -82,8 +82,8 @@ def collect(cfg):
     scope = os.environ.get("RSS_SOURCES", "all")  # all / twitter / reddit
 
     api_key = os.environ.get("TWITTER_API_KEY")
-    if not api_key and scope in ("all", "twitter"):
-        raise SystemExit("缺少 TWITTER_API_KEY（.env 或环境变量）")
+    if not api_key:
+        log.info("未配置 TWITTER_API_KEY，仅使用 syndication 免费通道")
 
     filters = cfg.get("filters", {})
     skip_reply = filters.get("twitter_skip_replies", False)
@@ -94,17 +94,25 @@ def collect(cfg):
 
         for name in cfg.get("twitter_accounts", []):
             key = f"twitter:{name}"
+            # 主通道：syndication 嵌入接口（免费）；备用：twitterapi.io
+            tweets = None
             try:
-                tweets = twitter.fetch_user_tweets(api_key, name)
+                tweets = twitter_synd.fetch_user_tweets(name)
             except Exception as e:
-                log.warning("拉取 @%s 失败: %s", name, e)
+                log.warning("syndication 拉 @%s 失败: %s", name, e)
+                if api_key:
+                    try:
+                        tweets = twitter.fetch_user_tweets(api_key, name)
+                    except Exception as e2:
+                        log.warning("twitterapi.io 拉 @%s 也失败: %s", name, e2)
+            if tweets is None:
                 continue
             buckets[key] = [
                 t for t in tweets
                 if not (skip_reply and t["is_reply"])
                 and not (skip_rt and t["type"] == "retweet")
             ]
-            _time.sleep(2)  # 轻微间隔，避免触发上游限流
+            _time.sleep(3)  # 轻微间隔，避免触发上游风控
 
     if scope not in ("all", "reddit"):
         return buckets
