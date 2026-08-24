@@ -40,6 +40,11 @@ Reddit 订阅（GitHub Actions）
 | 本仓库 secret | `AI_MODEL` | 否 | 模型名，默认 `deepseek-v4-flash-0731` |
 | 本仓库 secret | `REDDIT_PROXY` | 否 | Reddit 出站代理，如 `http://host.docker.internal:7890` |
 
+X 订阅主通道是 **syndication 嵌入接口**（官方给网页组件用的公开端点，无需任何认证），
+twitterapi.io 仅作为备用（配置了 Key 且 syndication 失败时才走）。
+国内服务器访问该接口需经代理：容器默认 `TWITTER_PROXY=http://host.docker.internal:7890`
+（即宿主机 sing-box mixed 端口），可在 Secrets 覆盖。
+
 X 推文卡片默认带 **AI 总结**（整批内容概括），非中文推文自动附中文译文（保留原文）。
 未配置 AI 或调用失败时自动降级为只推原文。
 
