@@ -90,6 +90,7 @@ jobs:
     name: Deploy to aliyun
     needs: build-and-push
     runs-on: [self-hosted, aliyun]
+    timeout-minutes: 20
     permissions:
       contents: read
       packages: read
@@ -127,9 +128,10 @@ jobs:
           GHCR_REPOSITORY="$GHCR_REGISTRY/$GHCR_IMAGE_NAME"
           ACR_REPOSITORY="$ALIYUN_ACR_REGISTRY/$ALIYUN_ACR_IMAGE_NAME"
 
-          if docker pull "$GHCR_REPOSITORY:$IMAGE_TAG"; then
+          # GHCR 从国内服务器拉取可能长时间挂起，限时后回退 ACR
+          if timeout --kill-after=20 120 docker pull "$GHCR_REPOSITORY:$IMAGE_TAG"; then
             IMAGE_REPOSITORY="$GHCR_REPOSITORY"
-          elif docker pull "$ACR_REPOSITORY:$IMAGE_TAG"; then
+          elif timeout --kill-after=20 300 docker pull "$ACR_REPOSITORY:$IMAGE_TAG"; then
             echo "GHCR pull failed; using Aliyun ACR fallback."
             IMAGE_REPOSITORY="$ACR_REPOSITORY"
           else
