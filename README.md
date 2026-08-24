@@ -88,13 +88,17 @@ docker compose pull && docker compose up -d   # 手动更新到 latest
 3. 安全设置建议选 **签名校验**，密钥填入 Secret `FEISHU_SECRET`
    （关键词校验需保证卡片含固定词；IP 白名单不适用云端出口）。
 
-## Reddit OAuth 凭据（建议配置）
+## Reddit 说明（重要）
 
-数据中心 IP 经常被 Reddit 匿名接口拦截（403/429），代码检测到后会自动切换
-OAuth 拉取，需要一对免费凭据：
+Reddit 在中国大陆被整站阻断，阿里云服务器直连不可达，**配 OAuth 凭据也无法绕过网络阻断**。
+当前可选方案：
 
-1. 登录 Reddit 后打开 <https://www.reddit.com/prefs/apps> -> create another app...
-2. 类型选 **script**，redirect uri 填 `http://localhost:8080`。
-3. 应用名下方的字符串是 client id，另一串是 secret。
-4. 在本仓库 Secrets 加 `REDDIT_CLIENT_ID` / `REDDIT_CLIENT_SECRET`，
-   并在 deploy.yml 的 deploy 环境（env 块）与 compose.yaml 的 environment 里补上两个变量。
+1. **走服务器本地代理**：确保代理进程可用后，在仓库 Secrets 加
+   `REDDIT_PROXY=http://host.docker.internal:7890`（端口按实际改），重新部署即可。
+   代码已内置支持，未设置时自动直连。
+2. 服务器上已有 sing-box（7890 端口），若节点修复则方案 1 即刻生效。
+
+另外，若 Reddit 返回 403/429（常见于数据中心 IP 的匿名访问），代码会尝试回退到
+OAuth API 拉取：在 <https://www.reddit.com/prefs/apps> 创建 script 应用，
+把 `REDDIT_CLIENT_ID` / `REDDIT_CLIENT_SECRET` 加进 Secrets 并在 deploy.yml 的
+deploy env 与 compose.yaml environment 里补上两个变量。

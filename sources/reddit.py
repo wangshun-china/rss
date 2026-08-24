@@ -1,17 +1,24 @@
-"""拉取 subreddit 最新帖子：优先匿名 RSS，被 403/429 时回退 OAuth API。"""
+"""拉取 subreddit 最新帖子：优先匿名 RSS，被 403/429 时回退 OAuth API。
 
+国内服务器访问 Reddit 被整站阻断时，可设置 REDDIT_PROXY（如 http://host.docker.internal:7890）
+让本模块的请求走代理。
+"""
+
+import os
 import time
 
 import requests
 import feedparser
 
 UA = "rss-feishu-bot/0.1 (personal feed aggregator)"
+_proxy = os.environ.get("REDDIT_PROXY") or None
+PROXIES = {"http": _proxy, "https": _proxy} if _proxy else None
 
 
 def _get_rss(url):
     """匿名 RSS，429 时退避重试一次。"""
     for attempt in range(2):
-        resp = requests.get(url, headers={"User-Agent": UA}, timeout=30)
+        resp = requests.get(url, headers={"User-Agent": UA}, timeout=30, proxies=PROXIES)
         if resp.status_code != 429:
             return resp
         time.sleep(5 * (attempt + 1))
@@ -25,6 +32,7 @@ def _oauth_token(client_id, client_secret):
         data={"grant_type": "client_credentials"},
         headers={"User-Agent": UA},
         timeout=30,
+        proxies=PROXIES,
     )
     resp.raise_for_status()
     return resp.json()["access_token"]
@@ -37,6 +45,7 @@ def _from_oauth(sub, limit, client_id, client_secret):
         params={"limit": limit},
         headers={"Authorization": f"bearer {token}", "User-Agent": UA},
         timeout=30,
+        proxies=PROXIES,
     )
     resp.raise_for_status()
     posts = []
