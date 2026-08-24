@@ -77,31 +77,37 @@ def truncate(text, limit):
 
 
 def collect(cfg):
-    """拉取所有源，返回 {key: items}；拉取失败的源跳过并告警。"""
+    """拉取源集合，返回 {key: items}；RSS_SOURCES 环境变量可限定只跑 twitter 或 reddit。"""
     buckets = {}
+    scope = os.environ.get("RSS_SOURCES", "all")  # all / twitter / reddit
+
     api_key = os.environ.get("TWITTER_API_KEY")
-    if not api_key:
+    if not api_key and scope in ("all", "twitter"):
         raise SystemExit("缺少 TWITTER_API_KEY（.env 或环境变量）")
 
     filters = cfg.get("filters", {})
     skip_reply = filters.get("twitter_skip_replies", False)
     skip_rt = filters.get("twitter_skip_retweets", False)
 
-    import time as _time
+    if scope in ("all", "twitter"):
+        import time as _time
 
-    for name in cfg.get("twitter_accounts", []):
-        key = f"twitter:{name}"
-        try:
-            tweets = twitter.fetch_user_tweets(api_key, name)
-        except Exception as e:
-            log.warning("拉取 @%s 失败: %s", name, e)
-            continue
-        buckets[key] = [
-            t for t in tweets
-            if not (skip_reply and t["is_reply"])
-            and not (skip_rt and t["type"] == "retweet")
-        ]
-        _time.sleep(2)  # 轻微间隔，避免触发上游限流
+        for name in cfg.get("twitter_accounts", []):
+            key = f"twitter:{name}"
+            try:
+                tweets = twitter.fetch_user_tweets(api_key, name)
+            except Exception as e:
+                log.warning("拉取 @%s 失败: %s", name, e)
+                continue
+            buckets[key] = [
+                t for t in tweets
+                if not (skip_reply and t["is_reply"])
+                and not (skip_rt and t["type"] == "retweet")
+            ]
+            _time.sleep(2)  # 轻微间隔，避免触发上游限流
+
+    if scope not in ("all", "reddit"):
+        return buckets
 
     cid = os.environ.get("REDDIT_CLIENT_ID") or None
     csec = os.environ.get("REDDIT_CLIENT_SECRET") or None

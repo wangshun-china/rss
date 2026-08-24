@@ -4,31 +4,25 @@
 
 ## 架构
 
+Reddit 在中国大陆被整站阻断、且 Reddit 已关闭自服务 API 申请（Responsible Builder Policy），
+而 GitHub Actions 的出口 IP 可正常匿名访问 Reddit RSS。因此采用双通道分工：
+
 ```
+X 订阅（服务器容器）
 git push master
-   │
-   ▼
-GitHub Actions: build-and-push（ubuntu-latest）
-   │  构建唯一 SHA 镜像，双推
-   ├── ghcr.io/<user>/rss:<sha>
-   └── 阿里云 ACR wangshun_build/rss:<sha>
-   │
-   ▼
-服务器 Self-hosted Runner（label: aliyun）
-   │  优先拉 GHCR，失败回退 ACR（同一 SHA）
-   ▼
-docker compose 启动 rss-push 常驻容器
-   │  容器内调度器：启动即跑一轮，之后每个整点 :17 执行
-   ▼
-twitterapi.io 拉 X 时间线 + Reddit RSS 拉新帖 -> 飞书卡片推送
+   └> Actions 构建 SHA 镜像双推 GHCR+ACR
+       └> aliyun Runner compose 启动 rss-push 容器
+           └> 每整点 :17 拉 twitterapi.io -> AI 翻译总结 -> 飞书卡片
+           去重状态：宿主机 ~/deployments/rss/data/state.json（挂载卷）
+
+Reddit 订阅（GitHub Actions）
+   └> reddit.yml 每小时 :47 匿名直连 RSS
+       └> 飞书卡片推送，state-reddit.json 提交回仓库持久化
 ```
 
-部署链路沿用 `G:\project\template`：**Actions 决定发布哪一版（SHA 镜像），
-镜像仓库保存这一版（GHCR + ACR 双源），Docker Compose 让这一版运行。**
-
-- 去重状态 `state.json` 挂载在宿主机 `~/deployments/rss/data/`，容器重建不丢
-- 首次运行某源只记录基线不推送，避免刷屏
-- 旧版本镜像在每次部署后自动清理，只保留当前运行版本
+- 服务器容器设 `RSS_SOURCES=twitter`，Actions 设 `RSS_SOURCES=reddit`，
+  同一份代码按环境变量各跑各的源，互不干扰。
+- 首次运行某源只记录基线不推送，避免刷屏；旧版本镜像每次部署后自动清理。
 
 ## 配置
 
@@ -94,17 +88,11 @@ docker compose pull && docker compose up -d   # 手动更新到 latest
 3. 安全设置建议选 **签名校验**，密钥填入 Secret `FEISHU_SECRET`
    （关键词校验需保证卡片含固定词；IP 白名单不适用云端出口）。
 
-## Reddit 说明（重要）
+## Reddit 说明
 
-Reddit 在中国大陆被整站阻断，阿里云服务器直连不可达，**配 OAuth 凭据也无法绕过网络阻断**。
-当前可选方案：
+Reddit 自 2025-11 起**关闭自服务 API 申请**（Responsible Builder Policy），个人无法再
+创建 OAuth 应用；2026-05 起匿名 `.json` 接口也全面 403。因此本项目的 Reddit 订阅改为
+**GitHub Actions 直连匿名 RSS**（Azure 出口 IP 实测可用），不再需要任何 Reddit 凭据，
+也不依赖服务器代理。`REDDIT_PROXY` / OAuth 相关配置仅作为备用路径保留在代码里。
 
-1. **走服务器本地代理**：确保代理进程可用后，在仓库 Secrets 加
-   `REDDIT_PROXY=http://host.docker.internal:7890`（端口按实际改），重新部署即可。
-   代码已内置支持，未设置时自动直连。
-2. 服务器上已有 sing-box（7890 端口），若节点修复则方案 1 即刻生效。
-
-另外，若 Reddit 返回 403/429（常见于数据中心 IP 的匿名访问），代码会尝试回退到
-OAuth API 拉取：在 <https://www.reddit.com/prefs/apps> 创建 script 应用，
-把 `REDDIT_CLIENT_ID` / `REDDIT_CLIENT_SECRET` 加进 Secrets 并在 deploy.yml 的
-deploy env 与 compose.yaml environment 里补上两个变量。
+服务器运维（X 部分，SSH 登录后）：

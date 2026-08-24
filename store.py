@@ -1,13 +1,14 @@
 """已推送条目的本地状态（state.json），用于跨运行去重。
 
-容器部署时通过 RSS_DATA_DIR 指向挂载卷，保证状态在容器重建后保留。
+容器部署时通过 RSS_DATA_DIR 指向挂载卷；
+Actions 上跑单源时可用 RSS_STATE_FILE 指定独立状态文件并提交回仓库。
 """
 
 import json
 import os
 
 _DATA_DIR = os.environ.get("RSS_DATA_DIR") or os.path.dirname(os.path.abspath(__file__))
-STATE_FILE = os.path.join(_DATA_DIR, "state.json")
+STATE_FILE = os.environ.get("RSS_STATE_FILE") or os.path.join(_DATA_DIR, "state.json")
 CAP = 500  # 每个 source 最多记录的 ID 数
 
 

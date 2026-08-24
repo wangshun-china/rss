@@ -1,0 +1,48 @@
+# Reddit 订阅：GitHub Actions 直连拉取（Azure 出口 IP 不被 Reddit 拦截）。
+# 与服务器容器分工：容器只跑 X（RSS_SOURCES=twitter），本工作流只跑 Reddit，
+# 去重状态独立存放于仓库根的 state-reddit.json，每次运行后提交回写。
+
+name: reddit-push
+
+on:
+  schedule:
+    - cron: "47 * * * *" # 每小时一次，与服务器容器的 :17 错开
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: reddit-push
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
+      - name: 拉取 Reddit 并推送飞书
+        env:
+          RSS_SOURCES: reddit
+          RSS_STATE_FILE: state-reddit.json
+          FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
+          FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
+        run: python main.py
+
+      - name: 回写去重状态
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state-reddit.json
+          git diff --cached --quiet || git commit -m "chore: 更新 Reddit 去重状态 [skip ci]"
+          git push
