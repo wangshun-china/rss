@@ -139,7 +139,9 @@ jobs:
             exit 1
           fi
 
-          DEPLOY_DIR="$HOME/deployments/rss"
+          # Runner 非交互环境下 HOME 可能未定义（set -u 会报错），从 passwd 派生
+          USER_HOME="$(getent passwd "$(id -un)" | cut -d: -f6)"
+          DEPLOY_DIR="$USER_HOME/deployments/rss"
           mkdir -p "$DEPLOY_DIR/data"
           cd "$DEPLOY_DIR"
 
