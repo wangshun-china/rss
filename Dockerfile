@@ -8,7 +8,8 @@ WORKDIR /app
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY main.py feishu.py store.py ai.py config.yaml entrypoint.sh ./
+COPY *.py ./
+COPY config.yaml entrypoint.sh ./
 COPY sources ./sources
 
 CMD ["sh", "/app/entrypoint.sh"]
