@@ -70,11 +70,13 @@ def ensure_rule(accounts):
     mine = next((r for r in rules if r.get("tag") == RULE_TAG), None)
 
     if mine and mine.get("value") == value:
-        if int(mine.get("is_effect") or 0) != 1:
+        needs_update = (int(mine.get("is_effect") or 0) != 1
+                        or float(mine.get("interval_seconds") or 0) != 1800)
+        if needs_update:
             api("POST", "/oapi/tweet_filter/update_rule",
                 {"rule_id": mine["rule_id"], "tag": RULE_TAG, "value": value,
                  "interval_seconds": 1800, "is_effect": 1})
-            log.info("规则已激活")
+            log.info("规则已激活/更新（interval=1800s）")
         else:
             log.info("规则已存在且生效，无需变更")
         return False
