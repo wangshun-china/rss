@@ -16,12 +16,13 @@ PROXIES = {"http": _proxy, "https": _proxy} if _proxy else None
 
 
 def _get_rss(url):
-    """匿名 RSS，429 时退避重试一次。"""
-    for attempt in range(2):
+    """匿名 RSS；数据中心 IP 频繁被 429 限流，用较长退避多次重试。"""
+    resp = None
+    for attempt in range(4):
         resp = requests.get(url, headers={"User-Agent": UA}, timeout=30, proxies=PROXIES)
         if resp.status_code != 429:
             return resp
-        time.sleep(5 * (attempt + 1))
+        time.sleep((10, 25, 50)[attempt])
     return resp
 
 
