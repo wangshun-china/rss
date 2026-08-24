@@ -165,9 +165,10 @@ jobs:
                 TZ: Asia/Shanghai
                 # 服务器只负责 X 源；Reddit 由 Actions 直连拉取（见 reddit.yml）
                 RSS_SOURCES: twitter
-                # twitterapi.io 流式客户端：回补与规则管理
+                # twitterapi.io 流式客户端：规则管理
                 TWITTER_API_KEY: ${TWITTER_API_KEY:-}
-                BACKFILL_ON_START: "1"
+                # 启动回补会按账号各花约 300 credits；默认关闭，接受重启窗口期可能漏推
+                BACKFILL_ON_START: "0"
                 # syndication 备用通道的代理（当前主通道为流式，不依赖代理）
                 TWITTER_PROXY: ${TWITTER_PROXY:-http://host.docker.internal:7890}
                 FEISHU_WEBHOOK: ${FEISHU_WEBHOOK:?FEISHU_WEBHOOK is required}
