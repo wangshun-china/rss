@@ -73,7 +73,7 @@ def ensure_rule(accounts):
         if int(mine.get("is_effect") or 0) != 1:
             api("POST", "/oapi/tweet_filter/update_rule",
                 {"rule_id": mine["rule_id"], "tag": RULE_TAG, "value": value,
-                 "interval_seconds": 5, "is_effect": 1})
+                 "interval_seconds": 1800, "is_effect": 1})
             log.info("规则已激活")
         else:
             log.info("规则已存在且生效，无需变更")
@@ -82,16 +82,16 @@ def ensure_rule(accounts):
     if mine:
         api("POST", "/oapi/tweet_filter/update_rule",
             {"rule_id": mine["rule_id"], "tag": RULE_TAG, "value": value,
-             "interval_seconds": 5, "is_effect": 1})
+             "interval_seconds": 1800, "is_effect": 1})
         log.info("规则已更新并激活")
         return True
 
     created = api("POST", "/oapi/tweet_filter/add_rule",
-                  {"tag": RULE_TAG, "value": value, "interval_seconds": 5})
+                  {"tag": RULE_TAG, "value": value, "interval_seconds": 1800})
     rule_id = (created.get("rules") or [{}])[0].get("rule_id") or created.get("rule_id")
     api("POST", "/oapi/tweet_filter/update_rule",
         {"rule_id": rule_id, "tag": RULE_TAG, "value": value,
-         "interval_seconds": 5, "is_effect": 1})
+         "interval_seconds": 1800, "is_effect": 1})
     log.info("规则已创建并激活")
     return True
 

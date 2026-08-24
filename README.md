@@ -4,22 +4,26 @@
 
 ## 架构
 
-Reddit 在中国大陆被整站阻断、且 Reddit 已关闭自服务 API 申请（Responsible Builder Policy），
-而 GitHub Actions 的出口 IP 可正常匿名访问 Reddit RSS。因此采用双通道分工：
+X 官方免费通道（syndication）实测返回的是排名筛选后的精选视图而非完整时间线，
+会漏推文；Reddit 则关闭了自助 API 申请。因此采用三通道分工，各用各的长处：
 
 ```
-X 订阅（服务器容器）
+X 订阅（服务器容器，实时流式）
 git push master
    └> Actions 构建 SHA 镜像双推 GHCR+ACR
-       └> aliyun Runner compose 启动 rss-push 容器
-            └> 每整点 :17 拉 X 时间线（syndication）-> AI 翻译总结 -> 飞书卡片
+       └> aliyun Runner compose 启动 rss-push 常驻容器
+           └> WebSocket 连接 twitterapi.io 流式接口
+               新推文秒级到达 -> 缓冲聚合(2分钟/8条) -> AI 翻译总结 -> 飞书卡片
            去重状态：宿主机 ~/deployments/rss/data/state.json（挂载卷）
+           启动时 REST 回补一次停机缺口；断线自动重连
 
 Reddit 订阅（GitHub Actions）
    └> reddit.yml 每小时 :47 匿名直连 RSS
        └> 飞书卡片推送，state-reddit.json 提交回仓库持久化
 ```
 
+- X 流式计费按实际收到的新推文（15 credits/条），五账号日更百条级 ≈ $0.02/天，
+  远低于轮询式；twitterapi.io 的 syndication 备用拉取代码保留在 main.py 本地可用。
 - 服务器容器设 `RSS_SOURCES=twitter`，Actions 设 `RSS_SOURCES=reddit`，
   同一份代码按环境变量各跑各的源，互不干扰。
 - 首次运行某源只记录基线不推送，避免刷屏；旧版本镜像每次部署后自动清理。
@@ -39,10 +43,11 @@ Reddit 订阅（GitHub Actions）
 | 本仓库 secret | `AI_MODEL` | 否 | 模型名，默认 `deepseek-v4-flash-0731` |
 | 本仓库 secret | `REDDIT_PROXY` | 否 | Reddit 出站代理，如 `http://host.docker.internal:7890` |
 
-X 订阅主通道是 **syndication 嵌入接口**（官方给网页组件用的公开端点，无需任何认证、
-无需任何账号）。国内服务器访问该接口需经代理：容器默认
-`TWITTER_PROXY=http://host.docker.internal:7890`（即宿主机 sing-box mixed 端口），
-可在 Secrets 覆盖。
+X 订阅主通道是 **twitterapi.io WebSocket 流式接口**：常驻连接实时接收五个账号的新推文，
+按实际收到条数计费（15 credits/条 ≈ $0.15/千条）。服务端过滤规则由容器启动时自动
+创建/更新/激活（tag: rss-push-x），断线自动重连，启动时 REST 回补一次停机缺口。
+`main.py` 里保留的 syndication 免费拉取代码可作为本地无 Key 环境的备用手段
+（注意其返回的是精选视图而非完整时间线，仅适合临时用途）。
 
 X 推文卡片默认带 **AI 总结**（整批内容概括），非中文推文自动附中文译文（保留原文）。
 未配置 AI 或调用失败时自动降级为只推原文。
