@@ -2,6 +2,10 @@
 
 这是官方给网页嵌入组件用的公开接口，返回的 HTML 内嵌 __NEXT_DATA__ JSON，
 含最近约百条推文。国内服务器需经代理访问（走 TWITTER_PROXY 环境变量）。
+
+注意：该接口的条目顺序不保证纯倒序（会掺入置顶/热门内容），
+因此解析后按发布时间重排并过滤超龄推文（TWITTER_MAX_AGE_HOURS，默认 72h），
+避免通道切换时把历史推文当成新内容推送。
 """
 
 import html as htmllib
@@ -9,12 +13,15 @@ import json
 import os
 import re
 import time
+from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 
 import requests
 
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
 BASE = "https://syndication.twitter.com/srv/timeline-profile/screen-name/{user}"
+MAX_AGE_HOURS = float(os.environ.get("TWITTER_MAX_AGE_HOURS") or 72)
 
 _proxy = os.environ.get("TWITTER_PROXY") or None
 PROXIES = {"http": _proxy, "https": _proxy} if _proxy else None
@@ -49,10 +56,9 @@ def fetch_user_tweets(username, limit=20):
     data = json.loads(m.group(1))
     entries = data["props"]["pageProps"]["timeline"]["entries"]
 
-    tweets = []
+    now = datetime.now(timezone.utc)
+    parsed = []
     for e in entries:
-        if len(tweets) >= limit:
-            break
         if e.get("type") != "tweet":
             continue
         t = e["content"].get("tweet") or {}
@@ -61,16 +67,23 @@ def fetch_user_tweets(username, limit=20):
         if not tid or not text:
             continue
         is_retweet = text.startswith("RT @") or "retweeted_status_result" in t
-        tweets.append(
-            {
-                "id": tid,
-                "text": text,
-                "url": t.get("permalink") or f"https://x.com/{username}/status/{tid}",
-                "time": t.get("created_at"),
-                "type": "retweet" if is_retweet else "tweet",
-                "is_reply": bool(t.get("in_reply_to_status_id_str")),
-                "reply_to": t.get("in_reply_to_screen_name") or "",
-                "likes": int(t.get("favorite_count") or 0),
-            }
-        )
-    return tweets
+        try:
+            dt = parsedate_to_datetime(t.get("created_at") or "")
+        except (TypeError, ValueError):
+            dt = None
+        parsed.append((dt, {
+            "id": tid,
+            "text": text,
+            "url": t.get("permalink") or f"https://x.com/{username}/status/{tid}",
+            "time": t.get("created_at"),
+            "type": "retweet" if is_retweet else "tweet",
+            "is_reply": bool(t.get("in_reply_to_status_id_str")),
+            "reply_to": t.get("in_reply_to_screen_name") or "",
+            "likes": int(t.get("favorite_count") or 0),
+        }))
+
+    # 按发布时间倒序取最新，并丢弃超龄条目（置顶/热门等历史内容）
+    parsed.sort(key=lambda x: x[0].timestamp() if x[0] else 0, reverse=True)
+    cutoff = now.timestamp() - MAX_AGE_HOURS * 3600
+    return [t for dt, t in parsed[:limit * 2]
+            if dt is None or dt.timestamp() >= cutoff][:limit]
