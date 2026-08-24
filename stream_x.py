@@ -64,9 +64,13 @@ def api(method, path, payload=None):
 
 
 def _rule_value(accounts):
-    """构造规则值：账号 + since 日期过滤，确保旧推文（置顶/热门/精选）
-    在匹配阶段就被排除，不会投递计费。窗口与客户端 72h 龄期过滤对齐。"""
-    since = (datetime.now(timezone.utc) - timedelta(hours=72)).strftime("%Y-%m-%d")
+    """构造规则值：账号 + since 日期过滤。
+
+    注意：since 必须用固定日期而不是动态计算——值一旦变化会导致服务端
+    去重游标重置，触发一轮旧推文重投并计费。客户端另有 72h 龄期过滤兜底，
+    所以这里的 since 只要不失效即可，无需随时间推进。
+    """
+    since = os.environ.get("X_RULE_SINCE") or "2026-08-21"
     return " OR ".join(f"from:{a}" for a in accounts) + f" since:{since}"
 
 
