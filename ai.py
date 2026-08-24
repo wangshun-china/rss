@@ -43,25 +43,38 @@ def _parse_json(text):
 def translate_and_summarize(tweets, timeout=90):
     """tweets 为按展示顺序排列的列表，返回 {"summary": str|None, "translations": {idx: str}}。"""
     numbered = "\n".join(f"[{i}] {(t['text'] or '').strip()[:500]}" for i, t in enumerate(tweets))
-    payload = {
-        "model": MODEL,
-        "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": numbered},
-        ],
-        "temperature": 0.2,
-    }
     headers = {"Authorization": f"Bearer {KEY}", "Content-Type": "application/json"}
 
-    resp = None
-    for attempt in range(3):
-        resp = requests.post(f"{BASE}/chat/completions",
-                             headers=headers, json=payload, timeout=timeout)
-        if resp.status_code not in (429, 500, 502, 503, 504):
-            break
-        time.sleep(6 * (attempt + 1))
+    def _call(items):
+        payload = {
+            "model": MODEL,
+            "messages": [
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": items},
+            ],
+            "temperature": 0.2,
+        }
+        resp = None
+        last_err = ""
+        for attempt in range(3):
+            try:
+                resp = requests.post(f"{BASE}/chat/completions",
+                                     headers=headers, json=payload, timeout=timeout)
+            except requests.RequestException as e:
+                last_err = str(e)
+                time.sleep(6 * (attempt + 1))
+                continue
+            if resp.status_code == 400 and attempt == 0:
+                # 个别推文内容触发上游 400 时，减半输入再试一次
+                payload["messages"][1]["content"] = numbered[:max(200, len(numbered) // 2)]
+                continue
+            if resp.status_code not in (429, 500, 502, 503, 504):
+                return resp
+            last_err = f"HTTP {resp.status_code}"
+            time.sleep((10, 25)[attempt] if attempt < 2 else 25)
+        raise RuntimeError(f"AI 接口失败: {last_err}")
 
-    resp.raise_for_status()
+    resp = _call(numbered)
     body = resp.json()
     if body.get("error"):
         raise RuntimeError(f"AI 接口错误: {body['error']}")
