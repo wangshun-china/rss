@@ -1,0 +1,25 @@
+name: x-probe
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: syndication 可达性
+        run: |
+          for i in 1 2 3; do
+            code=$(curl -s -m 25 -o /tmp/tl.html -w "%{http_code}" \
+              -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36" \
+              "https://syndication.twitter.com/srv/timeline-profile/screen-name/levelsio")
+            size=$(wc -c < /tmp/tl.html)
+            echo "attempt$i: code=$code size=$size"
+            [ "$code" = "200" ] && break
+            sleep 20
+          done
+          grep -c "__NEXT_DATA__" /tmp/tl.html || echo no-next-data
+          grep -oE '"full_text"' /tmp/tl.html | wc -l
