@@ -13,6 +13,7 @@ from email.utils import parsedate_to_datetime
 
 import yaml
 
+import ai
 from feishu import build_card, send
 from sources import reddit, twitter
 import store
@@ -122,16 +123,34 @@ def split_new(store_data, key, items):
 
 
 def build_tweet_card(name, items, fmt, sort_key, max_items, text_max):
+    ordered = sorted(items, key=sort_key)[:15]
+
+    ai_result = None
+    if ai.enabled():
+        try:
+            ai_result = ai.translate_and_summarize(ordered)
+            log.info("@%s AI 处理完成（翻译 %d 条）", name, len(ai_result["translations"]))
+        except Exception as e:
+            log.warning("@%s AI 增强失败，按原文推送: %s", name, e)
+
+    trans = (ai_result or {}).get("translations") or {}
     lines = []
-    for t in sorted(items, key=sort_key)[:max_items]:
+    for i, t in enumerate(ordered[:max_items]):
         meta = fmt(t["time"])
         if t["is_reply"]:
             meta += f" · 回复 @{t['reply_to']}"
         elif t["type"] == "retweet":
             meta += " · 转推"
+        body = truncate(t["text"], text_max)
+        zh = trans.get(i)
+        if zh:
+            body += f"\n译：{zh}"
         lines.append(
-            f"**{meta}**　[原文]({t['url']})\n{truncate(t['text'], text_max)}\n💙 {t['likes']}"
+            f"**{meta}**　[原文]({t['url']})\n{body}\n💙 {t['likes']}"
         )
+    summary = (ai_result or {}).get("summary")
+    if summary:
+        lines.insert(0, f"**AI 总结**：{summary}")
     return build_card(f"X · @{name} · {len(items)} 条更新", "blue", lines)
 
 

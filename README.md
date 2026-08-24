@@ -42,6 +42,12 @@ twitterapi.io 拉 X 时间线 + Reddit RSS 拉新帖 -> 飞书卡片推送
 | 本仓库 secret | `TWITTER_API_KEY` | 是 | twitterapi.io 的 Key |
 | 本仓库 secret | `FEISHU_WEBHOOK` | 是 | 飞书群机器人 webhook |
 | 本仓库 secret | `FEISHU_SECRET` | 否 | 飞书签名校验密钥 |
+| 本仓库 secret | `AI_API_BASE` / `AI_API_KEY` | 否 | OpenAI 兼容接口，启用推文中文翻译与 AI 总结 |
+| 本仓库 secret | `AI_MODEL` | 否 | 模型名，默认 `deepseek-v4-flash-0731` |
+| 本仓库 secret | `REDDIT_PROXY` | 否 | Reddit 出站代理，如 `http://host.docker.internal:7890` |
+
+X 推文卡片默认带 **AI 总结**（整批内容概括），非中文推文自动附中文译文（保留原文）。
+未配置 AI 或调用失败时自动降级为只推原文。
 
 本地开发则复制 `.env.example` 为 `.env` 填入真实值。
 

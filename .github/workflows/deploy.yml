@@ -103,6 +103,10 @@ jobs:
       FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
       # 可选：Reddit 被墙时走服务器本地代理，如 http://host.docker.internal:7890
       REDDIT_PROXY: ${{ secrets.REDDIT_PROXY }}
+      # AI 翻译与总结（OpenAI 兼容接口），不配则只推原文
+      AI_API_BASE: ${{ secrets.AI_API_BASE }}
+      AI_API_KEY: ${{ secrets.AI_API_KEY }}
+      AI_MODEL: ${{ secrets.AI_MODEL }}
 
     steps:
       - name: Deploy with GHCR primary and Aliyun ACR fallback
@@ -161,6 +165,9 @@ jobs:
                 FEISHU_WEBHOOK: ${FEISHU_WEBHOOK:?FEISHU_WEBHOOK is required}
                 FEISHU_SECRET: ${FEISHU_SECRET:-}
                 REDDIT_PROXY: ${REDDIT_PROXY:-}
+                AI_API_BASE: ${AI_API_BASE:-}
+                AI_API_KEY: ${AI_API_KEY:-}
+                AI_MODEL: ${AI_MODEL:-}
                 RSS_DATA_DIR: /data
               volumes:
                 - ./data:/data
