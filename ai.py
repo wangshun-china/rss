@@ -87,7 +87,7 @@ def translate_and_summarize(tweets, timeout=90):
             idx = int(item.get("i"))
             zh = (item.get("zh") or "").strip()
             if zh:
-                translations[idx] = zh[:900]
+                translations[idx] = zh[:3000]
         except (TypeError, ValueError):
             continue
     return {"summary": (data.get("summary") or "").strip() or None,

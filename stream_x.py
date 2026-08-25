@@ -1,11 +1,11 @@
 """X 实时流客户端：通过 twitterapi.io WebSocket 接收五个账号的新推文。
 
 设计：
-- 启动时确保服务端存在一条激活的过滤规则（from: 五个账号）
-- 启动回补：小页 REST 拉取最新推文，覆盖停机/部署窗口期漏掉的内容
+- 启动时确保服务端存在一条激活的过滤规则（from: 五个账号，since 固定日期排除旧内容）
 - 常驻 WebSocket：实时接收匹配推文，缓冲聚合后按账号推送飞书卡片
-- 断线自动重连（官方要求断开后至少等 90 秒）
-- 去重状态复用 data/state.json，与旧轮询格式一致
+- 断线自动重连（官方要求断开后至少等 90 秒），看门狗监测僵尸连接
+- 去重状态复用 data/state.json；不做启动回补（重启窗口期的漏推按需求接受）
+- 推文正文不截断
 """
 
 import html as htmllib
@@ -237,7 +237,7 @@ def flush():
                 meta += f" · 回复 @{t['reply_to']}"
             elif t["type"] == "retweet":
                 meta += " · 转推"
-            body = truncate(t["text"])
+            body = t["text"]
             zh = trans.get(i)
             if zh:
                 body += f"\n译：{zh}"
@@ -318,50 +318,6 @@ def handle_tweet_event(payload):
             last_activity = time.time()
 
 
-# ---------- 启动回补 ----------
-
-def backfill(api_key, accounts):
-    """启动回补：REST 小页拉取各账号最新推文（旧->新推送），
-    覆盖停机/断线窗口期漏掉的内容。每账号最多 10 条 ≈ 150 credits。"""
-    from main import build_tweet_card  # 复用既有卡片构建（含 AI）
-    store_data = store.load()
-    total_pushed = 0
-    for name in accounts:
-        key = f"twitter:{name}"
-        try:
-            resp = requests.get(
-                "https://api.twitterapi.io/twitter/user/last_tweets",
-                headers={"X-API-Key": api_key},
-                params={"userName": name, "pageSize": 10},
-                timeout=30,
-            )
-            resp.raise_for_status()
-            raw = (resp.json().get("data") or {}).get("tweets") or []
-            tweets = [t for t in (parse_tweet(x) for x in raw) if t]
-        except Exception as e:
-            log.warning("回补 @%s 失败: %s", name, e)
-            continue
-
-        seen = set(store_data.get(key, []))
-        fresh = [t for t in reversed(tweets) if t["id"] not in seen]  # 旧->新
-        if not fresh:
-            log.info("[回补 @%s] 无缺口", name)
-            continue
-        u = fresh[0]["_profile"]
-        profile = {"name": u["name"] or f"@{name}", "screen_name": name,
-                   "bio": truncate(u["description"], 160),
-                   "followers": u["followers"]}
-        try:
-            card = build_tweet_card(name, fresh, profile,
-                                    lambda v: "", lambda x: 0, 10, 500)
-            send(FEISHU_WEBHOOK, FEISHU_SECRET, card)
-            store.record(store_data, key, [t["id"] for t in fresh])
-            store.save(store_data)
-            total_pushed += len(fresh)
-            log.info("[回补 @%s] 补推 %d 条", name, len(fresh))
-        except Exception as e:
-            log.error("[回补 @%s] 推送失败: %s", name, e)
-    return total_pushed
 
 
 # ---------- 主流程 ----------
@@ -377,8 +333,6 @@ def main():
         raise SystemExit("缺少 TWITTER_API_KEY")
 
     ensure_rule(accounts)
-    # 启动回补：小页拉取，覆盖停机/部署窗口期漏掉的推文（每次约 750 credits）
-    backfill(API_KEY, accounts)
 
     def on_open(ws):
         log.info("WebSocket 已连接")
@@ -386,22 +340,20 @@ def main():
     def on_message(ws, message):
         global last_msg_time
         last_msg_time = time.time()
-        log.info("<<< %s", str(message)[:180])
         try:
             payload = json.loads(message)
         except Exception:
             log.warning("WS 非JSON消息: %s", str(message)[:200])
             return
-        # 实测投递消息可能不带 event_type 字段，只要含 tweets 数组就处理
-        if payload.get("tweets"):
-            handle_tweet_event(payload)
-            with buffer_lock:
-                total = sum(len(b["tweets"]) for b in buffer.values())
-            if total >= 8:
-                flush()
-        elif payload.get("event_type") == "connected":
-            log.info("流握手成功")
-        # ping 事件忽略
+        # 字段驱动：只要消息带 tweets 数组就处理；心跳/握手等无推文消息直接忽略
+        tweets_in = payload.get("tweets")
+        if not tweets_in:
+            return
+        handle_tweet_event(payload)
+        with buffer_lock:
+            total = sum(len(b["tweets"]) for b in buffer.values())
+        if total >= 8:
+            flush()
 
     def on_error(ws, err):
         log.warning("WS 错误: %s", err)
