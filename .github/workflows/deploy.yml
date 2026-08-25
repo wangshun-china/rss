@@ -164,8 +164,9 @@ jobs:
                 - "host.docker.internal:host-gateway"
               environment:
                 TZ: Asia/Shanghai
-                # 服务器只负责 X 源（每小时 advanced_search 增量轮询）；
+                # 服务器只负责 X 源（每 2 小时 advanced_search 增量轮询）；
                 # Reddit 由 Actions 直连拉取（见 reddit.yml）
+                POLL_INTERVAL_SECONDS: "7200"
                 TWITTER_API_KEY: ${TWITTER_API_KEY:-}
                 FEISHU_WEBHOOK: ${FEISHU_WEBHOOK:?FEISHU_WEBHOOK is required}
                 FEISHU_SECRET: ${FEISHU_SECRET:-}
