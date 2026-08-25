@@ -174,12 +174,53 @@ def build_tweet_card(name, items, profile, fmt, sort_key, max_items, text_max):
 
 
 def build_reddit_card(sub, items, fmt, sort_key, max_items):
+    import time as _time
+    from sources import reddit as _reddit
+
+    ordered = sorted(items, key=sort_key)[:max_items]
+
+    # 补充帖子正文（间隔防限流；拿不到就只推标题）
+    for p in ordered:
+        detail = _reddit.fetch_post_detail(p["url"])
+        if detail:
+            p["body"] = detail["selftext"]
+            p["score"] = detail["score"]
+            p["comments"] = detail["num_comments"]
+        _time.sleep(0.5)
+
+    # AI 输入：标题 + 正文前 800 字
+    ai_items = [{"i": i,
+                 "text": f"{p['title']}\n{truncate(p.get('body') or '', 800)}"}
+                for i, p in enumerate(ordered)]
+
+    ai_result = None
+    if ai.enabled() and any(x["text"].strip() for x in ai_items):
+        try:
+            ai_result = ai.translate_and_summarize(ai_items)
+            log.info("r/%s AI 处理完成（翻译 %d 条）",
+                     sub, len(ai_result["translations"]))
+        except Exception as e:
+            log.warning("r/%s AI 增强失败: %s", sub, e)
+    trans = (ai_result or {}).get("translations") or {}
+    summary = (ai_result or {}).get("summary")
+
     lines = []
-    for p in sorted(items, key=sort_key)[:max_items]:
+    for i, p in enumerate(ordered):
         author = f" · u/{p['author']}" if p["author"] else ""
-        lines.append(
-            f"**[{truncate(p['title'], 120)}]({p['url']})**{author} · {fmt(p['time'])}"
-        )
+        score = f" · 👍 {p.get('score', 0)} 💬 {p.get('comments', 0)}"
+        head = (f"**[{truncate(p['title'], 120)}]({p['url']})**"
+                f"{author}{score} · {fmt(p['time'])}")
+        block = head
+        body_text = (p.get("body") or "").strip()
+        if body_text:
+            block += f"\n原文：{truncate(body_text, 2500)}"
+        zh = trans.get(i)
+        if zh:
+            block += f"\n译：{zh}"
+        lines.append(block)
+
+    if summary:
+        lines.insert(0, f"**AI 总结**：{summary}")
     return build_card(f"Reddit · r/{sub} · {len(items)} 个新帖", "orange", lines)
 
 

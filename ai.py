@@ -42,7 +42,8 @@ def _parse_json(text):
 
 def translate_and_summarize(tweets, timeout=90):
     """tweets 为按展示顺序排列的列表，返回 {"summary": str|None, "translations": {idx: str}}。"""
-    numbered = "\n".join(f"[{i}] {(t['text'] or '').strip()[:500]}" for i, t in enumerate(tweets))
+    numbered = "\n".join(f"[{i}] {(t['text'] or '').strip()[:1500]}"
+                         for i, t in enumerate(tweets))
     headers = {"Authorization": f"Bearer {KEY}", "Content-Type": "application/json"}
 
     def _call(items):

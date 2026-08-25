@@ -65,6 +65,24 @@ def _from_oauth(sub, limit, client_id, client_secret):
     return posts
 
 
+def fetch_post_detail(url):
+    """拉取单帖详情（正文/分数/评论数）。被拦截或无正文时返回 None。"""
+    try:
+        r = requests.get(url.rstrip("/") + ".json",
+                         headers={"User-Agent": UA},
+                         timeout=30, proxies=PROXIES)
+        if r.status_code != 200:
+            return None
+        post = r.json()[0]["data"]["children"][0]["data"]
+        return {
+            "selftext": (post.get("selftext") or "").strip(),
+            "score": int(post.get("score") or 0),
+            "num_comments": int(post.get("num_comments") or 0),
+        }
+    except Exception:
+        return None
+
+
 def fetch_subreddit(sub, limit=25, client_id=None, client_secret=None):
     """返回该版块最新帖子列表（最新在前）。"""
     try:
