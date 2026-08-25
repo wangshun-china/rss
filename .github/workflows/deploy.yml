@@ -159,6 +159,11 @@ jobs:
               image: ${IMAGE_REPOSITORY:?IMAGE_REPOSITORY is required}:${IMAGE_TAG:?IMAGE_TAG is required}
               container_name: rss-push
               restart: unless-stopped
+              logging:
+                driver: json-file
+                options:
+                  max-size: "10m"
+                  max-file: "3"
               extra_hosts:
                 - "host.docker.internal:host-gateway"
               environment:
