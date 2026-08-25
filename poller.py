@@ -1,14 +1,15 @@
 """X 增量轮询器：advanced_search + since_id 游标。
 
-每小时调用一次合并查询（5 个账号 OR 在一起），配合 since_id 只取上次之后
-的新推文——不为重复的旧内容买单。结果按作者分组生成飞书卡片。
+每小时调用一次合并查询（5 个账号 OR 在一起），配合 since_id 只取上次
+之后的新推文——不为重复的旧内容买单。结果按作者分组生成飞书卡片
+（带作者简介与 AI 中文翻译/总结）。
 
 游标存于 state.json 的 "_x_since_id"。首次运行无游标时先做一次基线
-拉取（只记游标不推送）。
+拉取（只记游标不推送）。不做启动回补：重启窗口期的漏推按需求接受。
+推文正文不截断。
 """
 
 import html as htmllib
-import json
 import logging
 import os
 import sys
@@ -149,7 +150,7 @@ def fetch_page(query, cursor=""):
         body.get("next_cursor") or ""
 
 
-def fetch_all_new(query, since_id):
+def fetch_new_tweets(query, since_id):
     """带 since_id 的查询，翻页收集（最多 MAX_PAGES 页）。"""
     q = query + (f" since_id:{since_id}" if since_id else "")
     all_tweets, cursor = [], ""
@@ -166,12 +167,13 @@ def fetch_all_new(query, since_id):
     return all_tweets
 
 
+def fetch_baseline(query):
+    """基线拉取：只取第一页用于确定游标起点，不推送。"""
+    raws, _, _ = fetch_page(query)
+    return [t for t in (parse_tweet(x) for x in raws) if t]
+
+
 # ---------- 卡片与推送 ----------
-
-def truncate(text, limit):
-    text = text.strip()
-    return text if len(text) <= limit else text[:limit].rstrip() + "…"
-
 
 def push_author(username, tweets, profile):
     tweets = sorted(tweets, key=lambda t: snowflake_to_ms(t["id"]))
@@ -216,70 +218,68 @@ def push_author(username, tweets, profile):
 
 def run_cycle(accounts):
     state = store.load()
-    since_id = state.get("_x_since_id") or ""
+    since_id = str(state.get("_x_since_id") or "")
     baseline = not since_id
 
     query = " OR ".join(f"from:{a}" for a in accounts) + " since:2026-08-21"
-    if since_id:
-        query += f" since_id:{since_id}"
-    elif not baseline:
-        pass
-
-    tweets = fetch_all_new(query, since_id)
-    if not tweets:
-        if baseline:
-            log.info("[基线] 首次查询无结果，仅记录游标")
-        else:
-            log.info("本轮无新推文")
-        return
-
-    max_id = max(tweets, key=lambda t: int(t["id"]))["id"]
 
     if baseline:
-        # 基线模式：只记录游标，不推送历史内容
+        tweets = fetch_baseline(query)
+        if not tweets:
+            log.warning("[基线] 查询无结果，游标未建立")
+            return
+        max_id = max(tweets, key=lambda t: int(t["id"]))["id"]
         state["_x_since_id"] = max_id
         store.save(state)
         log.info("[基线] 已记录游标 %s（%d 条），本次不推送", max_id, len(tweets))
         return
 
-    groups = {}
-    profiles = {}
+    tweets = fetch_new_tweets(query, since_id)
+    if not tweets:
+        log.info("本轮无新推文")
+        return
+
+    groups, profiles = {}, {}
     for t in tweets:
         g = groups.setdefault(t["_username"], [])
         g.append(t)
         p = t["_profile"]
-        if t["_username"] not in profiles and (p["name"] or p["bio"]):
-            profiles[t["_username"]] = {
-                "name": p["name"] or f"@{t['_username']}",
-                "screen_name": t["_username"],
+        name = t["_username"]
+        if name not in profiles and (p["name"] or p["description"]):
+            profiles[name] = {
+                "name": p["name"] or f"@{name}",
+                "screen_name": name,
                 "bio": p["description"],
                 "followers": p["followers"],
             }
 
-    ok_all = True
+    store_data = store.load()
+    any_fail = False
+    pushed_total = 0
     for username, items in sorted(groups.items()):
-        fresh = [t for t in items
-                 if t["id"] not in set(store.load().get(f"twitter:{username}", []))]
+        key = f"twitter:{username}"
+        seen = set(store_data.get(key, []))
+        fresh = [t for t in items if t["id"] not in seen]
         if not fresh:
             continue
         try:
             push_author(username, fresh, profiles.get(username))
-            store.record(store_data := store.load(), f"twitter:{username}",
-                         [t["id"] for t in fresh])
+            store.record(store_data, key, [t["id"] for t in fresh])
             store.save(store_data)
+            pushed_total += len(fresh)
             log.info("@%s 已推送 %d 条", username, len(fresh))
         except Exception as e:
-            ok_all = False
+            any_fail = True
             log.error("@%s 飞书推送失败: %s", username, e)
 
-    # 全部推送成功才推进游标；有失败则下轮重试同批
-    if ok_all:
+    # 无推送失败就推进游标（含"全部已见"的空转轮次）；有失败则不推进，下轮自动重试
+    if not any_fail:
         state = store.load()
-        state["_x_since_id"] = max_id = max(
-            [int(t["id"]) for t in tweets] + [int(state.get("_x_since_id") or 0)])
+        max_id = max([int(t["id"]) for t in tweets]
+                     + [int(state.get("_x_since_id") or 0)])
         state["_x_since_id"] = str(max_id)
         store.save(state)
-        log.info("游标推进至 %s", max_id)
+        log.info("游标推进至 %s，本轮推送 %d 条", max_id, pushed_total)
 
 
 def main():
@@ -298,8 +298,7 @@ def main():
             run_cycle(accounts)
         except Exception:
             log.exception("本轮轮询异常（下轮自动重试）")
-        elapsed = time.time() - started
-        rest = max(60, INTERVAL_SECONDS - elapsed)
+        rest = max(60, INTERVAL_SECONDS - (time.time() - started))
         log.info("休眠 %.0f 秒后进行下一轮", rest)
         time.sleep(rest)
 
