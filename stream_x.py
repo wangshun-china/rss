@@ -8,6 +8,7 @@
 - 去重状态复用 data/state.json，与旧轮询格式一致
 """
 
+import html as htmllib
 import json
 import logging
 import os
@@ -16,6 +17,7 @@ import threading
 import time
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
+from urllib.parse import urlparse
 
 import requests
 import yaml
@@ -120,10 +122,14 @@ def pick(d, *keys, default=""):
 
 
 def parse_tweet(t):
+    """解析流式推文对象。兼容多种形态；作者名优先从 url 路径提取
+    （实测部分投递不含 user 对象）。"""
     tid = str(pick(t, "id_str", "id", "rest_id", default=""))
     text = str(pick(t, "text", "full_text", default="")).strip()
     if not tid or not text:
         return None
+    url = pick(t, "url", "twitterUrl",
+               default=f"https://x.com/i/status/{tid}")
     u = t.get("user") or t.get("author") or {}
     if isinstance(u, dict) and isinstance(u.get("legacy"), dict):
         legacy = u["legacy"]
@@ -131,7 +137,8 @@ def parse_tweet(t):
     else:
         profile_src = u
     created = pick(t, "createdAt", "created_at", default=None)
-    likes = int(pick(t, "favoriteCount", "like_count", "favorite_count", default=0) or 0)
+    likes = int(pick(t, "favoriteCount", "likeCount", "like_count",
+                     "favorite_count", default=0) or 0)
     is_reply = bool(pick(t, "inReplyToStatusIdStr", "in_reply_to_status_id_str",
                          "inReplyToStatusId", default=False))
     reply_to = str(pick(t, "inReplyToScreenName", "in_reply_to_screen_name", default=""))
@@ -139,20 +146,30 @@ def parse_tweet(t):
     return {
         "id": tid,
         "text": text,
-        "url": f"https://x.com/{profile_src.get('screen_name') or 'i'}/status/{tid}",
+        "url": url,
         "time": created,
         "type": "retweet" if is_rt else "tweet",
         "is_reply": is_reply,
         "reply_to": reply_to,
         "likes": likes,
-        "_user": {
-            "name": profile_src.get("name") or "",
+        "_username": profile_src.get("screen_name")
+                     or _username_from_url(url),
+        "_profile": {
+            "name": htmllib.unescape(profile_src.get("name") or ""),
             "screen_name": profile_src.get("screen_name") or "",
             "description": profile_src.get("description") or "",
             "followers": int(profile_src.get("followers_count")
                              or profile_src.get("followers") or 0),
         },
     }
+
+
+def _username_from_url(url):
+    """从 https://x.com/<user>/status/<id> 提取用户名。"""
+    try:
+        return urlparse(url).path.strip("/").split("/")[0]
+    except Exception:
+        return ""
 
 
 def fmt_time(value):
@@ -257,20 +274,21 @@ def handle_tweet_event(payload):
         for raw in tweets_in:
             t = parse_tweet(raw)
             if not t:
+                log.warning("[解析失败] 丢弃一条异常推文: %s", str(raw)[:120])
                 continue
-            user_info = t.pop("_user")
-            username = user_info.get("screen_name") or ""
+            username = t.pop("_username") or "unknown"
+            profile_info = t.pop("_profile")
             seen = set(store.load().get(f"twitter:{username}", []))
             if t["id"] in seen:
                 log.info("[去重] @%s 重复推文 %s，丢弃", username, t["id"])
                 continue
             bucket = buffer.setdefault(username, {"tweets": [], "profile": None})
-            if bucket["profile"] is None:
+            if bucket["profile"] is None and (profile_info["name"] or profile_info["bio"]):
                 bucket["profile"] = {
-                    "name": user_info["name"] or f"@{username}",
+                    "name": profile_info["name"] or f"@{username}",
                     "screen_name": username,
-                    "bio": truncate(user_info["description"], 160),
-                    "followers": user_info["followers"],
+                    "bio": truncate(profile_info["description"], 160),
+                    "followers": profile_info["followers"],
                 }
             bucket["tweets"].append(t)
             last_activity = time.time()
@@ -343,15 +361,16 @@ def main():
         try:
             payload = json.loads(message)
         except Exception:
+            log.warning("WS 非JSON消息: %s", str(message)[:200])
             return
-        et = payload.get("event_type")
-        if et == "tweet":
+        # 实测投递消息可能不带 event_type 字段，只要含 tweets 数组就处理
+        if payload.get("tweets"):
             handle_tweet_event(payload)
             with buffer_lock:
                 total = sum(len(b["tweets"]) for b in buffer.values())
             if total >= 8:
                 flush()
-        elif et == "connected":
+        elif payload.get("event_type") == "connected":
             log.info("流握手成功")
         # ping 事件忽略
 
