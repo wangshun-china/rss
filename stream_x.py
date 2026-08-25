@@ -140,9 +140,10 @@ def parse_tweet(t):
     created = pick(t, "createdAt", "created_at", default=None)
     likes = int(pick(t, "favoriteCount", "likeCount", "like_count",
                      "favorite_count", default=0) or 0)
-    is_reply = bool(pick(t, "inReplyToStatusIdStr", "in_reply_to_status_id_str",
+    is_reply = bool(pick(t, "isReply", "inReplyToStatusIdStr", "in_reply_to_status_id_str",
                          "inReplyToStatusId", default=False))
-    reply_to = str(pick(t, "inReplyToScreenName", "in_reply_to_screen_name", default=""))
+    reply_to = str(pick(t, "inReplyToUsername", "inReplyToScreenName",
+                        "in_reply_to_screen_name", default=""))
     is_rt = text.startswith("RT @")
     return {
         "id": tid,
