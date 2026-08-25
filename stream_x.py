@@ -358,6 +358,8 @@ def main():
         log.info("WebSocket 已连接")
 
     def on_message(ws, message):
+        # 临时诊断：记录所有到达的消息头（确认链路是否通）
+        log.info("<<< %s", str(message)[:180])
         try:
             payload = json.loads(message)
         except Exception:
