@@ -2,7 +2,7 @@
 
 设计：
 - 启动时确保服务端存在一条激活的过滤规则（from: 五个账号）
-- 可选启动回补（BACKFILL_ON_START=1）：用 REST 拉一次最新推文补上停机期间的缺口
+- 启动回补：小页 REST 拉取最新推文，覆盖停机/部署窗口期漏掉的内容
 - 常驻 WebSocket：实时接收匹配推文，缓冲聚合后按账号推送飞书卡片
 - 断线自动重连（官方要求断开后至少等 90 秒）
 - 去重状态复用 data/state.json，与旧轮询格式一致
@@ -40,7 +40,6 @@ API_KEY = os.environ.get("TWITTER_API_KEY") or ""
 FEISHU_WEBHOOK = os.environ.get("FEISHU_WEBHOOK") or ""
 FEISHU_SECRET = os.environ.get("FEISHU_SECRET") or None
 FLUSH_SECONDS = int(os.environ.get("X_FLUSH_SECONDS") or 120)
-BACKFILL = os.environ.get("BACKFILL_ON_START", "1") == "1"
 
 TZ = timezone(timedelta(hours=int(os.environ.get("TIMEZONE_OFFSET_HOURS") or 8)))
 
@@ -322,16 +321,18 @@ def handle_tweet_event(payload):
 # ---------- 启动回补 ----------
 
 def backfill(api_key, accounts):
-    """用 REST 拉各账号最新推文，把停机期间漏掉的推出去（旧->新顺序）。"""
+    """启动回补：REST 小页拉取各账号最新推文（旧->新推送），
+    覆盖停机/断线窗口期漏掉的内容。每账号最多 10 条 ≈ 150 credits。"""
     from main import build_tweet_card  # 复用既有卡片构建（含 AI）
     store_data = store.load()
+    total_pushed = 0
     for name in accounts:
         key = f"twitter:{name}"
         try:
             resp = requests.get(
                 "https://api.twitterapi.io/twitter/user/last_tweets",
                 headers={"X-API-Key": api_key},
-                params={"userName": name},
+                params={"userName": name, "pageSize": 10},
                 timeout=30,
             )
             resp.raise_for_status()
@@ -346,7 +347,7 @@ def backfill(api_key, accounts):
         if not fresh:
             log.info("[回补 @%s] 无缺口", name)
             continue
-        u = fresh[0]["_user"]
+        u = fresh[0]["_profile"]
         profile = {"name": u["name"] or f"@{name}", "screen_name": name,
                    "bio": truncate(u["description"], 160),
                    "followers": u["followers"]}
@@ -356,9 +357,11 @@ def backfill(api_key, accounts):
             send(FEISHU_WEBHOOK, FEISHU_SECRET, card)
             store.record(store_data, key, [t["id"] for t in fresh])
             store.save(store_data)
+            total_pushed += len(fresh)
             log.info("[回补 @%s] 补推 %d 条", name, len(fresh))
         except Exception as e:
             log.error("[回补 @%s] 推送失败: %s", name, e)
+    return total_pushed
 
 
 # ---------- 主流程 ----------
@@ -374,8 +377,8 @@ def main():
         raise SystemExit("缺少 TWITTER_API_KEY")
 
     ensure_rule(accounts)
-    if BACKFILL:
-        backfill(API_KEY, accounts)
+    # 启动回补：小页拉取，覆盖停机/部署窗口期漏掉的推文（每次约 750 credits）
+    backfill(API_KEY, accounts)
 
     def on_open(ws):
         log.info("WebSocket 已连接")
