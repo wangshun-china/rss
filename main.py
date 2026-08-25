@@ -15,7 +15,7 @@ import yaml
 
 import ai
 from feishu import build_card, send
-from sources import reddit, twitter_synd
+from sources import hn, reddit, twitter_synd
 import store
 
 log = logging.getLogger("rss")
@@ -77,18 +77,21 @@ def truncate(text, limit):
 
 
 def collect(cfg):
-    """拉取源集合，返回 (buckets, x_stats)；RSS_SOURCES 环境变量可限定只跑 twitter 或 reddit。"""
+    """拉取源集合，返回 (buckets, x_stats)；RSS_SOURCES 环境变量可限定范围
+    （逗号分隔组合：twitter / reddit / hn，默认全部）。"""
     buckets = {}
-    scope = os.environ.get("RSS_SOURCES", "all")  # all / twitter / reddit
+    scope = os.environ.get("RSS_SOURCES", "all")
+    scopes = set(scope.split(",")) if scope != "all" else {"twitter", "reddit", "hn"}
     x_stats = {"attempted": 0, "failed": []}
 
     filters = cfg.get("filters", {})
     skip_reply = filters.get("twitter_skip_replies", False)
     skip_rt = filters.get("twitter_skip_retweets", False)
 
-    if scope in ("all", "twitter"):
+    if "twitter" in scopes:
         import time as _time
 
+        api_key = os.environ.get("TWITTER_API_KEY")
         for name in cfg.get("twitter_accounts", []):
             key = f"twitter:{name}"
             x_stats["attempted"] += 1
@@ -108,17 +111,21 @@ def collect(cfg):
             }
             _time.sleep(3)  # 轻微间隔，避免触发上游风控
 
-    if scope not in ("all", "reddit"):
-        return buckets, x_stats
+    if "reddit" in scopes:
+        cid = os.environ.get("REDDIT_CLIENT_ID") or None
+        csec = os.environ.get("REDDIT_CLIENT_SECRET") or None
+        for sub in cfg.get("reddit_subreddits", []):
+            key = f"reddit:{sub}"
+            try:
+                buckets[key] = reddit.fetch_subreddit(sub, client_id=cid, client_secret=csec)
+            except Exception as e:
+                log.warning("拉取 r/%s 失败: %s", sub, e)
 
-    cid = os.environ.get("REDDIT_CLIENT_ID") or None
-    csec = os.environ.get("REDDIT_CLIENT_SECRET") or None
-    for sub in cfg.get("reddit_subreddits", []):
-        key = f"reddit:{sub}"
+    if "hn" in scopes:
         try:
-            buckets[key] = reddit.fetch_subreddit(sub, client_id=cid, client_secret=csec)
+            buckets["hn:front"] = hn.fetch_front(limit=15)
         except Exception as e:
-            log.warning("拉取 r/%s 失败: %s", sub, e)
+            log.warning("拉取 HN 失败: %s", e)
 
     return buckets, x_stats
 
@@ -224,6 +231,33 @@ def build_reddit_card(sub, items, fmt, sort_key, max_items):
     return build_card(f"Reddit · r/{sub} · {len(items)} 个新帖", "orange", lines)
 
 
+def build_hn_card(items):
+    ai_items = [{"text": p["title"]} for p in items]
+
+    ai_result = None
+    if ai.enabled():
+        try:
+            ai_result = ai.translate_and_summarize(ai_items)
+            log.info("HN AI 处理完成（翻译 %d 条）", len(ai_result["translations"]))
+        except Exception as e:
+            log.warning("HN AI 增强失败: %s", e)
+    trans = (ai_result or {}).get("translations") or {}
+    summary = (ai_result or {}).get("summary")
+
+    lines = []
+    for i, p in enumerate(items):
+        line = (f"**[{truncate(p['title'], 150)}]({p['url']})** · "
+                f"👍 {p['points']} 💬 {p['comments']} · [讨论]({p['hn_url']})")
+        zh = trans.get(i)
+        if zh:
+            line += f"\n译：{zh}"
+        lines.append(line)
+
+    if summary:
+        lines.insert(0, f"**AI 总结**：{summary}")
+    return build_card(f"Hacker News · 首页精选 · {len(items)} 条", "yellow", lines)
+
+
 def run(dry_run=False):
     load_env()
     scope = os.environ.get("RSS_SOURCES", "all")  # all / twitter / reddit
@@ -291,6 +325,8 @@ def run(dry_run=False):
         card = (
             build_tweet_card(name, fresh, profile, fmt, sort_key, max_items, text_max)
             if source == "twitter"
+            else build_hn_card(fresh)
+            if source == "hn"
             else build_reddit_card(name, fresh, fmt, sort_key, max_items)
         )
         if len(fresh) > max_items:

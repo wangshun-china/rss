@@ -31,9 +31,9 @@ jobs:
       - name: 安装依赖
         run: pip install -r requirements.txt
 
-      - name: 拉取 Reddit 并推送飞书
+      - name: 拉取 Reddit / HN 并推送飞书
         env:
-          RSS_SOURCES: reddit
+          RSS_SOURCES: reddit,hn
           RSS_STATE_FILE: state-reddit.json
           FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
           FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
