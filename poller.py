@@ -155,7 +155,7 @@ def fetch_new_tweets(query, since_id):
     q = query + (f" since_id:{since_id}" if since_id else "")
     all_tweets, cursor = [], ""
     for _ in range(MAX_PAGES):
-        raws, has_next, next_cursor = fetch_page(q, cursor)
+        raws, has_next_page, next_cursor = fetch_page(q, cursor)
         for x in raws:
             t = parse_tweet(x)
             if t:
