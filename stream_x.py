@@ -199,11 +199,15 @@ def truncate(text, limit=500):
 # ---------- 缓冲与推送 ----------
 
 def flush():
-    with buffer_lock:
-        if not buffer:
-            return
-        batches = buffer
-        buffer.clear()
+    try:
+        with buffer_lock:
+            if not buffer:
+                return
+            batches = buffer
+            buffer.clear()
+    except Exception:
+        log.exception("[flush] 取缓冲失败")
+        return
 
     for username, data in batches.items():
         tweets = sorted(data["tweets"], key=lambda t: str(t["time"]))
@@ -259,12 +263,15 @@ def buffer_flusher():
     global last_activity
     while True:
         time.sleep(15)
-        with buffer_lock:
-            empty = not buffer
-        if empty:
-            continue
-        if time.time() - last_activity >= FLUSH_SECONDS:
-            flush()
+        try:
+            with buffer_lock:
+                empty = not buffer
+            if empty:
+                continue
+            if time.time() - last_activity >= FLUSH_SECONDS:
+                flush()
+        except Exception:
+            log.exception("[flusher] 聚合刷新异常（线程存活）")
 
 
 def handle_tweet_event(payload):
