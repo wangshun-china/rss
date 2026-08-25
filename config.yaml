@@ -6,12 +6,12 @@ twitter_accounts:
   - levelsio
   - lidangzzz
 
-# 订阅的 Reddit 版块（AI / 编程类）
+# 订阅的 Reddit 版块（AI / Agent 方向）
 reddit_subreddits:
-  - MachineLearning
   - LocalLLaMA
-  - programming
-  - rust
+  - ClaudeAI
+  - singularity
+  - LLMDevs
 
 push:
   # 单张卡片最多展示条数，超出部分折叠为"+N"
