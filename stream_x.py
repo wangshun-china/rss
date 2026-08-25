@@ -47,6 +47,8 @@ TZ = timezone(timedelta(hours=int(os.environ.get("TIMEZONE_OFFSET_HOURS") or 8))
 buffer_lock = threading.Lock()
 buffer = {}  # username -> {"tweets": [...], "profile": {...}}
 last_activity = time.time()
+last_msg_time = time.time()  # 最近一次收到 WS 消息（含心跳）的时刻，供看门狗判断
+current_ws = [None]  # 持有当前 WebSocketApp 引用，供看门狗强制关闭
 
 
 def load_accounts():
@@ -274,6 +276,22 @@ def buffer_flusher():
             log.exception("[flusher] 聚合刷新异常（线程存活）")
 
 
+def connection_watchdog():
+    """看门狗：连接存活期间若超过 180 秒未收到任何消息（含心跳），
+    判定为僵尸连接，强制关闭触发重连（服务端要求重连前等待约 95 秒）。"""
+    while True:
+        time.sleep(30)
+        ws = current_ws[0]
+        silent = time.time() - last_msg_time
+        if ws is None or silent <= 180:
+            continue
+        log.warning("[watchdog] %.0f 秒未收到任何消息，判定僵尸连接，强制重连", silent)
+        try:
+            ws.close()
+        except Exception:
+            pass
+
+
 def handle_tweet_event(payload):
     global last_activity
     tweets_in = payload.get("tweets") or []
@@ -359,13 +377,12 @@ def main():
     if BACKFILL:
         backfill(API_KEY, accounts)
 
-    threading.Thread(target=buffer_flusher, daemon=True).start()
-
     def on_open(ws):
         log.info("WebSocket 已连接")
 
     def on_message(ws, message):
-        # 临时诊断：记录所有到达的消息头（确认链路是否通）
+        global last_msg_time
+        last_msg_time = time.time()
         log.info("<<< %s", str(message)[:180])
         try:
             payload = json.loads(message)
@@ -389,6 +406,9 @@ def main():
     def on_close(ws, code, reason):
         log.warning("WS 关闭 code=%s reason=%s，95 秒后重连", code, reason)
 
+    threading.Thread(target=buffer_flusher, daemon=True).start()
+    threading.Thread(target=connection_watchdog, daemon=True).start()
+
     while True:
         ws = websocket.WebSocketApp(
             WS_URL,
@@ -398,10 +418,13 @@ def main():
             on_error=on_error,
             on_close=on_close,
         )
+        current_ws[0] = ws
+        last_msg_time = time.time()
         try:
             ws.run_forever(ping_interval=40, ping_timeout=30)
         except Exception as e:
             log.error("run_forever 异常: %s", e)
+        current_ws[0] = None
         try:
             flush()  # 断线前把缓冲推干净
         except Exception:
