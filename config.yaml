@@ -5,6 +5,8 @@ twitter_accounts:
   - SunNeverSetsX
   - levelsio
   - lidangzzz
+# 可选：poller 检索的时间下界（只影响查询成本，增量去重靠 state 里的 since_id）
+# twitter_since_date: "2026-08-21"
 
 # 订阅的 Reddit 版块（AI / Agent 方向）
 reddit_subreddits:
@@ -12,6 +14,35 @@ reddit_subreddits:
   - ClaudeAI
   - singularity
   - LLMDevs
+
+# 通用 RSS/Atom 订阅（RSS_SOURCES 需包含 rss，reddit.yml 已是 reddit,hn,rss）。
+# 每卡最多 max_items_per_card 条，突发大量更新时积压在后续小时逐步排空。
+# 通用资讯类备选（按需取消注释）：
+#   Google News 关键词：https://news.google.com/rss/search?q=LLM&hl=zh-CN&gl=CN&ceid=CN:zh-Hans
+#   YouTube 频道：https://www.youtube.com/feeds/videos.xml?channel_id=UC...
+#   V2EX 全站：https://www.v2ex.com/index.xml（日均数百条，慎开）
+#   Anthropic 官方无 RSS（404），可用 Google News 关键词兜底。
+generic_feeds:
+  # -- 论文 --
+  - name: arxiv-cs-cl
+    url: https://export.arxiv.org/rss/cs.CL
+  # -- AI 官方博客 / 领域博客 --
+  - name: hf-blog
+    url: https://huggingface.co/blog/feed.xml
+  - name: openai
+    url: https://openai.com/news/rss.xml
+  - name: deepmind
+    url: https://deepmind.google/blog/rss.xml
+  - name: simonwillison
+    url: https://simonwillison.net/atom/everything/
+  # -- 中文 --
+  - name: ruanyifeng
+    url: https://www.ruanyifeng.com/blog/atom.xml
+  # -- GitHub Releases --
+  - name: gh-vllm
+    url: https://github.com/vllm-project/vllm/releases.atom
+  - name: gh-transformers
+    url: https://github.com/huggingface/transformers/releases.atom
 
 push:
   # 单张卡片最多展示条数，超出部分折叠为"+N"

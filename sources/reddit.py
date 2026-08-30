@@ -1,18 +1,36 @@
 """拉取 subreddit 最新帖子：优先匿名 RSS，被 403/429 时回退 OAuth API。
 
+正文来源：RSS 的 <content>（文字帖自带正文 HTML）；OAuth 路径直接读 selftext。
+不再逐帖请求匿名 .json 详情——该接口 2026-05 起对数据中心 IP 全面 403，
+以前作为正文兜底的 fetch_post_detail 已删除。
+
 国内服务器访问 Reddit 被整站阻断时，可设置 REDDIT_PROXY（如 http://host.docker.internal:7890）
 让本模块的请求走代理。
 """
 
 import os
+import re
 import time
 
 import requests
 import feedparser
 
+from sources.text import html_to_text
+
 UA = "rss-feishu-bot/0.1 (personal feed aggregator)"
 _proxy = os.environ.get("REDDIT_PROXY") or None
 PROXIES = {"http": _proxy, "https": _proxy} if _proxy else None
+
+# Reddit RSS 正文末尾自带的 "submitted by /u/xxx [link] [comments]" 页脚
+_FOOTER_RE = re.compile(r"submitted by\s*/u/\S+[\s\S]*$")
+
+
+def _entry_body(entry):
+    """从 RSS 条目的 content/summary 提取纯文本正文。"""
+    content = entry.get("content") or []
+    html = (content[0].get("value") if content else None) \
+        or entry.get("summary") or ""
+    return _FOOTER_RE.sub("", html_to_text(html)).strip()
 
 
 def _get_rss(url):
@@ -22,7 +40,8 @@ def _get_rss(url):
         resp = requests.get(url, headers={"User-Agent": UA}, timeout=30, proxies=PROXIES)
         if resp.status_code != 429:
             return resp
-        time.sleep((10, 25, 50)[attempt])
+        if attempt < 3:
+            time.sleep((10, 25, 50)[attempt])
     return resp
 
 
@@ -60,31 +79,19 @@ def _from_oauth(sub, limit, client_id, client_secret):
                 "author": d.get("author") or "",
                 "time": d.get("created_utc"),
                 "comments": int(d.get("num_comments") or 0),
+                "score": int(d.get("score") or 0),
+                "body": (d.get("selftext") or "").strip(),
             }
         )
     return posts
 
 
-def fetch_post_detail(url):
-    """拉取单帖详情（正文/分数/评论数）。被拦截或无正文时返回 None。"""
-    try:
-        r = requests.get(url.rstrip("/") + ".json",
-                         headers={"User-Agent": UA},
-                         timeout=30, proxies=PROXIES)
-        if r.status_code != 200:
-            return None
-        post = r.json()[0]["data"]["children"][0]["data"]
-        return {
-            "selftext": (post.get("selftext") or "").strip(),
-            "score": int(post.get("score") or 0),
-            "num_comments": int(post.get("num_comments") or 0),
-        }
-    except Exception:
-        return None
+def fetch_subreddit(sub, limit=100, client_id=None, client_secret=None):
+    """返回该版块最新帖子列表（最新在前）。limit 上限 100（Reddit 两通道一致）。
 
-
-def fetch_subreddit(sub, limit=25, client_id=None, client_secret=None):
-    """返回该版块最新帖子列表（最新在前）。"""
+    RSS 通道拿不到分数，score 为 None；OAuth 通道带 score/comments/body。
+    """
+    limit = min(limit, 100)
     try:
         resp = _get_rss(f"https://www.reddit.com/r/{sub}/new/.rss?limit={limit}")
         if resp.status_code in (403, 429):
@@ -114,6 +121,8 @@ def fetch_subreddit(sub, limit=25, client_id=None, client_secret=None):
                 "author": (e.get("author") or "").removeprefix("/u/"),
                 "time": e.get("published"),
                 "comments": 0,
+                "score": None,
+                "body": _entry_body(e),
             }
         )
     return posts

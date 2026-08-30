@@ -4,29 +4,43 @@
 
 ## 架构
 
-X 官方免费通道（syndication）实测返回的是排名筛选后的精选视图而非完整时间线，
-会漏推文；Reddit 则关闭了自助 API 申请。因此采用三通道分工，各用各的长处：
+三通道分工，各用各的长处：
 
 ```
-X 订阅（服务器容器，实时流式）
+X 订阅（服务器容器，常驻轮询）
 git push master
    └> Actions 构建 SHA 镜像双推 GHCR+ACR
        └> aliyun Runner compose 启动 rss-push 常驻容器
-           └> WebSocket 连接 twitterapi.io 流式接口
-               新推文秒级到达 -> 缓冲聚合(2分钟/8条) -> AI 翻译总结 -> 飞书卡片
+           └> poller.py 每轮 advanced_search + since_id 增量拉取
+               按作者分组 -> AI 翻译总结 -> 飞书卡片
            去重状态：宿主机 ~/deployments/rss/data/state.json（挂载卷）
-           启动时 REST 回补一次停机缺口；断线自动重连
 
-Reddit 订阅（GitHub Actions）
-   └> reddit.yml 每小时 :47 匿名直连 RSS
+Reddit / HN / 通用 RSS（GitHub Actions）
+   └> reddit.yml 每小时 :47 直连拉取（Reddit 匿名 RSS / HN Algolia / generic_feeds）
        └> 飞书卡片推送，state-reddit.json 提交回仓库持久化
 ```
 
-- X 流式计费按实际收到的新推文（15 credits/条），五账号日更百条级 ≈ $0.02/天，
-  远低于轮询式；twitterapi.io 的 syndication 备用拉取代码保留在 main.py 本地可用。
-- 服务器容器设 `RSS_SOURCES=twitter`，Actions 设 `RSS_SOURCES=reddit`，
+- X 主通道是 **twitterapi.io advanced_search**：5 个账号 OR 成一条查询，
+  配合 `since_id` 只取上次之后的新推文。游标存 state.json，不做启动回补
+  （重启窗口期的漏推按需求接受）；推文正文不截断。
+- Reddit 正文直接来自 RSS `<content>`（OAuth 备用通道读 selftext），
+  不再逐帖请求匿名 .json 详情（该接口 2026-05 起对数据中心 IP 全面 403）。
+- HN 外链帖附 Algolia 热评，自述帖（Ask HN 等）带 story_text。
+- 飞书卡片发送前自动做整卡大小预算（`fit_card`），满载内容超限时逐块压缩，
+  避免超限被拒后形成"失败->重试更大卡片"的死循环。
+- `main.py --dry-run` 只打印卡片，不写去重状态，可反复试跑。
+- 服务器容器设 `RSS_SOURCES=twitter`，Actions 设 `RSS_SOURCES=reddit,hn,rss`，
   同一份代码按环境变量各跑各的源，互不干扰。
 - 首次运行某源只记录基线不推送，避免刷屏；旧版本镜像每次部署后自动清理。
+
+## 通用 RSS 订阅
+
+`config.yaml` 的 `generic_feeds` 可接入任何标准 RSS/Atom（无凭据）：
+AI 官方博客、GitHub Releases（`github.com/{owner}/{repo}/releases.atom`）、
+arXiv（`export.arxiv.org/rss/cs.CL`）、V2EX、YouTube 频道、
+Google News 关键词等。卡片每源最多 `max_items_per_card` 条，突发大量更新时
+积压会在后续小时逐步排空。取消注释并在 `RSS_SOURCES` 中包含 `rss` 即生效
+（reddit.yml 已包含）。
 
 ## 配置
 
@@ -43,11 +57,13 @@ Reddit 订阅（GitHub Actions）
 | 本仓库 secret | `AI_MODEL` | 否 | 模型名，默认 `deepseek-v4-flash-0731` |
 | 本仓库 secret | `REDDIT_PROXY` | 否 | Reddit 出站代理，如 `http://host.docker.internal:7890` |
 
-X 订阅主通道是 **twitterapi.io WebSocket 流式接口**：常驻连接实时接收五个账号的新推文，
-按实际收到条数计费（15 credits/条 ≈ $0.15/千条）。服务端过滤规则由容器启动时自动
-创建/更新/激活（tag: rss-push-x），断线自动重连，启动时 REST 回补一次停机缺口。
-`main.py` 里保留的 syndication 免费拉取代码可作为本地无 Key 环境的备用手段
-（注意其返回的是精选视图而非完整时间线，仅适合临时用途）。
+X 订阅主通道是 **twitterapi.io advanced_search 增量轮询**：5 个账号 OR 成一条查询，
+`since_id` 只取上次之后的新推文，不为重复内容买单。连续整轮失败会自动发飞书
+告警卡片（每累计 4 轮一次）。`main.py` 里保留的 syndication 免费拉取代码可作为
+本地无 Key 环境的备用手段（注意其返回的是精选视图而非完整时间线，仅适合临时用途）。
+
+Reddit / HN / RSS 订阅跑在 GitHub Actions（`reddit.yml`），拉取或推送失败时
+通过 `if: failure()` 步骤发飞书告警；`REDDIT_CLIENT_ID/SECRET` 为可选兜底凭据。
 
 X 推文卡片默认带 **AI 总结**（整批内容概括），非中文推文自动附中文译文（保留原文）。
 未配置 AI 或调用失败时自动降级为只推原文。
@@ -58,11 +74,12 @@ X 推文卡片默认带 **AI 总结**（整批内容概括），非中文推文�
 
 ```bash
 pip install -r requirements.txt
-python main.py --dry-run   # 只打印将推送的卡片内容，不发送
+python main.py --dry-run   # 只打印将推送的卡片内容，不发送、不写状态
 python main.py             # 正式推送
 ```
 
-想看卡片效果：删掉 `state.json` 里某个源的几条 ID 再跑 dry-run。
+想看卡片效果：删掉 `state.json` 里某个源的几条 ID 再跑 dry-run
+（dry-run 不落盘，可以反复试跑，不会吃掉待推内容）。
 
 本地起完整容器：
 

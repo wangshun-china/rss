@@ -13,13 +13,10 @@ from email.utils import parsedate_to_datetime
 
 import yaml
 
-import ai
-from feishu import build_card, send
-from sources import hn, reddit, twitter_synd
-import store
-
 log = logging.getLogger("rss")
 BASE = os.path.dirname(os.path.abspath(__file__))
+
+ALL_SCOPES = {"twitter", "reddit", "hn", "rss"}
 
 
 def load_env():
@@ -36,6 +33,15 @@ def load_env():
             key, val = key.strip(), val.strip().strip('"').strip("'")
             if key and key not in os.environ:
                 os.environ[key] = val
+
+
+# 必须先于 ai/sources 导入执行：这些模块在导入期读取代理与 AI 配置
+load_env()
+
+import ai  # noqa: E402
+from feishu import build_card, send  # noqa: E402
+from sources import generic_rss, hn, reddit, twitter_synd  # noqa: E402
+import store  # noqa: E402
 
 
 def make_times(offset_hours):
@@ -76,13 +82,23 @@ def truncate(text, limit):
     return text[:limit].rstrip() + "…"
 
 
-def collect(cfg):
-    """拉取源集合，返回 (buckets, x_stats)；RSS_SOURCES 环境变量可限定范围
-    （逗号分隔组合：twitter / reddit / hn，默认全部）。"""
-    buckets = {}
+def parse_scope():
+    """RSS_SOURCES 环境变量 -> 源集合（逗号分隔组合，默认全部）。"""
     scope = os.environ.get("RSS_SOURCES", "all")
-    scopes = set(scope.split(",")) if scope != "all" else {"twitter", "reddit", "hn"}
-    x_stats = {"attempted": 0, "failed": []}
+    return set(scope.split(",")) if scope != "all" else set(ALL_SCOPES)
+
+
+def collect(cfg):
+    """拉取源集合，返回 (buckets, stats)。
+
+    stats 记录各范围 attempted/failed，供 run() 在范围内全部源失败时
+    以非零码退出，触发 reddit.yml 的飞书告警步骤。
+    """
+    buckets = {}
+    scopes = parse_scope()
+    stats = {name: {"attempted": 0, "failed": 0} for name in ("twitter", "hn", "rss")}
+    stats["twitter"]["failed"] = []
+    stats["reddit"] = {"attempted": 0, "failed": []}
 
     filters = cfg.get("filters", {})
     skip_reply = filters.get("twitter_skip_replies", False)
@@ -94,12 +110,12 @@ def collect(cfg):
         api_key = os.environ.get("TWITTER_API_KEY")
         for name in cfg.get("twitter_accounts", []):
             key = f"twitter:{name}"
-            x_stats["attempted"] += 1
+            stats["twitter"]["attempted"] += 1
             try:
                 tweets, profile = twitter_synd.fetch_user_tweets(name)
             except Exception as e:
                 log.warning("syndication 拉 @%s 失败: %s", name, e)
-                x_stats["failed"].append(name)
+                stats["twitter"]["failed"].append(name)
                 continue
             buckets[key] = {
                 "tweets": [
@@ -116,18 +132,32 @@ def collect(cfg):
         csec = os.environ.get("REDDIT_CLIENT_SECRET") or None
         for sub in cfg.get("reddit_subreddits", []):
             key = f"reddit:{sub}"
+            stats["reddit"]["attempted"] += 1
             try:
                 buckets[key] = reddit.fetch_subreddit(sub, client_id=cid, client_secret=csec)
             except Exception as e:
+                stats["reddit"]["failed"].append(sub)
                 log.warning("拉取 r/%s 失败: %s", sub, e)
 
     if "hn" in scopes:
+        stats["hn"]["attempted"] += 1
         try:
-            buckets["hn:front"] = hn.fetch_front(limit=15)
+            buckets["hn:front"] = hn.fetch_front_with_content(limit=15)
         except Exception as e:
+            stats["hn"]["failed"] += 1
             log.warning("拉取 HN 失败: %s", e)
 
-    return buckets, x_stats
+    if "rss" in scopes:
+        for feed_cfg in cfg.get("generic_feeds") or []:
+            name = feed_cfg.get("name")
+            stats["rss"]["attempted"] += 1
+            try:
+                buckets[f"rss:{name}"] = generic_rss.fetch_feed(feed_cfg["url"])
+            except Exception as e:
+                stats["rss"]["failed"] += 1
+                log.warning("拉取 RSS %s 失败: %s", name, e)
+
+    return buckets, stats
 
 
 def split_new(store_data, key, items):
@@ -181,19 +211,7 @@ def build_tweet_card(name, items, profile, fmt, sort_key, max_items, text_max):
 
 
 def build_reddit_card(sub, items, fmt, sort_key, max_items):
-    import time as _time
-    from sources import reddit as _reddit
-
     ordered = sorted(items, key=sort_key)[:max_items]
-
-    # 补充帖子正文（间隔防限流；拿不到就只推标题）
-    for p in ordered:
-        detail = _reddit.fetch_post_detail(p["url"])
-        if detail:
-            p["body"] = detail["selftext"]
-            p["score"] = detail["score"]
-            p["comments"] = detail["num_comments"]
-        _time.sleep(0.5)
 
     # AI 输入：标题 + 正文前 800 字
     ai_items = [{"i": i,
@@ -214,13 +232,16 @@ def build_reddit_card(sub, items, fmt, sort_key, max_items):
     lines = []
     for i, p in enumerate(ordered):
         author = f" · u/{p['author']}" if p["author"] else ""
-        score = f" · 👍 {p.get('score', 0)} 💬 {p.get('comments', 0)}"
+        # RSS 通道拿不到分数，不把未知伪装成 0
+        stats = ""
+        if p.get("score") is not None:
+            stats = f" · 👍 {p['score']} 💬 {p.get('comments', 0)}"
         head = (f"**[{truncate(p['title'], 120)}]({p['url']})**"
-                f"{author}{score} · {fmt(p['time'])}")
+                f"{author}{stats} · {fmt(p['time'])}")
         block = head
         body_text = (p.get("body") or "").strip()
         if body_text:
-            block += f"\n原文：{truncate(body_text, 2500)}"
+            block += f"\n{truncate(body_text, 2500)}"
         zh = trans.get(i)
         if zh:
             block += f"\n译：{zh}"
@@ -231,8 +252,12 @@ def build_reddit_card(sub, items, fmt, sort_key, max_items):
     return build_card(f"Reddit · r/{sub} · {len(items)} 个新帖", "orange", lines)
 
 
-def build_hn_card(items):
-    ai_items = [{"text": p["title"]} for p in items]
+def build_hn_card(items, fmt, max_items):
+    ordered = items[:max_items]
+
+    # AI 输入：标题 + 自述正文/热评前 800 字（原来只有标题，总结质量差）
+    ai_items = [{"text": f"{p['title']}\n{truncate(hn_content(p), 800)}"}
+                for p in ordered]
 
     ai_result = None
     if ai.enabled():
@@ -245,22 +270,71 @@ def build_hn_card(items):
     summary = (ai_result or {}).get("summary")
 
     lines = []
-    for i, p in enumerate(items):
+    for i, p in enumerate(ordered):
         line = (f"**[{truncate(p['title'], 150)}]({p['url']})** · "
-                f"👍 {p['points']} 💬 {p['comments']} · [讨论]({p['hn_url']})")
+                f"👍 {p['points']} 💬 {p['comments']} · {fmt(p['time'])} · "
+                f"[讨论]({p['hn_url']})")
+        block = line
+        content = hn_content(p)
+        if content:
+            block += f"\n{truncate(content, 1000)}"
         zh = trans.get(i)
         if zh:
-            line += f"\n译：{zh}"
-        lines.append(line)
+            block += f"\n译：{zh}"
+        lines.append(block)
 
     if summary:
         lines.insert(0, f"**AI 总结**：{summary}")
     return build_card(f"Hacker News · 首页精选 · {len(items)} 条", "yellow", lines)
 
 
+def hn_content(post):
+    """自述帖用正文，外链帖用热评。"""
+    text = (post.get("story_text") or "").strip()
+    if text:
+        return text
+    top = post.get("top_comment")
+    if top:
+        return f"热评 @{top[0]}：{top[1]}"
+    return ""
+
+
+def build_generic_card(name, items, fmt, sort_key, max_items):
+    ordered = sorted(items, key=sort_key)[:max_items]
+
+    ai_items = [{"i": i,
+                 "text": f"{p['title']}\n{truncate(p.get('body') or '', 600)}"}
+                for i, p in enumerate(ordered)]
+
+    ai_result = None
+    if ai.enabled() and any(x["text"].strip() for x in ai_items):
+        try:
+            ai_result = ai.translate_and_summarize(ai_items)
+            log.info("[%s] AI 处理完成（翻译 %d 条）", name, len(ai_result["translations"]))
+        except Exception as e:
+            log.warning("[%s] AI 增强失败: %s", name, e)
+    trans = (ai_result or {}).get("translations") or {}
+    summary = (ai_result or {}).get("summary")
+
+    lines = []
+    for i, p in enumerate(ordered):
+        author = f" · {p['author']}" if p["author"] else ""
+        block = f"**[{truncate(p['title'], 150)}]({p['url']})**{author} · {fmt(p['time'])}"
+        body_text = (p.get("body") or "").strip()
+        if body_text:
+            block += f"\n{truncate(body_text, 1200)}"
+        zh = trans.get(i)
+        if zh:
+            block += f"\n译：{zh}"
+        lines.append(block)
+
+    if summary:
+        lines.insert(0, f"**AI 总结**：{summary}")
+    return build_card(f"RSS · {name} · {len(items)} 条更新", "green", lines)
+
+
 def run(dry_run=False):
     load_env()
-    scope = os.environ.get("RSS_SOURCES", "all")  # all / twitter / reddit
     with open(os.path.join(BASE, "config.yaml"), encoding="utf-8") as f:
         cfg = yaml.safe_load(f)
 
@@ -275,10 +349,23 @@ def run(dry_run=False):
         raise SystemExit("缺少 FEISHU_WEBHOOK（.env 或 GitHub Secrets）")
 
     store_data = store.load()
-    buckets, x_stats = collect(cfg)
+    buckets, stats = collect(cfg)
+    x_stats = stats["twitter"]
+
+    # 范围内 reddit/hn/rss 全部源拉取失败时标记，最终以非零码退出触发告警
+    dead = []
+    for name in ("reddit", "hn", "rss"):
+        if name not in parse_scope() or not stats[name]["attempted"]:
+            continue
+        s = stats[name]
+        failed = len(s["failed"]) if isinstance(s["failed"], list) else s["failed"]
+        if failed == s["attempted"]:
+            dead.append(name)
+    if dead:
+        log.error("范围内全部源拉取失败: %s", "、".join(dead))
 
     # X 拉取连续整轮全失败时发告警卡片（第 4 轮触发一次，不重复刷屏）
-    if scope in ("all", "twitter") and cfg.get("twitter_accounts"):
+    if "twitter" in parse_scope() and cfg.get("twitter_accounts"):
         streak_key = "_twitter_fail_streak"
         prev = int(store_data.get(streak_key) or 0)
         if x_stats["attempted"] == 0:
@@ -322,19 +409,28 @@ def run(dry_run=False):
             continue
         total_new += len(fresh)
         source, name = key.split(":", 1)
-        card = (
-            build_tweet_card(name, fresh, profile, fmt, sort_key, max_items, text_max)
-            if source == "twitter"
-            else build_hn_card(fresh)
-            if source == "hn"
-            else build_reddit_card(name, fresh, fmt, sort_key, max_items)
-        )
+        if source == "twitter":
+            card = build_tweet_card(name, fresh, profile, fmt, sort_key, max_items, text_max)
+        elif source == "hn":
+            card = build_hn_card(fresh, fmt, max_items)
+        elif source == "rss":
+            card = build_generic_card(name, fresh, fmt, sort_key, max_items)
+        else:
+            card = build_reddit_card(name, fresh, fmt, sort_key, max_items)
         if len(fresh) > max_items:
+            # 通用 RSS 只记录展示条目，积压在后续小时排空，措辞不同
+            note = (f"另有 {len(fresh) - max_items} 条将在后续卡片推送"
+                    if source == "rss" else
+                    f"另有 {len(fresh) - max_items} 条未展示")
             card["elements"].append(
-                {"tag": "note", "elements": [{"tag": "plain_text",
-                                              "content": f"另有 {len(fresh) - max_items} 条未展示"}]}
+                {"tag": "note", "elements": [{"tag": "plain_text", "content": note}]}
             )
-        pending.append((key, [str(it["id"]) for it in fresh], card))
+        # 通用 RSS 积压采用排空模式：只记录本卡实际展示的条目
+        record_ids = [str(it["id"]) for it in fresh]
+        if source == "rss":
+            shown = {str(it["id"]) for it in sorted(fresh, key=sort_key)[:max_items]}
+            record_ids = [i for i in record_ids if i in shown]
+        pending.append((key, record_ids, card))
 
     # 发送阶段：成功才记录为已推送，失败留给下轮重试
     sent, failed = 0, 0
@@ -343,7 +439,6 @@ def run(dry_run=False):
             import json as _json
             print(f"\n===== DRY-RUN 将推送 [{key}] =====")
             print(_json.dumps(card, ensure_ascii=False, indent=2)[:3000])
-            store.record(store_data, key, ids)
             sent += 1
             continue
         try:
@@ -355,14 +450,16 @@ def run(dry_run=False):
             failed += 1
             log.error("[%s] 推送失败（下轮重试）: %s", key, e)
 
-    store_data.update(baselines)
-    store.save(store_data)
+    # dry-run 不落盘：只打印卡片，不消耗去重状态
+    if not dry_run:
+        store_data.update(baselines)
+        store.save(store_data)
 
     log.info(
         "完成：%d 个源有新内容（%d 条），推送成功 %d 个源，失败 %d，基线初始化 %d",
         len(pending), total_new, sent, failed, len(baselines),
     )
-    return 1 if failed else 0
+    return 1 if (failed or dead) else 0
 
 
 if __name__ == "__main__":

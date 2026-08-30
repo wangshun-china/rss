@@ -1,5 +1,6 @@
-# Reddit 订阅：GitHub Actions 直连拉取（Azure 出口 IP 不被 Reddit 拦截）。
-# 与服务器容器分工：容器只跑 X（RSS_SOURCES=twitter），本工作流只跑 Reddit，
+# Reddit / HN / 通用 RSS 订阅：GitHub Actions 直连拉取（Azure 出口 IP 不被
+# Reddit 拦截；HN 走 Algolia；通用 RSS 见 config.yaml 的 generic_feeds）。
+# 与服务器容器分工：容器只跑 X（RSS_SOURCES=twitter），本工作流跑其余源，
 # 去重状态独立存放于仓库根的 state-reddit.json，每次运行后提交回写。
 
 name: reddit-push
@@ -19,7 +20,7 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
@@ -31,16 +32,36 @@ jobs:
       - name: 安装依赖
         run: pip install -r requirements.txt
 
-      - name: 拉取 Reddit / HN 并推送飞书
+      - name: 拉取 Reddit / HN / RSS 并推送飞书
         env:
-          RSS_SOURCES: reddit,hn
+          RSS_SOURCES: reddit,hn,rss
           RSS_STATE_FILE: state-reddit.json
           FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
           FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
           AI_API_BASE: ${{ secrets.AI_API_BASE }}
           AI_API_KEY: ${{ secrets.AI_API_KEY }}
           AI_MODEL: ${{ secrets.AI_MODEL }}
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
         run: python main.py
+
+      - name: 失败时发飞书告警
+        if: failure()
+        env:
+          FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
+          FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
+        run: |
+          python - <<'EOF'
+          import os
+          from feishu import build_card, send
+
+          webhook = os.environ.get("FEISHU_WEBHOOK")
+          if webhook:
+              send(webhook, os.environ.get("FEISHU_SECRET") or None,
+                   build_card("Reddit/HN/RSS 推流失败", "red",
+                              ["GitHub Actions 运行失败（拉取或推送环节），"
+                               "请到 Actions 页查看日志。"]))
+          EOF
 
       - name: 回写去重状态
         run: |

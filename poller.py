@@ -42,10 +42,9 @@ UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
 
 
-def load_accounts():
+def load_config():
     with open("/app/config.yaml", encoding="utf-8") as f:
-        cfg = yaml.safe_load(f)
-    return cfg.get("twitter_accounts") or []
+        return yaml.safe_load(f) or {}
 
 
 # ---------- 解析 ----------
@@ -216,12 +215,14 @@ def push_author(username, tweets, profile):
 
 # ---------- 主循环 ----------
 
-def run_cycle(accounts):
+def run_cycle(accounts, since=""):
     state = store.load()
     since_id = str(state.get("_x_since_id") or "")
     baseline = not since_id
 
-    query = " OR ".join(f"from:{a}" for a in accounts) + " since:2026-08-21"
+    query = " OR ".join(f"from:{a}" for a in accounts)
+    if since:
+        query += f" since:{since}"
 
     if baseline:
         tweets = fetch_baseline(query)
@@ -285,19 +286,47 @@ def run_cycle(accounts):
 def main():
     logging.basicConfig(level=logging.INFO,
                         format="%(asctime)s %(levelname)s %(message)s")
-    accounts = load_accounts()
+    cfg = load_config()
+    accounts = cfg.get("twitter_accounts") or []
     if not accounts:
         raise SystemExit("config.yaml 未配置 twitter_accounts")
     if not API_KEY:
         raise SystemExit("缺少 TWITTER_API_KEY")
+    since = str(cfg.get("twitter_since_date") or "").strip()
+
+    # 连续整轮失败告警：每累计 4 轮发一次卡片，恢复即清零
+    fail_streak = int(store.load().get("_x_fail_streak") or 0)
 
     log.info("增量轮询启动：%d 个账号，间隔 %ds", len(accounts), INTERVAL_SECONDS)
     while True:
         started = time.time()
         try:
-            run_cycle(accounts)
+            run_cycle(accounts, since)
+            if fail_streak:
+                fail_streak = 0
+                state = store.load()
+                state["_x_fail_streak"] = 0
+                store.save(state)
         except Exception:
-            log.exception("本轮轮询异常（下轮自动重试）")
+            fail_streak += 1
+            try:
+                state = store.load()
+                state["_x_fail_streak"] = fail_streak
+                store.save(state)
+            except Exception:
+                pass
+            log.exception("本轮轮询异常（连续第 %d 轮）", fail_streak)
+            if fail_streak >= 4 and fail_streak % 4 == 0 and FEISHU_WEBHOOK:
+                try:
+                    send(FEISHU_WEBHOOK, FEISHU_SECRET, build_card(
+                        "X 轮询异常",
+                        "red",
+                        [f"poller 已连续 {fail_streak} 轮整体失败，请检查服务器网络与"
+                         f"twitterapi.io 可用性。推文不会永久丢失（恢复后 since_id"
+                         f"未推进，会自动补拉）。"],
+                    ))
+                except Exception:
+                    log.exception("告警卡片发送失败")
         rest = max(60, INTERVAL_SECONDS - (time.time() - started))
         log.info("休眠 %.0f 秒后进行下一轮", rest)
         time.sleep(rest)
