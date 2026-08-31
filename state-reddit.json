@@ -115,6 +115,13 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1w2zjur",
+    "1w2zice",
+    "1w2zb9l",
+    "1w2z5qw",
+    "1w2z2zo",
+    "1w2wre0",
+    "1w2wdeq",
     "1w2v97w",
     "1w2usf4",
     "1w2ujys",
@@ -607,14 +614,7 @@
     "1vwt6m7",
     "1vwsjut",
     "1vwrc6i",
-    "1vwqd8k",
-    "1vwq9li",
-    "1vwpi9z",
-    "1vwp91v",
-    "1vwowbu",
-    "1vwow9z",
-    "1vwoseh",
-    "1vwoaop"
+    "1vwqd8k"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,20 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1w2zo2n",
+    "1w2zgvv",
+    "1w2z3h6",
+    "1w2z2rx",
+    "1w2yyr8",
+    "1w2xqzt",
+    "1w2xapb",
+    "1w2x9bc",
+    "1w2x689",
+    "1w2x1vx",
+    "1w2wiys",
+    "1w2whfl",
+    "1w2u6iz",
+    "1w2spcw",
     "1w2vpm3",
     "1w2vksa",
     "1w2utom",
@@ -1140,23 +1154,13 @@
     "1vy5moj",
     "1vy5lnc",
     "1vy5ifs",
-    "1vy5hfx",
-    "1vy5ayu",
-    "1vy50ga",
-    "1vy4nq9",
-    "1vy4eta",
-    "1vy4iz9",
-    "1vy46z2",
-    "1vy40r2",
-    "1vy3o16",
-    "1vy3f0s",
-    "1vy2p7b",
-    "1vy2oit",
-    "1vy2o2i",
-    "1vy298y",
-    "1vy228x"
+    "1vy5hfx"
   ],
   "reddit:LLMDevs": [
+    "1w2zb3u",
+    "1w2xlfr",
+    "1w2x6i4",
+    "1w2wd1o",
     "1w2w39v",
     "1w2vty7",
     "1w2un91",
@@ -1326,6 +1330,8 @@
     "1vxk719"
   ],
   "reddit:singularity": [
+    "1w2y9rb",
+    "1w2xdqz",
     "1w2w46u",
     "1w2p3g7",
     "1w2kom2",
@@ -1507,6 +1513,9 @@
     "1vwkffs"
   ],
   "hn:front": [
+    "49503601",
+    "49478426",
+    "49435285",
     "49499891",
     "49468126",
     "49497854",
@@ -1798,6 +1807,7 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Aug/30/understanding-chatgpt-work/",
     "https://simonwillison.net/2026/Aug/29/hy4/",
     "https://simonwillison.net/2026/Aug/28/just-a-rumour-of-a-bug/",
     "https://simonwillison.net/2026/Aug/27/breaking-claude-code-opus-5-auto-mode/",
