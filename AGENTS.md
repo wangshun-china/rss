@@ -2,7 +2,7 @@
 
 ## 当前架构
 
-- X：阿里云 Runner 部署常驻容器，`entrypoint.sh` 启动 `poller.py`，通过 twitterapi.io `advanced_search + since_id` 增量轮询；部署配置当前为 7200 秒。连续整轮失败自动发飞书告警。
+- X：已停用（twitterapi.io 按查询计费）。仓库变量 `ENABLE_X_PUSH` 控制：`true` 时容器每 2 小时 `advanced_search + since_id` 增量轮询，否则容器空转零调用；`since_id` 游标保留在挂载卷，恢复后自动补拉。
 - Reddit/Hacker News/通用 RSS：`.github/workflows/reddit.yml` 定时执行（RSS_SOURCES=reddit,hn,rss），状态写回 `state-reddit.json`；拉取/推送失败有 `if: failure()` 飞书告警步骤。
 - Reddit 正文取自 RSS `<content>`（OAuth 备用通道读 selftext），匿名 `.json` 详情接口已废弃（2026-05 起全面 403）；HN 外链帖附 Algolia 热评。
 - 通用 RSS 源：`config.yaml` 的 `generic_feeds`（name+url），由 `sources/generic_rss.py` 拉取，积压只记录已展示条目、后续小时排空。

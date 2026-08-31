@@ -57,10 +57,13 @@ Google News 关键词等。卡片每源最多 `max_items_per_card` 条，突发�
 | 本仓库 secret | `AI_MODEL` | 否 | 模型名，默认 `deepseek-v4-flash-0731` |
 | 本仓库 secret | `REDDIT_PROXY` | 否 | Reddit 出站代理，如 `http://host.docker.internal:7890` |
 
-X 订阅主通道是 **twitterapi.io advanced_search 增量轮询**：5 个账号 OR 成一条查询，
-`since_id` 只取上次之后的新推文，不为重复内容买单。连续整轮失败会自动发飞书
-告警卡片（每累计 4 轮一次）。`main.py` 里保留的 syndication 免费拉取代码可作为
-本地无 Key 环境的备用手段（注意其返回的是精选视图而非完整时间线，仅适合临时用途）。
+X 订阅**当前已停用**（twitterapi.io 按查询计费）。恢复方式：把仓库变量
+`ENABLE_X_PUSH` 设为 `true` 后手动 Run 一次 deploy workflow 即可——容器改为
+空转模式零 API 调用，`since_id` 游标保留在挂载卷，恢复后自动补拉停机窗口。
+恢复后的行为：5 个账号 OR 成一条查询，`since_id` 只取上次之后的新推文，
+连续整轮失败自动发飞书告警。`main.py` 里保留的 syndication 免费拉取代码可
+作为本地无 Key 环境的备用手段（注意其返回的是精选视图而非完整时间线，
+仅适合临时用途）。
 
 Reddit / HN / RSS 订阅跑在 GitHub Actions（`reddit.yml`），拉取或推送失败时
 通过 `if: failure()` 步骤发飞书告警；`REDDIT_CLIENT_ID/SECRET` 为可选兜底凭据。

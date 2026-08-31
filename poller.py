@@ -283,9 +283,22 @@ def run_cycle(accounts, since=""):
         log.info("游标推进至 %s，本轮推送 %d 条", max_id, pushed_total)
 
 
+def x_enabled():
+    """RSS_SOURCES 不含 twitter 时视为停用：容器空转，零 API 调用零计费。"""
+    scope = os.environ.get("RSS_SOURCES", "all")
+    return scope == "all" or "twitter" in (s.strip() for s in scope.split(","))
+
+
 def main():
     logging.basicConfig(level=logging.INFO,
                         format="%(asctime)s %(levelname)s %(message)s")
+    if not x_enabled():
+        log.info("X 源已停用（RSS_SOURCES=%s 不含 twitter），容器空转中；"
+                 "置仓库变量 ENABLE_X_PUSH=true 重新部署即可恢复，"
+                 "since_id 游标保留，恢复后自动补拉停机窗口", 
+                 os.environ.get("RSS_SOURCES"))
+        while True:
+            time.sleep(3600)
     cfg = load_config()
     accounts = cfg.get("twitter_accounts") or []
     if not accounts:
