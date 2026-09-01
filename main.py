@@ -1,8 +1,8 @@
-"""入口：拉取 X / Reddit 增量 -> 组装飞书卡片 -> 推送 -> 回写去重状态。
+"""入口：拉取 Reddit/HN/通用 RSS -> 组装飞书卡片 -> 推送 -> 回写去重状态。
 
 用法：
     python main.py            # 正式运行（需要 .env 或环境变量）
-    python main.py --dry-run  # 只打印将推送的内容，不真正发送
+    python main.py --dry-run  # 只打印将推送的内容，不真正发送、不写状态
 """
 
 import logging
@@ -16,7 +16,7 @@ import yaml
 log = logging.getLogger("rss")
 BASE = os.path.dirname(os.path.abspath(__file__))
 
-ALL_SCOPES = {"twitter", "reddit", "hn", "rss"}
+ALL_SCOPES = {"reddit", "hn", "rss"}
 
 
 def load_env():
@@ -40,7 +40,7 @@ load_env()
 
 import ai  # noqa: E402
 from feishu import build_card, send  # noqa: E402
-from sources import generic_rss, hn, reddit, twitter_synd  # noqa: E402
+from sources import generic_rss, hn, reddit  # noqa: E402
 import store  # noqa: E402
 
 
@@ -96,36 +96,8 @@ def collect(cfg):
     """
     buckets = {}
     scopes = parse_scope()
-    stats = {name: {"attempted": 0, "failed": 0} for name in ("twitter", "hn", "rss")}
-    stats["twitter"]["failed"] = []
+    stats = {name: {"attempted": 0, "failed": 0} for name in ("hn", "rss")}
     stats["reddit"] = {"attempted": 0, "failed": []}
-
-    filters = cfg.get("filters", {})
-    skip_reply = filters.get("twitter_skip_replies", False)
-    skip_rt = filters.get("twitter_skip_retweets", False)
-
-    if "twitter" in scopes:
-        import time as _time
-
-        api_key = os.environ.get("TWITTER_API_KEY")
-        for name in cfg.get("twitter_accounts", []):
-            key = f"twitter:{name}"
-            stats["twitter"]["attempted"] += 1
-            try:
-                tweets, profile = twitter_synd.fetch_user_tweets(name)
-            except Exception as e:
-                log.warning("syndication 拉 @%s 失败: %s", name, e)
-                stats["twitter"]["failed"].append(name)
-                continue
-            buckets[key] = {
-                "tweets": [
-                    t for t in tweets
-                    if not (skip_reply and t["is_reply"])
-                    and not (skip_rt and t["type"] == "retweet")
-                ],
-                "profile": profile,
-            }
-            _time.sleep(3)  # 轻微间隔，避免触发上游风控
 
     if "reddit" in scopes:
         cid = os.environ.get("REDDIT_CLIENT_ID") or None
@@ -165,49 +137,6 @@ def split_new(store_data, key, items):
     seen = set(store_data.get(key, []))
     fresh = [it for it in items if str(it["id"]) not in seen]
     return fresh, key not in store_data
-
-
-def build_tweet_card(name, items, profile, fmt, sort_key, max_items, text_max):
-    ordered = sorted(items, key=sort_key)[:15]
-
-    ai_result = None
-    if ai.enabled():
-        try:
-            ai_result = ai.translate_and_summarize(ordered)
-            log.info("@%s AI 处理完成（翻译 %d 条）", name, len(ai_result["translations"]))
-        except Exception as e:
-            log.warning("@%s AI 增强失败，按原文推送: %s", name, e)
-
-    trans = (ai_result or {}).get("translations") or {}
-    lines = []
-
-    # 作者简介行：让人一眼知道这个账号是干什么的
-    if profile:
-        head = f"**{profile['name']}** · {profile['followers']:,} 粉丝"
-        if profile["bio"]:
-            head += f"\n{profile['bio']}"
-        lines.append(head)
-        insert_at = 1
-    else:
-        insert_at = 0
-
-    for i, t in enumerate(ordered[:max_items]):
-        meta = fmt(t["time"])
-        if t["is_reply"]:
-            meta += f" · 回复 @{t['reply_to']}"
-        elif t["type"] == "retweet":
-            meta += " · 转推"
-        body = truncate(t["text"], text_max)
-        zh = trans.get(i)
-        if zh:
-            body += f"\n译：{zh}"
-        lines.append(
-            f"**{meta}**　[原文]({t['url']})\n{body}\n💙 {t['likes']}"
-        )
-    summary = (ai_result or {}).get("summary")
-    if summary:
-        lines.insert(insert_at, f"**AI 总结**：{summary}")
-    return build_card(f"X · @{name} · {len(items)} 条更新", "blue", lines)
 
 
 def build_reddit_card(sub, items, fmt, sort_key, max_items):
@@ -340,7 +269,6 @@ def run(dry_run=False):
 
     push_cfg = cfg.get("push", {})
     max_items = int(push_cfg.get("max_items_per_card", 10))
-    text_max = int(push_cfg.get("tweet_text_max_chars", 500))
     fmt, sort_key = make_times(int(cfg.get("timezone_offset_hours", 8)))
 
     webhook = os.environ.get("FEISHU_WEBHOOK")
@@ -350,7 +278,6 @@ def run(dry_run=False):
 
     store_data = store.load()
     buckets, stats = collect(cfg)
-    x_stats = stats["twitter"]
 
     # 范围内 reddit/hn/rss 全部源拉取失败时标记，最终以非零码退出触发告警
     dead = []
@@ -364,54 +291,22 @@ def run(dry_run=False):
     if dead:
         log.error("范围内全部源拉取失败: %s", "、".join(dead))
 
-    # X 拉取连续整轮全失败时发告警卡片（第 4 轮触发一次，不重复刷屏）
-    if "twitter" in parse_scope() and cfg.get("twitter_accounts"):
-        streak_key = "_twitter_fail_streak"
-        prev = int(store_data.get(streak_key) or 0)
-        if x_stats["attempted"] == 0:
-            cur = prev
-        elif len(x_stats["failed"]) == x_stats["attempted"]:
-            cur = prev + 1
-        else:
-            cur = 0
-        store_data[streak_key] = cur
-        if cur >= 4 > prev and not dry_run:
-            names = "、".join(f"@{n}" for n in x_stats["failed"]) or "全部账号"
-            try:
-                send(webhook, secret, build_card(
-                    "X 订阅拉取异常",
-                    "red",
-                    [f"已连续 {cur} 轮全部账号拉取失败：{names}\n"
-                     f"推文不会永久丢失（恢复后会自动补拉），但请检查服务器代理与接口可用性。"],
-                ))
-                log.warning("已发送 X 拉取异常告警（连续失败 %d 轮）", cur)
-            except Exception as e:
-                log.warning("告警卡片发送失败: %s", e)
-
     pending = []      # (key, ids, card)
     baselines = {}    # 首运行只记基线不推送
     total_new = 0
 
     for key in sorted(buckets):
-        bucket = buckets[key]
-        # twitter 源带作者档案，reddit 源是纯列表
-        if isinstance(bucket, dict) and "tweets" in bucket:
-            items, profile = bucket["tweets"], bucket["profile"]
-        else:
-            items, profile = bucket, None
-        fresh, first_run = split_new(store_data, key, items)
+        fresh, first_run = split_new(store_data, key, buckets[key])
         if first_run:
-            log.info("[%s] 首次运行，记录 %d 条基线，本次不推送", key, len(items))
-            baselines[key] = [str(it["id"]) for it in items]
+            log.info("[%s] 首次运行，记录 %d 条基线，本次不推送", key, len(buckets[key]))
+            baselines[key] = [str(it["id"]) for it in buckets[key]]
             continue
         if not fresh:
             log.info("[%s] 无新内容", key)
             continue
         total_new += len(fresh)
         source, name = key.split(":", 1)
-        if source == "twitter":
-            card = build_tweet_card(name, fresh, profile, fmt, sort_key, max_items, text_max)
-        elif source == "hn":
+        if source == "hn":
             card = build_hn_card(fresh, fmt, max_items)
         elif source == "rss":
             card = build_generic_card(name, fresh, fmt, sort_key, max_items)

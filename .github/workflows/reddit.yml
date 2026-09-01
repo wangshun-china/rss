@@ -1,6 +1,5 @@
 # Reddit / HN / 通用 RSS 订阅：GitHub Actions 直连拉取（Azure 出口 IP 不被
 # Reddit 拦截；HN 走 Algolia；通用 RSS 见 config.yaml 的 generic_feeds）。
-# 与服务器容器分工：容器只跑 X（RSS_SOURCES=twitter），本工作流跑其余源，
 # 去重状态独立存放于仓库根的 state-reddit.json，每次运行后提交回写。
 
 name: reddit-push
