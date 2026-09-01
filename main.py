@@ -16,7 +16,7 @@ import yaml
 log = logging.getLogger("rss")
 BASE = os.path.dirname(os.path.abspath(__file__))
 
-ALL_SCOPES = {"reddit", "hn", "rss"}
+ALL_SCOPES = {"reddit", "hn", "rss", "trending", "radar"}
 
 
 def load_env():
@@ -40,7 +40,7 @@ load_env()
 
 import ai  # noqa: E402
 from feishu import build_card, send  # noqa: E402
-from sources import generic_rss, github_trending, hn, reddit  # noqa: E402
+from sources import generic_rss, github_trending, hn, hf_models, reddit  # noqa: E402
 import store  # noqa: E402
 
 
@@ -101,22 +101,26 @@ def parse_scope():
 def collect(cfg):
     """拉取源集合，返回 (buckets, stats)。
 
-    stats 记录各范围 attempted/failed，供 run() 在范围内全部源失败时
-    以非零码退出，触发 reddit.yml 的飞书告警步骤。
+    stats 记录各范围 attempted/failed，供 run() 在范围内全部源失败时以非零码
+    退出触发告警；stats["drops"] 记录被相关性过滤剔除的条目 id（run() 会把
+    它们记入去重状态，避免每小时反复重判同一批被过滤内容）。
     """
     buckets = {}
     scopes = parse_scope()
-    stats = {name: {"attempted": 0, "failed": 0} for name in ("hn", "rss")}
+    stats = {name: {"attempted": 0, "failed": 0} for name in ("hn", "rss", "trending", "radar")}
     stats["reddit"] = {"attempted": 0, "failed": []}
+    drops = {}
 
     if "reddit" in scopes:
         cid = os.environ.get("REDDIT_CLIENT_ID") or None
         csec = os.environ.get("REDDIT_CLIENT_SECRET") or None
+        listing = cfg.get("reddit_listing") or "hot"
         for sub in cfg.get("reddit_subreddits", []):
             key = f"reddit:{sub}"
             stats["reddit"]["attempted"] += 1
             try:
-                buckets[key] = reddit.fetch_subreddit(sub, client_id=cid, client_secret=csec)
+                buckets[key] = reddit.fetch_subreddit(
+                    sub, client_id=cid, client_secret=csec, listing=listing)
             except Exception as e:
                 stats["reddit"]["failed"].append(sub)
                 log.warning("拉取 r/%s 失败: %s", sub, e)
@@ -124,7 +128,11 @@ def collect(cfg):
     if "hn" in scopes:
         stats["hn"]["attempted"] += 1
         try:
-            buckets["hn:front"] = hn.fetch_front_with_content(limit=15)
+            items = hn.fetch_front_with_content(limit=15)
+            min_points = int(cfg.get("hn_min_points") or 0)
+            if min_points:
+                items = [p for p in items if p["points"] >= min_points]
+            buckets["hn:front"] = items
         except Exception as e:
             stats["hn"]["failed"] += 1
             log.warning("拉取 HN 失败: %s", e)
@@ -132,25 +140,54 @@ def collect(cfg):
     if "rss" in scopes:
         for feed_cfg in cfg.get("generic_feeds") or []:
             name = feed_cfg.get("name")
+            key = f"rss:{name}"
             stats["rss"]["attempted"] += 1
             try:
-                buckets[f"rss:{name}"] = generic_rss.fetch_feed(feed_cfg["url"])
+                items = generic_rss.fetch_feed(feed_cfg["url"])
+                topic = feed_cfg.get("filter_topic")
+                if topic and ai.enabled() and items:
+                    try:
+                        keep = ai.filter_relevant(items, topic)
+                        dropped = [it["id"] for i, it in enumerate(items) if i not in keep]
+                        items = [it for i, it in enumerate(items) if i in keep]
+                        if dropped:
+                            drops[key] = dropped
+                        log.info("[%s] 相关性过滤：%d/%d 条命中主题",
+                                 key, len(items), len(items) + len(dropped))
+                    except Exception as e:
+                        log.warning("[%s] 相关性过滤失败，按未过滤推送: %s", key, e)
+                buckets[key] = items
             except Exception as e:
                 stats["rss"]["failed"] += 1
                 log.warning("拉取 RSS %s 失败: %s", name, e)
 
+    if "trending" in scopes:
         gt = cfg.get("github_trending")
         if gt:
             for lang in (gt.get("languages") or [None]):
                 name = lang or "all"
-                stats["rss"]["attempted"] += 1
+                stats["trending"]["attempted"] += 1
                 try:
                     buckets[f"trending:{name}"] = github_trending.fetch_trending(
-                        since=gt.get("since") or "daily", language=lang)
+                        since=gt.get("since") or "daily", language=lang,
+                        limit=int(gt.get("limit") or 10))
                 except Exception as e:
-                    stats["rss"]["failed"] += 1
+                    stats["trending"]["failed"] += 1
                     log.warning("拉取 GitHub Trending(%s) 失败: %s", name, e)
 
+    if "radar" in scopes:
+        rc = cfg.get("hf_radar")
+        if rc:
+            stats["radar"]["attempted"] += 1
+            try:
+                buckets["radar:all"] = hf_models.fetch_radar(
+                    filter_tag=rc.get("filter") or "text-generation",
+                    limit=int(rc.get("limit") or 10))
+            except Exception as e:
+                stats["radar"]["failed"] += 1
+                log.warning("拉取模型雷达失败: %s", e)
+
+    stats["drops"] = drops
     return buckets, stats
 
 
@@ -185,23 +222,26 @@ def build_reddit_card(sub, items, fmt, sort_key, max_items):
     for i, p in enumerate(ordered):
         author = f" · u/{p['author']}" if p["author"] else ""
         # RSS 通道拿不到分数，不把未知伪装成 0
-        stats = ""
+        stat_line = ""
         if p.get("score") is not None:
-            stats = f" · 👍 {p['score']} 💬 {p.get('comments', 0)}"
+            stat_line = f" · ⬆ {p['score']:,} · 💬 {p.get('comments', 0):,}"
         head = (f"**[{truncate(p['title'], 120)}]({p['url']})**"
-                f"{author}{stats} · {fmt(p['time'])}")
+                f"{author}{stat_line} · 🕐 {fmt(p['time'])}")
         block = head
         body_text = (p.get("body") or "").strip()
         if body_text:
             block += f"\n{truncate(body_text, body_cap)}"
         zh = trans.get(i)
         if zh:
-            block += f"\n译：{truncate(zh, zh_cap)}"
+            block += f"\n🌐 译：{truncate(zh, zh_cap)}"
         lines.append(block)
 
     if summary:
-        lines.insert(0, f"**AI 总结**：{summary}")
-    return build_card(f"Reddit · r/{sub} · {len(items)} 个新帖", "orange", lines)
+        lines.insert(0, f"**🤖 AI 总结**：{summary}")
+    return build_card(
+        f"🟠 Reddit · r/{sub} · {len(items)} 个新帖", "orange", lines,
+        buttons=[(f"打开 r/{sub}", f"https://www.reddit.com/r/{sub}", "primary")],
+    )
 
 
 def build_hn_card(items, fmt, max_items):
@@ -224,21 +264,25 @@ def build_hn_card(items, fmt, max_items):
 
     lines = []
     for i, p in enumerate(ordered):
+        by = f" · @{p['author']}" if p.get("author") else ""
         line = (f"**[{truncate(p['title'], 150)}]({p['url']})** · "
-                f"👍 {p['points']} 💬 {p['comments']} · {fmt(p['time'])} · "
-                f"[讨论]({p['hn_url']})")
+                f"▲ {p['points']:,} · 💬 {p['comments']:,}{by} · "
+                f"🕐 {fmt(p['time'])} · [讨论]({p['hn_url']})")
         block = line
         content = hn_content(p)
         if content:
             block += f"\n{truncate(content, body_cap)}"
         zh = trans.get(i)
         if zh:
-            block += f"\n译：{truncate(zh, zh_cap)}"
+            block += f"\n🌐 译：{truncate(zh, zh_cap)}"
         lines.append(block)
 
     if summary:
-        lines.insert(0, f"**AI 总结**：{summary}")
-    return build_card(f"Hacker News · 首页精选 · {len(items)} 条", "yellow", lines)
+        lines.insert(0, f"**🤖 AI 总结**：{summary}")
+    return build_card(
+        f"🟡 Hacker News · 首页精选 · {len(items)} 条", "yellow", lines,
+        buttons=[("打开 Hacker News", "https://news.ycombinator.com", "primary")],
+    )
 
 
 def hn_content(post):
@@ -252,7 +296,7 @@ def hn_content(post):
     return ""
 
 
-def build_generic_card(name, items, fmt, sort_key, max_items, label="RSS"):
+def build_generic_card(name, items, fmt, sort_key, max_items, label="RSS", buttons=None):
     ordered = sorted(items, key=sort_key)[:max_items]
     body_cap, zh_cap = per_item_caps(len(ordered))
 
@@ -281,12 +325,13 @@ def build_generic_card(name, items, fmt, sort_key, max_items, label="RSS"):
             block += f"\n{truncate(body_text, body_cap)}"
         zh = trans.get(i)
         if zh:
-            block += f"\n译：{truncate(zh, zh_cap)}"
+            block += f"\n🌐 译：{truncate(zh, zh_cap)}"
         lines.append(block)
 
     if summary:
-        lines.insert(0, f"**AI 总结**：{summary}")
-    return build_card(f"{label} · {name} · {len(items)} 条更新", "green", lines)
+        lines.insert(0, f"**🤖 AI 总结**：{summary}")
+    return build_card(f"{label} · {name} · {len(items)} 条更新", "green", lines,
+                      buttons=buttons)
 
 
 def run(dry_run=False):
@@ -306,9 +351,9 @@ def run(dry_run=False):
     store_data = store.load()
     buckets, stats = collect(cfg)
 
-    # 范围内 reddit/hn/rss 全部源拉取失败时标记，最终以非零码退出触发告警
+    # 范围内全部源拉取失败时标记，最终以非零码退出触发告警
     dead = []
-    for name in ("reddit", "hn", "rss"):
+    for name in ("reddit", "hn", "rss", "trending", "radar"):
         if name not in parse_scope() or not stats[name]["attempted"]:
             continue
         s = stats[name]
@@ -335,25 +380,31 @@ def run(dry_run=False):
         source, name = key.split(":", 1)
         if source == "hn":
             card = build_hn_card(fresh, fmt, max_items)
-        elif source in ("rss", "trending"):
-            card = build_generic_card(
-                name, fresh, fmt, sort_key, max_items,
-                label="GitHub Trending" if source == "trending" else "RSS")
+        elif source in ("trending", "radar"):
+            label, buttons = {
+                "trending": ("🔥 GitHub Trending",
+                             [("打开 GitHub Trending", "https://github.com/trending", "primary")]),
+                "radar": ("🤗 模型雷达",
+                          [("Hugging Face 趋势榜",
+                            "https://huggingface.co/models?sort=trendingScore", "primary")]),
+            }[source]
+            card = build_generic_card(name, fresh, fmt, sort_key, max_items,
+                                      label=label, buttons=buttons)
+        elif source == "rss":
+            card = build_generic_card(name, fresh, fmt, sort_key, max_items, label="📰 RSS")
         else:
             card = build_reddit_card(name, fresh, fmt, sort_key, max_items)
-        if len(fresh) > max_items:
-            # rss/trending 只记录展示条目，积压在后续小时排空，措辞不同
-            note = (f"另有 {len(fresh) - max_items} 条将在后续卡片推送"
-                    if source in ("rss", "trending") else
-                    f"另有 {len(fresh) - max_items} 条未展示")
+        if len(fresh) > max_items and source == "rss":
             card["elements"].append(
-                {"tag": "note", "elements": [{"tag": "plain_text", "content": note}]}
+                {"tag": "note", "elements": [{"tag": "plain_text",
+                                              "content": f"另有 {len(fresh) - max_items} 条将在后续卡片推送"}]}
             )
-        # rss/trending 积压采用排空模式：只记录本卡实际展示的条目
+        # rss 排空模式只记录展示条目 + 被相关性过滤剔除的条目；其余源全量记录
         record_ids = [str(it["id"]) for it in fresh]
-        if source in ("rss", "trending"):
+        if source == "rss":
             shown = {str(it["id"]) for it in sorted(fresh, key=sort_key)[:max_items]}
-            record_ids = [i for i in record_ids if i in shown]
+            record_ids = ([i for i in record_ids if i in shown]
+                          + list(stats.get("drops", {}).get(key, [])))
         pending.append((key, record_ids, card))
 
     # 发送阶段：成功才记录为已推送，失败留给下轮重试

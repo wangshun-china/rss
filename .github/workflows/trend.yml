@@ -1,20 +1,18 @@
-# Reddit / HN / 通用 RSS 订阅：GitHub Actions 直连拉取（Azure 出口 IP 不被
-# Reddit 拦截；HN 走 Algolia；通用 RSS 见 config.yaml 的 generic_feeds）。
-# 趋势类源（GitHub Trending / 模型雷达）由 trend.yml 每天上午 9 点单独推送。
-# 去重状态独立存放于仓库根的 state-reddit.json，每次运行后提交回写。
+# 趋势日报：GitHub Trending + Hugging Face 模型雷达，每天上午 9 点（北京时间）
+# 推送一次。两个榜单均不去重（仓库/模型连续上榜如实重复推送），limit 控制在
+# 单卡容量内一次推完。去重状态与 reddit.yml 共用 state-reddit.json，
+# 并发组与其串行，避免 git push 冲突。
 
-name: reddit-push
+name: trend-daily
 
 on:
   schedule:
-    - cron: "47 * * * *" # 每小时一次
+    - cron: "0 1 * * *" # UTC 01:00 = 北京时间 09:00
   workflow_dispatch: {}
 
 permissions:
   contents: write
 
-# 与 trend.yml 共用并发组：两个 workflow 都会提交回写 state-reddit.json，
-# 串行执行避免 git push 冲突
 concurrency:
   group: rss-state
   cancel-in-progress: false
@@ -34,17 +32,15 @@ jobs:
       - name: 安装依赖
         run: pip install -r requirements.txt
 
-      - name: 拉取 Reddit / HN / RSS 并推送飞书
+      - name: 拉取趋势榜并推送飞书
         env:
-          RSS_SOURCES: reddit,hn,rss
+          RSS_SOURCES: trending,radar
           RSS_STATE_FILE: state-reddit.json
           FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
           FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
           AI_API_BASE: ${{ secrets.AI_API_BASE }}
           AI_API_KEY: ${{ secrets.AI_API_KEY }}
           AI_MODEL: ${{ secrets.AI_MODEL }}
-          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
-          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
         run: python main.py
 
       - name: 失败时发飞书告警
@@ -60,8 +56,8 @@ jobs:
           webhook = os.environ.get("FEISHU_WEBHOOK")
           if webhook:
               send(webhook, os.environ.get("FEISHU_SECRET") or None,
-                   build_card("⚠️ Reddit/HN/RSS 推流失败", "red",
-                              ["GitHub Actions 运行失败（拉取或推送环节），"
+                   build_card("⚠️ 趋势日报推送失败", "red",
+                              ["GitHub Trending / 模型雷达运行失败，"
                                "请到 Actions 页查看日志。"]))
           EOF
 
@@ -71,5 +67,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git pull --rebase origin master
           git add state-reddit.json
-          git diff --cached --quiet || git commit -m "chore: 更新去重状态 [skip ci]"
+          git diff --cached --quiet || git commit -m "chore: 更新趋势去重状态 [skip ci]"
           git push

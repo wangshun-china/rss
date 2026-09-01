@@ -9,13 +9,15 @@
 全部跑在 GitHub Actions，无服务器、无容器、零成本（public 仓库分钟数免费）：
 
 ```
-GitHub Actions（ubuntu 虚拟机，每小时 :47，跑完即销毁）
-   └> reddit.yml：python main.py（RSS_SOURCES=reddit,hn,rss）
-       ├─ Reddit   匿名直连 RSS（Azure 出口 IP 不被 Reddit 拦截）
-       ├─ HN       Algolia 公开 API（外链帖附热评，自述帖带正文）
-       ├─ 通用 RSS config.yaml 的 generic_feeds
-       ├─ AI 翻译总结 -> 飞书卡片
-       └> 去重状态 state-reddit.json 提交回仓库持久化
+GitHub Actions（ubuntu 虚拟机，跑完即销毁）
+   └> reddit.yml 每小时 :47：python main.py（RSS_SOURCES=reddit,hn,rss）
+       ├─ Reddit   hot 热门榜，匿名直连 RSS（Azure 出口 IP 不被拦截）
+       ├─ HN       Algolia API，低于 hn_min_points 的帖子跳过
+       ├─ 通用 RSS config.yaml 的 generic_feeds（arXiv 带 AI 相关性过滤）
+       └> 去重状态 state-reddit.json 提交回仓库
+   └> trend.yml 每天上午 9 点（北京时间）：RSS_SOURCES=trending,radar
+       ├─ 🔥 GitHub Trending 榜（不去重，连续上榜如实推送）
+       └─ 🤗 Hugging Face 模型雷达（趋势榜 API）
 ```
 
 - Reddit 正文直接来自 RSS `<content>`（OAuth 备用通道读 selftext），
@@ -36,12 +38,11 @@ Google News 关键词等。卡片每源最多 `max_items_per_card` 条，突发�
 积压会在后续小时逐步排空。取消注释并在 `RSS_SOURCES` 中包含 `rss` 即生效
 （reddit.yml 已包含）。
 
-## GitHub Trending 订阅
+## GitHub Trending / 模型雷达
 
-`config.yaml` 的 `github_trending` 块（`since`: daily/weekly/monthly，
-`languages` 留空只订总榜，填如 `[python, rust]` 则每语言一个源）。无官方 API，
-解析 trending 页面实现；同一仓库只在首次上榜时推送，同一批上榜仓库按排空
-语义在后续小时逐步推完。
+`config.yaml` 的 `github_trending`（`since`: daily/weekly/monthly，`languages`
+留空只订总榜）与 `hf_radar`（HF 趋势榜模型）由 `trend.yml` **每天上午 9 点**
+推送。两个榜单**不去重**：同一仓库/模型连续上榜会如实重复推送。
 
 ## 卡片长度说明
 

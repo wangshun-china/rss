@@ -60,13 +60,27 @@ def send(webhook, secret, card):
         raise RuntimeError(f"飞书返回错误: {body}")
 
 
-def build_card(title, color, items, footer=None):
-    """items: lark_md 字符串列表，条目间用分隔线。"""
+def build_card(title, color, items, footer=None, buttons=None):
+    """items: lark_md 字符串列表，条目间用分隔线。
+
+    buttons: (文案, 链接, 样式[可选 primary/default]) 元组列表，渲染为卡片底部按钮。
+    """
     elements = []
     for i, text in enumerate(items):
         if i > 0:
             elements.append({"tag": "hr"})
         elements.append({"tag": "div", "text": {"tag": "lark_md", "content": text}})
+    if buttons:
+        elements.append({
+            "tag": "action",
+            "actions": [
+                {"tag": "button",
+                 "text": {"tag": "plain_text", "content": btn[0]},
+                 "url": btn[1],
+                 "type": btn[2] if len(btn) > 2 else "default"}
+                for btn in buttons
+            ],
+        })
     if footer:
         elements.append({"tag": "note", "elements": [{"tag": "plain_text", "content": footer}]})
     return {

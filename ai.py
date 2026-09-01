@@ -28,6 +28,53 @@ def enabled():
     return bool(BASE and KEY)
 
 
+FILTER_PROMPT = """你是信息流过滤器。判断每条编号内容是否与给定主题相关，只输出一个 JSON 对象（禁止 markdown 代码块围栏）：
+{"relevant": [相关内容的编号, ...]}
+标准从严：拿不准的一律视为不相关。编号按原样输出，不要增删。"""
+
+
+def filter_relevant(items, topic, timeout=60):
+    """逐条判断是否与 topic 相关，返回相关下标集合。失败时放行全部（宁可多推不可漏推）。"""
+    numbered = "\n".join(f"[{i}] {(t['text'] or '').strip()[:400]}"
+                         for i, t in enumerate(items))
+    payload = {
+        "model": MODEL,
+        "messages": [
+            {"role": "system", "content": FILTER_PROMPT},
+            {"role": "user", "content": f"主题：{topic}\n\n内容：\n{numbered}"},
+        ],
+        "temperature": 0,
+    }
+    headers = {"Authorization": f"Bearer {KEY}", "Content-Type": "application/json"}
+    resp = None
+    last_err = ""
+    for attempt in range(3):
+        try:
+            resp = requests.post(f"{BASE}/chat/completions",
+                                 headers=headers, json=payload, timeout=timeout)
+        except requests.RequestException as e:
+            last_err = str(e)
+            time.sleep(6 * (attempt + 1))
+            continue
+        if resp.status_code not in (429, 500, 502, 503, 504):
+            break
+        last_err = f"HTTP {resp.status_code}"
+        time.sleep((10, 25)[attempt] if attempt < 2 else 25)
+    if resp is None or resp.status_code != 200:
+        raise RuntimeError(f"AI 过滤接口失败: {last_err}")
+
+    data = _parse_json(resp.json()["choices"][0]["message"]["content"])
+    keep = set()
+    for idx in data.get("relevant") or []:
+        try:
+            i = int(idx)
+        except (TypeError, ValueError):
+            continue
+        if 0 <= i < len(items):
+            keep.add(i)
+    return keep
+
+
 def _parse_json(text):
     text = text.strip()
     if text.startswith("```"):

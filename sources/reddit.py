@@ -58,10 +58,10 @@ def _oauth_token(client_id, client_secret):
     return resp.json()["access_token"]
 
 
-def _from_oauth(sub, limit, client_id, client_secret):
+def _from_oauth(sub, limit, client_id, client_secret, listing="hot"):
     token = _oauth_token(client_id, client_secret)
     resp = requests.get(
-        f"https://oauth.reddit.com/r/{sub}/new",
+        f"https://oauth.reddit.com/r/{sub}/{listing}",
         params={"limit": limit},
         headers={"Authorization": f"bearer {token}", "User-Agent": UA},
         timeout=30,
@@ -86,25 +86,26 @@ def _from_oauth(sub, limit, client_id, client_secret):
     return posts
 
 
-def fetch_subreddit(sub, limit=100, client_id=None, client_secret=None):
-    """返回该版块最新帖子列表（最新在前）。limit 上限 100（Reddit 两通道一致）。
+def fetch_subreddit(sub, limit=100, client_id=None, client_secret=None, listing="hot"):
+    """返回该版块帖子列表。listing: hot（默认，最热门）/ new / top。
 
+    limit 上限 100（Reddit 两通道一致）。
     RSS 通道拿不到分数，score 为 None；OAuth 通道带 score/comments/body。
     """
     limit = min(limit, 100)
     try:
-        resp = _get_rss(f"https://www.reddit.com/r/{sub}/new/.rss?limit={limit}")
+        resp = _get_rss(f"https://www.reddit.com/r/{sub}/{listing}/.rss?limit={limit}")
         if resp.status_code in (403, 429):
             if not (client_id and client_secret):
                 raise RuntimeError(
                     f"r/{sub} RSS 返回 {resp.status_code}（数据中心 IP 常被 Reddit 拦截）。"
                     "请在 .env / GitHub Secrets 配置 REDDIT_CLIENT_ID/SECRET 以走 OAuth。"
                 )
-            return _from_oauth(sub, limit, client_id, client_secret)
+            return _from_oauth(sub, limit, client_id, client_secret, listing)
         resp.raise_for_status()
     except requests.RequestException:
         if client_id and client_secret:
-            return _from_oauth(sub, limit, client_id, client_secret)
+            return _from_oauth(sub, limit, client_id, client_secret, listing)
         raise
 
     feed = feedparser.parse(resp.content)

@@ -4,9 +4,30 @@ reddit_subreddits:
   - ClaudeAI
   - singularity
   - LLMDevs
+# 榜单类型：hot（最热门，默认）/ new（最新）/ top
+reddit_listing: hot
+
+# HN 首页帖子热度门槛：低于该赞数的帖子跳过（不推送也不记为已读，
+# 后续热度涨过门槛仍会推送）；设为 0 关闭
+hn_min_points: 50
+
+# GitHub Trending 订阅（无官方 API，解析 trending 页面；删除本块即停用）。
+# since: daily/weekly/monthly；languages 留空 = 只订总榜，填语言则每语言一个源。
+# limit 控制单次推送条数；不去重——仓库连续多日上榜会如实重复推送。
+github_trending:
+  since: daily
+  languages: []
+  limit: 10
+  # languages: [python, rust]
+
+# Hugging Face 模型雷达：趋势榜（trendingScore），每天随趋势 workflow 推送。
+# filter 为 HF 的模型过滤标签；删除本块即停用。
+hf_radar:
+  filter: text-generation
+  limit: 10
 
 # 通用 RSS/Atom 订阅（RSS_SOURCES 需包含 rss，reddit.yml 已是 reddit,hn,rss）。
-# 每卡最多 max_items_per_card 条，突发大量更新时积压在后续小时逐步排空。
+# filter_topic：可选项，配置后该源先经 AI 相关性过滤，命中主题才推送（如 arXiv）。
 # 通用资讯类备选（按需取消注释）：
 #   Google News 关键词：https://news.google.com/rss/search?q=LLM&hl=zh-CN&gl=CN&ceid=CN:zh-Hans
 #   YouTube 频道：https://www.youtube.com/feeds/videos.xml?channel_id=UC...
@@ -16,6 +37,7 @@ generic_feeds:
   # -- 论文 --
   - name: arxiv-cs-cl
     url: https://export.arxiv.org/rss/cs.CL
+    filter_topic: "大语言模型（LLM）、Agent/智能体、RAG、模型推理与本地部署、多模态应用方向的研究"
   # -- AI 官方博客 / 领域博客 --
   - name: hf-blog
     url: https://huggingface.co/blog/feed.xml
@@ -33,13 +55,6 @@ generic_feeds:
     url: https://github.com/vllm-project/vllm/releases.atom
   - name: gh-transformers
     url: https://github.com/huggingface/transformers/releases.atom
-
-# GitHub Trending 订阅（无官方 API，解析 trending 页面；删除本块即停用）。
-# since: daily/weekly/monthly；languages 留空 = 只订总榜，填语言则每语言一个源。
-github_trending:
-  since: daily
-  languages: []
-  # languages: [python, rust]
 
 push:
   # 单张卡片最多展示条数，超出部分折叠为"+N"

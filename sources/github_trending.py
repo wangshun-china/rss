@@ -25,14 +25,20 @@ def _clean(text):
     return re.sub(r"\s+", " ", unescape(text or "")).strip()
 
 
-def fetch_trending(since="daily", language=None, limit=25):
-    """返回该榜单条目（按页面排名排序）。since: daily/weekly/monthly。"""
+def fetch_trending(since="daily", language=None, limit=10):
+    """返回该榜单条目（按页面排名排序）。since: daily/weekly/monthly。
+
+    id 带日期戳：不去重——某仓库连续多日上榜会如实重复推送。
+    """
     params = {"since": since}
     if language:
         params["language"] = language
     r = requests.get("https://github.com/trending",
                      headers={"User-Agent": UA}, params=params, timeout=30)
     r.raise_for_status()
+
+    from datetime import datetime, timedelta, timezone
+    stamp = datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d")
 
     period = _TODAY_RE.search(r.text)
     period_word = period.group(2) if period else "today"
@@ -60,7 +66,7 @@ def fetch_trending(since="daily", language=None, limit=25):
         if text:
             body_parts.append(text)
         items.append({
-            "id": path.lower(),
+            "id": f"{path.lower()}@{stamp}",
             "title": path,
             "url": f"https://github.com/{path}",
             "author": "",
