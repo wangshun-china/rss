@@ -115,6 +115,14 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1w3wegw",
+    "1w3w8fg",
+    "1w3vhv9",
+    "1w3vcvh",
+    "1w3u815",
+    "1w3t5sr",
+    "1w3s82z",
+    "1w3roul",
     "1w3qrqk",
     "1w3qljm",
     "1w3qi1r",
@@ -606,15 +614,7 @@
     "1vxf3lk",
     "1vxescz",
     "1vxdvmv",
-    "1vxd6yb",
-    "1vxch7l",
-    "1vxc1gh",
-    "1vxbpcc",
-    "1vxbkjz",
-    "1vxbbng",
-    "1vxajio",
-    "1vxa8q3",
-    "1vxa0il"
+    "1vxd6yb"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,24 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1w3wgi4",
+    "1w3wf47",
+    "1w3wdzm",
+    "1w3vndn",
+    "1w3vk28",
+    "1w3v6ln",
+    "1w3v23g",
+    "1w3uzzj",
+    "1w3ugo9",
+    "1w3ubv4",
+    "1w3tyzx",
+    "1w3tx9t",
+    "1w3t2oh",
+    "1w3syxw",
+    "1w3sdu7",
+    "1w3rscc",
+    "1w3r4iu",
+    "1w3r0hp",
     "1w3qyq4",
     "1w3qrkm",
     "1w3qpf1",
@@ -1136,27 +1154,13 @@
     "1vyyskg",
     "1vyy1vv",
     "1vyy0cq",
-    "1vyxz6w",
-    "1vyxslj",
-    "1vywy9s",
-    "1vywnig",
-    "1vywkd9",
-    "1vyw2wg",
-    "1vyvvqx",
-    "1vyvqzg",
-    "1vyvkpy",
-    "1vyvij1",
-    "1vyvhcy",
-    "1vyv9u9",
-    "1vyv5m0",
-    "1vyv2as",
-    "1vyulfp",
-    "1vyu53u",
-    "1vytxz2",
-    "1vytrb8",
-    "1vyth4b"
+    "1vyxz6w"
   ],
   "reddit:LLMDevs": [
+    "1w3utc4",
+    "1w3tl90",
+    "1w3sw30",
+    "1w3s888",
     "1w3nbw6",
     "1w3mt16",
     "1w3lw6g",
@@ -1358,6 +1362,11 @@
     "1vxk719"
   ],
   "reddit:singularity": [
+    "1w3w3vp",
+    "1w3vyz0",
+    "1w3v143",
+    "1w3uou6",
+    "1w3r29c",
     "1w3qfe8",
     "1w3pry0",
     "1w3ppmp",
@@ -1553,6 +1562,11 @@
     "1vwkffs"
   ],
   "hn:front": [
+    "49514878",
+    "49503521",
+    "49495171",
+    "49467700",
+    "49476239",
     "49510514",
     "49511856",
     "49508982",
@@ -1872,6 +1886,7 @@
     "https://huggingface.co/blog/real-world-voiceeq"
   ],
   "rss:openai": [
+    "https://openai.com/index/polimill",
     "https://openai.com/index/expanding-access-to-ai-with-chatgpt-ads",
     "https://openai.com/index/our-decision-on-cursor-following-its-acquisition-by-spacex",
     "https://openai.com/index/supporting-next-generation-ai-startups-thailand",
@@ -1910,6 +1925,8 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Aug/31/introducing-wrapture/",
+    "https://simonwillison.net/2026/Aug/31/andrew-digby/",
     "https://simonwillison.net/2026/Aug/30/understanding-chatgpt-work/",
     "https://simonwillison.net/2026/Aug/29/hy4/",
     "https://simonwillison.net/2026/Aug/28/just-a-rumour-of-a-bug/",
