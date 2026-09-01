@@ -69,7 +69,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin master
+          # 运行刚改过 state 文件（脏工作区），autostash 后再 rebase 远端新提交
+          git pull --rebase --autostash origin master
           git add state-reddit.json
           git diff --cached --quiet || git commit -m "chore: 更新去重状态 [skip ci]"
           git push

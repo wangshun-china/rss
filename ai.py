@@ -35,7 +35,7 @@ FILTER_PROMPT = """你是信息流过滤器。判断每条编号内容是否与�
 
 def filter_relevant(items, topic, timeout=60):
     """逐条判断是否与 topic 相关，返回相关下标集合。失败时放行全部（宁可多推不可漏推）。"""
-    numbered = "\n".join(f"[{i}] {(t['text'] or '').strip()[:400]}"
+    numbered = "\n".join(f"[{i}] {(t.get('text') or t.get('body') or '').strip()[:400]}"
                          for i, t in enumerate(items))
     payload = {
         "model": MODEL,
