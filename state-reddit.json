@@ -115,6 +115,14 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1w4oadx",
+    "1w4s1kj",
+    "1w4rzbd",
+    "1w4ruuj",
+    "1w4prsg",
+    "1w4sb5i",
+    "1w4s68k",
+    "1w4p3cv",
     "1w4l9cp",
     "1w4fp6w",
     "1w4dsrw",
@@ -606,15 +614,7 @@
     "1vy2zh6",
     "1vy2jz7",
     "1vy2f2q",
-    "1vy2eda",
-    "1vy1q1l",
-    "1vy1g90",
-    "1vy0tqe",
-    "1vy0knv",
-    "1vy09xv",
-    "1vxzxug",
-    "1vxzvwk",
-    "1vxzjps"
+    "1vy2eda"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,19 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1w4qgue",
+    "1w4rivi",
+    "1w4omd1",
+    "1w4p2tv",
+    "1w4octc",
+    "1w4qoib",
+    "1w4qgu2",
+    "1w4qblu",
+    "1w4q7ty",
+    "1w4pqqf",
+    "1w4o1e3",
+    "1w4nxxe",
+    "1w4nuev",
     "1w4juj2",
     "1w4juuz",
     "1w4fjy3",
@@ -1141,22 +1154,11 @@
     "1w0fems",
     "1w0e8j7",
     "1w0dwlj",
-    "1w0dksg",
-    "1w0djxh",
-    "1w0djtj",
-    "1w0c1pp",
-    "1w0btk9",
-    "1w0bh33",
-    "1w0axls",
-    "1w0as63",
-    "1w0a6dr",
-    "1w09wy7",
-    "1w08o9q",
-    "1w08m7p",
-    "1w083jz",
-    "1w082ce"
+    "1w0dksg"
   ],
   "reddit:LLMDevs": [
+    "1w4rmbk",
+    "1w4oaqg",
     "1w4hiqy",
     "1w4dqau",
     "1w4mnea",
@@ -1388,6 +1390,9 @@
     "1vxk719"
   ],
   "reddit:singularity": [
+    "1w4nxsb",
+    "1w4o0a1",
+    "1w4r0g2",
     "1w4jumu",
     "1w4k0yu",
     "1w4fv84",
@@ -1619,6 +1624,11 @@
     "1vwkffs"
   ],
   "hn:front": [
+    "49526069",
+    "49527396",
+    "49524320",
+    "49527573",
+    "49525160",
     "49525378",
     "49519939",
     "49523754",
@@ -1961,6 +1971,7 @@
     "tag:github.com,2008:Repository/599547518/v0.26.0"
   ],
   "rss:hf-blog": [
+    "https://huggingface.co/blog/allenai/benchmirt",
     "https://huggingface.co/blog/webgpu-kernels",
     "https://huggingface.co/blog/open-asr-leaderboard-global-south",
     "https://huggingface.co/blog/train-multi-vector-encoder",
@@ -2114,6 +2125,11 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/0/997/196.htm",
+    "https://www.ithome.com/0/997/195.htm",
+    "https://www.ithome.com/0/997/194.htm",
+    "https://www.ithome.com/0/997/193.htm",
+    "https://www.ithome.com/0/997/191.htm",
     "https://www.ithome.com/0/997/189.htm",
     "https://www.ithome.com/0/996/723.htm",
     "https://www.ithome.com/0/997/188.htm",
