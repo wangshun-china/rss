@@ -1,7 +1,7 @@
-# 趋势日报：GitHub Trending + Hugging Face 模型雷达，每天上午 9 点（北京时间）
-# 推送一次。两个榜单均不去重（仓库/模型连续上榜如实重复推送），limit 控制在
-# 单卡容量内一次推完。去重状态与 reddit.yml 共用 state-reddit.json，
-# 并发组与其串行，避免 git push 冲突。
+# 趋势日报：GitHub Trending + Hugging Face 模型雷达 + HF Daily Papers，
+# 每天上午 9 点（北京时间）推送一次。趋势/榜单均不去重（连续上榜如实重复
+# 推送），limit 控制在单卡容量内一次推完。去重状态与 reddit.yml 共用
+# state-reddit.json，并发组与其串行，避免 git push 冲突。
 
 name: trend-daily
 
@@ -34,7 +34,7 @@ jobs:
 
       - name: 拉取趋势榜并推送飞书
         env:
-          RSS_SOURCES: trending,radar
+          RSS_SOURCES: trending,radar,papers
           RSS_STATE_FILE: state-reddit.json
           FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
           FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}

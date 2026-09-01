@@ -15,9 +15,10 @@ GitHub Actions（ubuntu 虚拟机，跑完即销毁）
        ├─ HN       Algolia API，低于 hn_min_points 的帖子跳过
        ├─ 通用 RSS config.yaml 的 generic_feeds（arXiv 带 AI 相关性过滤）
        └> 去重状态 state-reddit.json 提交回仓库
-   └> trend.yml 每天上午 9 点（北京时间）：RSS_SOURCES=trending,radar
+   └> trend.yml 每天上午 9 点（北京时间）：RSS_SOURCES=trending,radar,papers
        ├─ 🔥 GitHub Trending 榜（不去重，连续上榜如实推送）
-       └─ 🤗 Hugging Face 模型雷达（趋势榜 API）
+       ├─ 🤗 Hugging Face 模型雷达（趋势榜 API）
+       └─ 📄 HF 论文日报（Daily Papers API，按赞数取前 10）
 ```
 
 - Reddit 正文直接来自 RSS `<content>`（OAuth 备用通道读 selftext），

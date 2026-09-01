@@ -16,7 +16,7 @@ import yaml
 log = logging.getLogger("rss")
 BASE = os.path.dirname(os.path.abspath(__file__))
 
-ALL_SCOPES = {"reddit", "hn", "rss", "trending", "radar"}
+ALL_SCOPES = {"reddit", "hn", "rss", "trending", "radar", "papers"}
 
 
 def load_env():
@@ -40,7 +40,7 @@ load_env()
 
 import ai  # noqa: E402
 from feishu import build_card, send  # noqa: E402
-from sources import generic_rss, github_trending, hn, hf_models, reddit  # noqa: E402
+from sources import generic_rss, github_trending, hn, hf_models, hf_papers, reddit  # noqa: E402
 import store  # noqa: E402
 
 
@@ -92,6 +92,21 @@ def per_item_caps(n, budget=22000):
     return per // 3, per // 5
 
 
+# 正文不超过该长度时原文+全文翻译直接展示；更长则只展示 AI 提炼的要点，
+# 细节通过标题链接看原文——长文塞卡片里没法读，靠摘要保证不丢关键信息
+SHORT_BODY = 600
+
+
+def prepare_ai_text(body):
+    """AI 输入：短文全量；长文取前 2500 字并标注要点模式（提示词据此输出要点而非全译）。"""
+    body = (body or "").strip()
+    if not body:
+        return ""
+    if len(body) <= SHORT_BODY:
+        return body
+    return "（长文，请输出要点）" + truncate(body, 2500)
+
+
 def parse_scope():
     """RSS_SOURCES 环境变量 -> 源集合（逗号分隔组合，默认全部）。"""
     scope = os.environ.get("RSS_SOURCES", "all")
@@ -107,7 +122,8 @@ def collect(cfg):
     """
     buckets = {}
     scopes = parse_scope()
-    stats = {name: {"attempted": 0, "failed": 0} for name in ("hn", "rss", "trending", "radar")}
+    stats = {name: {"attempted": 0, "failed": 0}
+             for name in ("hn", "rss", "trending", "radar", "papers")}
     stats["reddit"] = {"attempted": 0, "failed": []}
     drops = {}
 
@@ -187,6 +203,17 @@ def collect(cfg):
                 stats["radar"]["failed"] += 1
                 log.warning("拉取模型雷达失败: %s", e)
 
+    if "papers" in scopes:
+        pc = cfg.get("hf_papers")
+        if pc:
+            stats["papers"]["attempted"] += 1
+            try:
+                buckets["papers:daily"] = hf_papers.fetch_daily_papers(
+                    limit=int(pc.get("limit") or 10))
+            except Exception as e:
+                stats["papers"]["failed"] += 1
+                log.warning("拉取 HF 论文日报失败: %s", e)
+
     stats["drops"] = drops
     return buckets, stats
 
@@ -202,9 +229,9 @@ def build_reddit_card(sub, items, fmt, sort_key, max_items):
     ordered = sorted(items, key=sort_key)[:max_items]
     body_cap, zh_cap = per_item_caps(len(ordered))
 
-    # AI 输入与展示用同一份截断正文：译文恰好覆盖卡片上显示的全部内容
+    # AI 输入与展示对齐：短文全量进 AI（译文覆盖展示的原文）；长文只进要点
     ai_items = [{"i": i,
-                 "text": f"{p['title']}\n{truncate(p.get('body') or '', body_cap)}"}
+                 "text": f"{p['title']}\n{prepare_ai_text(p.get('body'))}"}
                 for i, p in enumerate(ordered)]
 
     ai_result = None
@@ -229,11 +256,13 @@ def build_reddit_card(sub, items, fmt, sort_key, max_items):
                 f"{author}{stat_line} · 🕐 {fmt(p['time'])}")
         block = head
         body_text = (p.get("body") or "").strip()
-        if body_text:
-            block += f"\n{truncate(body_text, body_cap)}"
+        if body_text and len(body_text) <= SHORT_BODY:
+            block += f"\n{body_text}"
         zh = trans.get(i)
         if zh:
-            block += f"\n🌐 译：{truncate(zh, zh_cap)}"
+            # 长文要点模式不带"译"前缀，避免"译：要点："叠词
+            block += (f"\n🌐 {truncate(zh, zh_cap)}" if zh.startswith("要点：")
+                      else f"\n🌐 译：{truncate(zh, zh_cap)}")
         lines.append(block)
 
     if summary:
@@ -248,8 +277,8 @@ def build_hn_card(items, fmt, max_items):
     ordered = items[:max_items]
     body_cap, zh_cap = per_item_caps(len(ordered))
 
-    # AI 输入：标题 + 自述正文/热评（与展示同截断，译文覆盖显示内容）
-    ai_items = [{"text": f"{p['title']}\n{truncate(hn_content(p), body_cap)}"}
+    # AI 输入：标题 + 自述正文/热评（短文全量，长文要点化）
+    ai_items = [{"text": f"{p['title']}\n{prepare_ai_text(hn_content(p))}"}
                 for p in ordered]
 
     ai_result = None
@@ -270,11 +299,13 @@ def build_hn_card(items, fmt, max_items):
                 f"🕐 {fmt(p['time'])} · [讨论]({p['hn_url']})")
         block = line
         content = hn_content(p)
-        if content:
-            block += f"\n{truncate(content, body_cap)}"
+        if content and len(content) <= SHORT_BODY:
+            block += f"\n{content}"
         zh = trans.get(i)
         if zh:
-            block += f"\n🌐 译：{truncate(zh, zh_cap)}"
+            # 长文要点模式不带"译"前缀，避免"译：要点："叠词
+            block += (f"\n🌐 {truncate(zh, zh_cap)}" if zh.startswith("要点：")
+                      else f"\n🌐 译：{truncate(zh, zh_cap)}")
         lines.append(block)
 
     if summary:
@@ -301,7 +332,7 @@ def build_generic_card(name, items, fmt, sort_key, max_items, label="RSS", butto
     body_cap, zh_cap = per_item_caps(len(ordered))
 
     ai_items = [{"i": i,
-                 "text": f"{p['title']}\n{truncate(p.get('body') or '', body_cap)}"}
+                 "text": f"{p['title']}\n{prepare_ai_text(p.get('body'))}"}
                 for i, p in enumerate(ordered)]
 
     ai_result = None
@@ -321,11 +352,13 @@ def build_generic_card(name, items, fmt, sort_key, max_items, label="RSS", butto
         tail = f" · {meta}" if meta else ""
         block = f"**[{truncate(p['title'], 150)}]({p['url']})**{author}{tail}"
         body_text = (p.get("body") or "").strip()
-        if body_text:
-            block += f"\n{truncate(body_text, body_cap)}"
+        if body_text and len(body_text) <= SHORT_BODY:
+            block += f"\n{body_text}"
         zh = trans.get(i)
         if zh:
-            block += f"\n🌐 译：{truncate(zh, zh_cap)}"
+            # 长文要点模式不带"译"前缀，避免"译：要点："叠词
+            block += (f"\n🌐 {truncate(zh, zh_cap)}" if zh.startswith("要点：")
+                      else f"\n🌐 译：{truncate(zh, zh_cap)}")
         lines.append(block)
 
     if summary:
@@ -353,7 +386,7 @@ def run(dry_run=False):
 
     # 范围内全部源拉取失败时标记，最终以非零码退出触发告警
     dead = []
-    for name in ("reddit", "hn", "rss", "trending", "radar"):
+    for name in ("reddit", "hn", "rss", "trending", "radar", "papers"):
         if name not in parse_scope() or not stats[name]["attempted"]:
             continue
         s = stats[name]
@@ -380,13 +413,15 @@ def run(dry_run=False):
         source, name = key.split(":", 1)
         if source == "hn":
             card = build_hn_card(fresh, fmt, max_items)
-        elif source in ("trending", "radar"):
+        elif source in ("trending", "radar", "papers"):
             label, buttons = {
                 "trending": ("🔥 GitHub Trending",
                              [("打开 GitHub Trending", "https://github.com/trending", "primary")]),
                 "radar": ("🤗 模型雷达",
                           [("Hugging Face 趋势榜",
                             "https://huggingface.co/models?sort=trendingScore", "primary")]),
+                "papers": ("📄 HF 论文日报",
+                           [("Hugging Face Papers", "https://huggingface.co/papers", "primary")]),
             }[source]
             card = build_generic_card(name, fresh, fmt, sort_key, max_items,
                                       label=label, buttons=buttons)

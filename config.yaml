@@ -26,12 +26,18 @@ hf_radar:
   filter: text-generation
   limit: 10
 
+# Hugging Face Daily Papers 论文日报：按赞数取前 N，每天随趋势 workflow 推送。
+# 摘要较长，卡片上由 AI 提炼要点；删除本块即停用。
+hf_papers:
+  limit: 10
+
 # 通用 RSS/Atom 订阅（RSS_SOURCES 需包含 rss，reddit.yml 已是 reddit,hn,rss）。
 # filter_topic：可选项，配置后该源先经 AI 相关性过滤，命中主题才推送（如 arXiv）。
 # 通用资讯类备选（按需取消注释）：
 #   Google News 关键词：https://news.google.com/rss/search?q=LLM&hl=zh-CN&gl=CN&ceid=CN:zh-Hans
 #   YouTube 频道：https://www.youtube.com/feeds/videos.xml?channel_id=UC...
 #   V2EX 全站：https://www.v2ex.com/index.xml（日均数百条，慎开）
+#   36kr：官方 feed 已停更（返回 HTML 页面），需要时走 RSSHub 桥接
 #   Anthropic 官方无 RSS（404），可用 Google News 关键词兜底。
 generic_feeds:
   # -- 论文 --
@@ -50,6 +56,12 @@ generic_feeds:
   # -- 中文 --
   - name: ruanyifeng
     url: https://www.ruanyifeng.com/blog/atom.xml
+  - name: sspai
+    url: https://sspai.com/feed
+  - name: ithome
+    url: https://www.ithome.com/rss/
+  - name: solidot
+    url: https://www.solidot.org/index.rss
   # -- GitHub Releases --
   - name: gh-vllm
     url: https://github.com/vllm-project/vllm/releases.atom

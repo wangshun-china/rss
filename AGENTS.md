@@ -3,7 +3,8 @@
 ## 当前架构
 
 - 全部源跑在 GitHub Actions：`reddit.yml` 每小时跑 reddit/hn/rss（Reddit 用 hot 热门榜，HN 有 hn_min_points 门槛，arXiv 在 generic_feeds 里配 filter_topic 走 AI 相关性过滤、被剔除条目记入 drops 避免重判）；`trend.yml` 每天北京时间 9 点跑 trending/radar。两个 workflow 共用并发组 rss-state 且回写前 `git pull --rebase`，状态都在 `state-reddit.json`；失败有 `if: failure()` 飞书告警。
-- 趋势类源（GitHub Trending / 模型雷达）不去重：id 带日期戳，连续上榜如实重复推送，limit 控制单卡容量一次推完。
+- 趋势类源（GitHub Trending / 模型雷达 / HF 论文日报）不去重：id 带日期戳或按唯一 id，连续上榜如实重复推送，limit 控制单卡容量一次推完，由 trend.yml 每天 9 点推。
+- 长文自适应：正文 ≤600 字（SHORT_BODY）原文+全译展示，更长则 AI 提炼「要点：」（提示词按（长文，请输出要点）标注识别），细节靠链接——不要回退成往卡片里塞长文。
 - Reddit 正文取自 RSS `<content>`（OAuth 备用通道读 selftext），匿名 `.json` 详情接口已废弃（2026-05 起全面 403）；HN 外链帖附 Algolia 热评。
 - 通用 RSS 源：`config.yaml` 的 `generic_feeds`（name+url），由 `sources/generic_rss.py` 拉取，积压只记录已展示条目、后续小时排空；GitHub Trending 同策略（`sources/github_trending.py`，解析页面无官方 API，按仓库 id 去重只推首榜）。
 - 飞书卡片支持 AI 中文翻译和批量总结，未配置或调用失败时降级为原文；卡片文本按条数均摊 30KB 预算（`per_item_caps`），`feishu.send` 发送前 `fit_card` 兜底压缩；AI 翻译输入与展示截断对齐。
