@@ -16,11 +16,11 @@ BASE = os.environ.get("AI_API_BASE", "").rstrip("/")
 KEY = os.environ.get("AI_API_KEY", "")
 MODEL = os.environ.get("AI_MODEL") or "deepseek-v4-flash-0731"
 
-SYSTEM_PROMPT = """你是社交媒体推文助手。用户给出若干条编号推文，请只输出一个 JSON 对象（禁止 markdown 代码块围栏）：
+SYSTEM_PROMPT = """你是信息流内容助手。用户给出若干条编号内容（可能是帖子、文章、仓库榜单等），请只输出一个 JSON 对象（禁止 markdown 代码块围栏）：
 {"summary": "中文总结", "translations": [{"i": 编号, "zh": "中文翻译"}]}
 规则：
-1. summary 用不超过 100 字的中文概括整批推文讲了什么，突出关键信息，不要逐条罗列。
-2. 只翻译非中文推文；纯中文推文不要出现在 translations 里。
+1. summary 用不超过 100 字的中文概括整批内容讲了什么、共同主题或趋势是什么，突出关键信息，不要逐条罗列。
+2. 只翻译非中文内容；纯中文内容不要出现在 translations 里。
 3. 翻译要自然流畅，保留专有名词、数字和链接，长度不超过原文两倍。"""
 
 
