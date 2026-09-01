@@ -36,6 +36,20 @@ Google News 关键词等。卡片每源最多 `max_items_per_card` 条，突发�
 积压会在后续小时逐步排空。取消注释并在 `RSS_SOURCES` 中包含 `rss` 即生效
 （reddit.yml 已包含）。
 
+## GitHub Trending 订阅
+
+`config.yaml` 的 `github_trending` 块（`since`: daily/weekly/monthly，
+`languages` 留空只订总榜，填如 `[python, rust]` 则每语言一个源）。无官方 API，
+解析 trending 页面实现；同一仓库只在首次上榜时推送，同一批上榜仓库按排空
+语义在后续小时逐步推完。
+
+## 卡片长度说明
+
+飞书单卡硬上限 30KB，无法突破。策略是"按条数均摊预算"：一次新帖越少，
+单帖可展示的正文和译文越长（仅 1 帖时约 7300 字正文 + 全量对应译文）；
+AI 翻译输入与展示截断对齐，保证译文覆盖卡片上显示的全部内容。
+`fit_card` 作为最后防线兜底整卡大小。
+
 ## 配置
 
 订阅列表、单卡条数上限等在 `config.yaml`；密钥走本仓库 GitHub Secrets：

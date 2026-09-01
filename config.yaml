@@ -34,6 +34,13 @@ generic_feeds:
   - name: gh-transformers
     url: https://github.com/huggingface/transformers/releases.atom
 
+# GitHub Trending 订阅（无官方 API，解析 trending 页面；删除本块即停用）。
+# since: daily/weekly/monthly；languages 留空 = 只订总榜，填语言则每语言一个源。
+github_trending:
+  since: daily
+  languages: []
+  # languages: [python, rust]
+
 push:
   # 单张卡片最多展示条数，超出部分折叠为"+N"
   max_items_per_card: 10

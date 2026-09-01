@@ -40,7 +40,7 @@ load_env()
 
 import ai  # noqa: E402
 from feishu import build_card, send  # noqa: E402
-from sources import generic_rss, hn, reddit  # noqa: E402
+from sources import generic_rss, github_trending, hn, reddit  # noqa: E402
 import store  # noqa: E402
 
 
@@ -80,6 +80,16 @@ def truncate(text, limit):
     if len(text) <= limit:
         return text
     return text[:limit].rstrip() + "…"
+
+
+def per_item_caps(n, budget=22000):
+    """按条数均摊整卡文本预算（飞书单卡 30KB 上限，扣除标题/分隔/备注开销）。
+
+    正文按英文≈1字节/字、译文按中文≈3字节/字估算，返回 (body_cap, zh_cap)。
+    条数越少单条预算越大：单帖长文可推到 ~7300 字并带全量译文，10 条满载则收紧。
+    """
+    per = max(1200, budget // max(1, n))
+    return per // 3, per // 5
 
 
 def parse_scope():
@@ -129,6 +139,18 @@ def collect(cfg):
                 stats["rss"]["failed"] += 1
                 log.warning("拉取 RSS %s 失败: %s", name, e)
 
+        gt = cfg.get("github_trending")
+        if gt:
+            for lang in (gt.get("languages") or [None]):
+                name = lang or "all"
+                stats["rss"]["attempted"] += 1
+                try:
+                    buckets[f"trending:{name}"] = github_trending.fetch_trending(
+                        since=gt.get("since") or "daily", language=lang)
+                except Exception as e:
+                    stats["rss"]["failed"] += 1
+                    log.warning("拉取 GitHub Trending(%s) 失败: %s", name, e)
+
     return buckets, stats
 
 
@@ -141,10 +163,11 @@ def split_new(store_data, key, items):
 
 def build_reddit_card(sub, items, fmt, sort_key, max_items):
     ordered = sorted(items, key=sort_key)[:max_items]
+    body_cap, zh_cap = per_item_caps(len(ordered))
 
-    # AI 输入：标题 + 正文前 800 字
+    # AI 输入与展示用同一份截断正文：译文恰好覆盖卡片上显示的全部内容
     ai_items = [{"i": i,
-                 "text": f"{p['title']}\n{truncate(p.get('body') or '', 800)}"}
+                 "text": f"{p['title']}\n{truncate(p.get('body') or '', body_cap)}"}
                 for i, p in enumerate(ordered)]
 
     ai_result = None
@@ -170,10 +193,10 @@ def build_reddit_card(sub, items, fmt, sort_key, max_items):
         block = head
         body_text = (p.get("body") or "").strip()
         if body_text:
-            block += f"\n{truncate(body_text, 2500)}"
+            block += f"\n{truncate(body_text, body_cap)}"
         zh = trans.get(i)
         if zh:
-            block += f"\n译：{zh}"
+            block += f"\n译：{truncate(zh, zh_cap)}"
         lines.append(block)
 
     if summary:
@@ -183,9 +206,10 @@ def build_reddit_card(sub, items, fmt, sort_key, max_items):
 
 def build_hn_card(items, fmt, max_items):
     ordered = items[:max_items]
+    body_cap, zh_cap = per_item_caps(len(ordered))
 
-    # AI 输入：标题 + 自述正文/热评前 800 字（原来只有标题，总结质量差）
-    ai_items = [{"text": f"{p['title']}\n{truncate(hn_content(p), 800)}"}
+    # AI 输入：标题 + 自述正文/热评（与展示同截断，译文覆盖显示内容）
+    ai_items = [{"text": f"{p['title']}\n{truncate(hn_content(p), body_cap)}"}
                 for p in ordered]
 
     ai_result = None
@@ -206,10 +230,10 @@ def build_hn_card(items, fmt, max_items):
         block = line
         content = hn_content(p)
         if content:
-            block += f"\n{truncate(content, 1000)}"
+            block += f"\n{truncate(content, body_cap)}"
         zh = trans.get(i)
         if zh:
-            block += f"\n译：{zh}"
+            block += f"\n译：{truncate(zh, zh_cap)}"
         lines.append(block)
 
     if summary:
@@ -228,11 +252,12 @@ def hn_content(post):
     return ""
 
 
-def build_generic_card(name, items, fmt, sort_key, max_items):
+def build_generic_card(name, items, fmt, sort_key, max_items, label="RSS"):
     ordered = sorted(items, key=sort_key)[:max_items]
+    body_cap, zh_cap = per_item_caps(len(ordered))
 
     ai_items = [{"i": i,
-                 "text": f"{p['title']}\n{truncate(p.get('body') or '', 600)}"}
+                 "text": f"{p['title']}\n{truncate(p.get('body') or '', body_cap)}"}
                 for i, p in enumerate(ordered)]
 
     ai_result = None
@@ -248,18 +273,20 @@ def build_generic_card(name, items, fmt, sort_key, max_items):
     lines = []
     for i, p in enumerate(ordered):
         author = f" · {p['author']}" if p["author"] else ""
-        block = f"**[{truncate(p['title'], 150)}]({p['url']})**{author} · {fmt(p['time'])}"
+        meta = fmt(p["time"])
+        tail = f" · {meta}" if meta else ""
+        block = f"**[{truncate(p['title'], 150)}]({p['url']})**{author}{tail}"
         body_text = (p.get("body") or "").strip()
         if body_text:
-            block += f"\n{truncate(body_text, 1200)}"
+            block += f"\n{truncate(body_text, body_cap)}"
         zh = trans.get(i)
         if zh:
-            block += f"\n译：{zh}"
+            block += f"\n译：{truncate(zh, zh_cap)}"
         lines.append(block)
 
     if summary:
         lines.insert(0, f"**AI 总结**：{summary}")
-    return build_card(f"RSS · {name} · {len(items)} 条更新", "green", lines)
+    return build_card(f"{label} · {name} · {len(items)} 条更新", "green", lines)
 
 
 def run(dry_run=False):
@@ -308,21 +335,23 @@ def run(dry_run=False):
         source, name = key.split(":", 1)
         if source == "hn":
             card = build_hn_card(fresh, fmt, max_items)
-        elif source == "rss":
-            card = build_generic_card(name, fresh, fmt, sort_key, max_items)
+        elif source in ("rss", "trending"):
+            card = build_generic_card(
+                name, fresh, fmt, sort_key, max_items,
+                label="GitHub Trending" if source == "trending" else "RSS")
         else:
             card = build_reddit_card(name, fresh, fmt, sort_key, max_items)
         if len(fresh) > max_items:
-            # 通用 RSS 只记录展示条目，积压在后续小时排空，措辞不同
+            # rss/trending 只记录展示条目，积压在后续小时排空，措辞不同
             note = (f"另有 {len(fresh) - max_items} 条将在后续卡片推送"
-                    if source == "rss" else
+                    if source in ("rss", "trending") else
                     f"另有 {len(fresh) - max_items} 条未展示")
             card["elements"].append(
                 {"tag": "note", "elements": [{"tag": "plain_text", "content": note}]}
             )
-        # 通用 RSS 积压采用排空模式：只记录本卡实际展示的条目
+        # rss/trending 积压采用排空模式：只记录本卡实际展示的条目
         record_ids = [str(it["id"]) for it in fresh]
-        if source == "rss":
+        if source in ("rss", "trending"):
             shown = {str(it["id"]) for it in sorted(fresh, key=sort_key)[:max_items]}
             record_ids = [i for i in record_ids if i in shown]
         pending.append((key, record_ids, card))
