@@ -2043,5 +2043,8 @@
     "orcarouter/glm-5.3-flash-uncensored-fp8@2026-09-01",
     "ornith-ai/ornith-1.5-35b-a3b@2026-09-01",
     "demo/m"
+  ],
+  "papers:daily": [
+    "demo/p"
   ]
 }
