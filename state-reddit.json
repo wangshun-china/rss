@@ -655,9 +655,6 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
-    "1w49vmz",
-    "1w49lff",
-    "1w49d9w",
     "1w49abr",
     "1w48zcr",
     "1w48yvh",
@@ -1579,9 +1576,6 @@
     "1vwkffs"
   ],
   "hn:front": [
-    "49517584",
-    "49489376",
-    "49520022",
     "49517448",
     "49515830",
     "49516199",
@@ -2004,20 +1998,9 @@
     "https://simonwillison.net/2026/Aug/15/sighting-391300422/"
   ],
   "trending:all": [
-    "gitlawb/openclaude",
-    "imbad0202/academic-research-skills",
-    "thu-maic/openmaic",
-    "iv-org/invidious",
-    "jingyaogong/minimind",
-    "debpalash/voicestudio",
-    "3b1b/manim",
-    "firecrawl/pdf-inspector",
-    "browser-use/video-use",
-    "k-dense-ai/scientific-agent-skills",
-    "handsomestwei/patent-disclosure-skill",
-    "voltagent/awesome-design-md",
-    "averygan/reclip",
-    "affaan-m/ecc",
-    "unclecode/crawl4ai"
+    "demo/x"
+  ],
+  "radar:all": [
+    "demo/m"
   ]
 }
