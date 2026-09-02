@@ -115,6 +115,14 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1w4umhm",
+    "1w4vg3t",
+    "1w4syn5",
+    "1w4ur6e",
+    "1w4tejh",
+    "1w4uxna",
+    "1w4uyl0",
+    "1w4t6jq",
     "1w4oadx",
     "1w4s1kj",
     "1w4rzbd",
@@ -606,15 +614,7 @@
     "1vy79n9",
     "1vy71my",
     "1vy6smx",
-    "1vy6p4s",
-    "1vy6mjb",
-    "1vy6kke",
-    "1vy3t5h",
-    "1vy3lsp",
-    "1vy2zh6",
-    "1vy2jz7",
-    "1vy2f2q",
-    "1vy2eda"
+    "1vy6p4s"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,16 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1w4tgyj",
+    "1w4tadv",
+    "1w4szvz",
+    "1w4sul5",
+    "1w4ud5w",
+    "1w4shr4",
+    "1w4vgzd",
+    "1w4vcd8",
+    "1w4sr49",
+    "1w4s622",
     "1w4qgue",
     "1w4rivi",
     "1w4omd1",
@@ -1144,19 +1154,12 @@
     "1w0id56",
     "1w0i2f9",
     "1w0hvzv",
-    "1w0ho4p",
-    "1w0h6qm",
-    "1w0h2f4",
-    "1w0gzkh",
-    "1w0gsfc",
-    "1w0fyvr",
-    "1w0fhp7",
-    "1w0fems",
-    "1w0e8j7",
-    "1w0dwlj",
-    "1w0dksg"
+    "1w0ho4p"
   ],
   "reddit:LLMDevs": [
+    "1w4soun",
+    "1w4vuip",
+    "1w4t8y8",
     "1w4rmbk",
     "1w4oaqg",
     "1w4hiqy",
@@ -1390,6 +1393,10 @@
     "1vxk719"
   ],
   "reddit:singularity": [
+    "1w4tkn0",
+    "1w4ujad",
+    "1w4w5g0",
+    "1w4u0gm",
     "1w4nxsb",
     "1w4o0a1",
     "1w4r0g2",
@@ -1624,6 +1631,8 @@
     "1vwkffs"
   ],
   "hn:front": [
+    "49527748",
+    "49525153",
     "49526069",
     "49527396",
     "49524320",
@@ -2005,6 +2014,7 @@
     "https://huggingface.co/blog/real-world-voiceeq"
   ],
   "rss:openai": [
+    "https://openai.com/index/gilbert-tobin",
     "https://openai.com/index/ai-native-company-workflows",
     "https://openai.com/index/path-to-astra",
     "https://openai.com/index/chatgpt-connects-health-records-and-healthcare-sources",
@@ -2048,6 +2058,8 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/1/claude-fable-5-1/",
+    "https://simonwillison.net/2026/Sep/1/geojson/",
     "https://simonwillison.net/2026/Sep/1/codex-libreoffice/",
     "https://simonwillison.net/2026/Sep/1/tarn-adams/",
     "https://simonwillison.net/2026/Sep/1/python-315-rc-2/",
@@ -2125,6 +2137,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/0/997/213.htm",
+    "https://www.ithome.com/0/997/211.htm",
+    "https://www.ithome.com/0/997/212.htm",
+    "https://www.ithome.com/0/997/210.htm",
+    "https://www.ithome.com/0/997/209.htm",
+    "https://www.ithome.com/0/997/208.htm",
+    "https://www.ithome.com/0/997/207.htm",
+    "https://www.ithome.com/0/997/206.htm",
+    "https://www.ithome.com/0/997/205.htm",
+    "https://www.ithome.com/0/997/204.htm",
     "https://www.ithome.com/0/997/196.htm",
     "https://www.ithome.com/0/997/195.htm",
     "https://www.ithome.com/0/997/194.htm",
@@ -2184,6 +2206,7 @@
     "https://www.solidot.org/story?sid=85238"
   ],
   "rss:sspai": [
+    "https://sspai.com/post/114093",
     "https://sspai.com/post/114078",
     "https://sspai.com/post/114071",
     "https://sspai.com/post/114062",
