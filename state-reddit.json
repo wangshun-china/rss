@@ -115,6 +115,11 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1w77ath",
+    "1w77j2t",
+    "1w77hcs",
+    "1w7724p",
+    "1w775aw",
     "1w748cf",
     "1w73aak",
     "1w75rp4",
@@ -609,12 +614,7 @@
     "1w0vg19",
     "1w0u82b",
     "1w0u24k",
-    "1w0tgzl",
-    "1w0szzv",
-    "1w0sn44",
-    "1w0sii7",
-    "1w0shqf",
-    "1w0sepz"
+    "1w0tgzl"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,9 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1w77fyo",
+    "1w77ihx",
+    "1w77gpn",
     "1w752jb",
     "1w72qac",
     "1w76bjh",
@@ -1151,10 +1154,7 @@
     "1w49abr",
     "1w3r0hp",
     "1w3htyi",
-    "1w3wf47",
-    "1w3wdzm",
-    "1w2z2rx",
-    "1w3vk28"
+    "1w3wf47"
   ],
   "reddit:LLMDevs": [
     "1w73srs",
@@ -1487,6 +1487,7 @@
     "1vxk719"
   ],
   "reddit:singularity": [
+    "1w77frs",
     "1w73pw2",
     "1w754l2",
     "1w7497g",
@@ -2646,6 +2647,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/0/998/605.htm",
+    "https://www.ithome.com/0/998/604.htm",
+    "https://www.ithome.com/0/998/603.htm",
+    "https://www.ithome.com/0/998/602.htm",
+    "https://www.ithome.com/0/998/601.htm",
+    "https://www.ithome.com/0/998/600.htm",
+    "https://www.ithome.com/0/998/599.htm",
+    "https://www.ithome.com/0/998/598.htm",
+    "https://www.ithome.com/0/998/597.htm",
+    "https://www.ithome.com/0/998/595.htm",
     "https://www.ithome.com/0/998/593.htm",
     "https://www.ithome.com/0/998/592.htm",
     "https://www.ithome.com/0/998/591.htm",
@@ -2891,6 +2902,15 @@
     "https://sspai.com/post/113827"
   ],
   "deals:radar": [
+    "openrouter-inclusionai/ling-3.0-flash-fin:free",
+    "openrouter-dots-studio/dots-3-note-preview:free",
+    "openrouter-liquid/lfm-2.5-2.6b:free",
+    "openrouter-nvidia/nemotron-3.5-lightning:free",
+    "openrouter-thinkingmachines/inkling-small:free",
+    "tag:github.com,2008:Grit::Commit/1742598b469ede44ec345c364623bc1def120c82",
+    "tag:github.com,2008:Grit::Commit/5d71a98734dc6805eb8be6ddaf4247e9048e3831",
+    "tag:github.com,2008:Grit::Commit/853888f6ac9ba77eb87ef3be2b40c35e553b0401",
+    "tag:github.com,2008:Grit::Commit/b0c71b4cdea097c077af917152f36f76bae43d58",
     "demo/seed"
   ]
 }
