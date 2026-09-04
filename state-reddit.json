@@ -115,6 +115,19 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1w7990o",
+    "1w78ztg",
+    "1w78dmn",
+    "1w7aoau",
+    "1w7c6u4",
+    "1w79gag",
+    "1w7c4ej",
+    "1w78wbm",
+    "1w79mpc",
+    "1w797w1",
+    "1w78wx4",
+    "1w79x68",
+    "1w79ywy",
     "1w77ath",
     "1w77j2t",
     "1w77hcs",
@@ -601,20 +614,7 @@
     "1w10a0m",
     "1w1002h",
     "1w0zl5q",
-    "1w0yzva",
-    "1w0yfmn",
-    "1w0xzxu",
-    "1w0xlu9",
-    "1w0x1r2",
-    "1w0wjbw",
-    "1w0wgv8",
-    "1w0wgad",
-    "1w0vyfg",
-    "1w0vrrx",
-    "1w0vg19",
-    "1w0u82b",
-    "1w0u24k",
-    "1w0tgzl"
+    "1w0yzva"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,22 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1w7bh9p",
+    "1w7agvf",
+    "1w7amh6",
+    "1w7cpau",
+    "1w7clgs",
+    "1w7ce3c",
+    "1w7cd5n",
+    "1w7c8n2",
+    "1w7c3j2",
+    "1w7c0p9",
+    "1w7bx1r",
+    "1w7b3tg",
+    "1w78b5v",
+    "1w7a0y9",
+    "1w79b1s",
+    "1w78ttq",
     "1w77fyo",
     "1w77ihx",
     "1w77gpn",
@@ -1138,25 +1154,13 @@
     "1w41xfg",
     "1w41ryn",
     "1w38qdq",
-    "1w3nziw",
-    "1w3kavm",
-    "1w48xvk",
-    "1w40jjp",
-    "1w3n2s3",
-    "1w3v6ln",
-    "1w4089l",
-    "1w3hf12",
-    "1w3ubv4",
-    "1w3qpf1",
-    "1w3b5gn",
-    "1w3xktg",
-    "1w39gok",
-    "1w49abr",
-    "1w3r0hp",
-    "1w3htyi",
-    "1w3wf47"
+    "1w3nziw"
   ],
   "reddit:LLMDevs": [
+    "1w7cj2x",
+    "1w7cf0p",
+    "1w7agfc",
+    "1w69s2u",
     "1w73srs",
     "1w72uks",
     "1w76wss",
@@ -1487,6 +1491,12 @@
     "1vxk719"
   ],
   "reddit:singularity": [
+    "1w79wvx",
+    "1w78vet",
+    "1w79jqc",
+    "1w78m6y",
+    "1w78l6e",
+    "1w7btok",
     "1w77frs",
     "1w73pw2",
     "1w754l2",
@@ -1877,6 +1887,12 @@
     "1vwkffs"
   ],
   "hn:front": [
+    "49566137",
+    "49563784",
+    "49563851",
+    "49564555",
+    "49564714",
+    "49516312",
     "49563355",
     "49562657",
     "49563386",
@@ -2480,6 +2496,7 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/4/rogue-agent-wikis/",
     "https://simonwillison.net/2026/Sep/4/august-newsletter/",
     "https://simonwillison.net/2026/Sep/3/gpt6-astra/",
     "https://simonwillison.net/2026/Sep/2/llm-gemini/",
@@ -2824,6 +2841,8 @@
     "https://www.ithome.com/0/997/153.htm"
   ],
   "rss:solidot": [
+    "https://www.solidot.org/story?sid=85292",
+    "https://www.solidot.org/story?sid=85291",
     "https://www.solidot.org/story?sid=85290",
     "https://www.solidot.org/story?sid=85289",
     "https://www.solidot.org/story?sid=85288",
@@ -2902,15 +2921,16 @@
     "https://sspai.com/post/113827"
   ],
   "deals:radar": [
+    "openrouter-inclusionai/ling-3.0-flash-sante:free",
+    "tag:github.com,2008:Grit::Commit/1742598b469ede44ec345c364623bc1def120c82",
+    "tag:github.com,2008:Grit::Commit/5d71a98734dc6805eb8be6ddaf4247e9048e3831",
+    "tag:github.com,2008:Grit::Commit/853888f6ac9ba77eb87ef3be2b40c35e553b0401",
+    "tag:github.com,2008:Grit::Commit/b0c71b4cdea097c077af917152f36f76bae43d58",
     "openrouter-inclusionai/ling-3.0-flash-fin:free",
     "openrouter-dots-studio/dots-3-note-preview:free",
     "openrouter-liquid/lfm-2.5-2.6b:free",
     "openrouter-nvidia/nemotron-3.5-lightning:free",
     "openrouter-thinkingmachines/inkling-small:free",
-    "tag:github.com,2008:Grit::Commit/1742598b469ede44ec345c364623bc1def120c82",
-    "tag:github.com,2008:Grit::Commit/5d71a98734dc6805eb8be6ddaf4247e9048e3831",
-    "tag:github.com,2008:Grit::Commit/853888f6ac9ba77eb87ef3be2b40c35e553b0401",
-    "tag:github.com,2008:Grit::Commit/b0c71b4cdea097c077af917152f36f76bae43d58",
     "demo/seed"
   ]
 }
