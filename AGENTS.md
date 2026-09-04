@@ -3,6 +3,7 @@
 ## 当前架构
 
 - 全部源跑在 GitHub Actions：`reddit.yml` 每小时跑 reddit/hn/rss（Reddit 用 hot 热门榜，HN 有 hn_min_points 门槛，arXiv 在 generic_feeds 里配 filter_topic 走 AI 相关性过滤、被剔除条目记入 drops 避免重判）；`trend.yml` 每天北京时间 9 点跑 trending/radar。两个 workflow 共用并发组 rss-state 且回写前 `git pull --rebase`，状态都在 `state-reddit.json`；失败有 `if: failure()` 飞书告警。
+- 羊毛雷达（sources/deals.py，deals scope）：OpenRouter 免费模型/Reddit 关键词/GitHub 羊毛清单/HN 关键词汇聚，经 ai.judge_deals 判定"可领"才推送（标注 phone/card/time-limited 风险），判定掉的记入 drops；linux.do 有 CF 防护、NodeSeek 无 RSS，未接入。
 - 趋势类源（GitHub Trending / 模型雷达 / HF 论文日报）不去重：id 带日期戳或按唯一 id，连续上榜如实重复推送，limit 控制单卡容量一次推完，由 trend.yml 每天 9 点推。
 - 长文自适应：正文 ≤600 字（SHORT_BODY）原文+全译展示，更长则 AI 提炼「要点：」（提示词按（长文，请输出要点）标注识别），细节靠链接——不要回退成往卡片里塞长文。
 - Reddit 正文取自 RSS `<content>`（OAuth 备用通道读 selftext），匿名 `.json` 详情接口已废弃（2026-05 起全面 403）；HN 外链帖附 Algolia 热评。

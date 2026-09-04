@@ -68,6 +68,14 @@ generic_feeds:
   - name: gh-transformers
     url: https://github.com/huggingface/transformers/releases.atom
 
+# 🧧 羊毛雷达：免费 LLM 额度信号源（OpenRouter 免费模型 / Reddit 关键词搜索 /
+# GitHub 羊毛清单更新 / HN 关键词），每小时随 reddit.yml 检查，AI 判定
+# "真能领"才推送（标注需手机号/绑卡/限时），被过滤的线索记入已读不再重判。
+# AI 判定挂了则放行全部，可能略吵。删除本块即停用。
+deals:
+  fetch_limit: 25
+  limit: 10
+
 push:
   # 单张卡片最多展示条数，超出部分折叠为"+N"
   max_items_per_card: 10

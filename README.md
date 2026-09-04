@@ -14,6 +14,8 @@ GitHub Actions（ubuntu 虚拟机，跑完即销毁）
        ├─ Reddit   hot 热门榜，匿名直连 RSS（Azure 出口 IP 不被拦截）
        ├─ HN       Algolia API，低于 hn_min_points 的帖子跳过
        ├─ 通用 RSS config.yaml 的 generic_feeds（arXiv 带 AI 相关性过滤）
+       ├─ 🧧 羊毛雷达 deals.py：OpenRouter 免费模型 / Reddit 关键词 /
+       │    GitHub 羊毛清单 / HN 关键词，AI 判定"真能领"才推送
        └> 去重状态 state-reddit.json 提交回仓库
    └> trend.yml 每天上午 9 点（北京时间）：RSS_SOURCES=trending,radar,papers
        ├─ 🔥 GitHub Trending 榜（不去重，连续上榜如实推送）

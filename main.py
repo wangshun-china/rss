@@ -16,7 +16,19 @@ import yaml
 log = logging.getLogger("rss")
 BASE = os.path.dirname(os.path.abspath(__file__))
 
-ALL_SCOPES = {"reddit", "hn", "rss", "trending", "radar", "papers"}
+ALL_SCOPES = {"reddit", "hn", "rss", "trending", "radar", "papers", "deals"}
+
+# 羊毛判定 risk 标签 -> 中文提示
+_DEAL_RISK = {"phone": "需手机号", "card": "需绑卡/实名", "time-limited": "限时活动"}
+
+
+def _deal_note(judged):
+    """把判定结果转成展示用的一行说明。"""
+    text = judged.get("note") or ""
+    risk = _DEAL_RISK.get(judged.get("risk"))
+    if risk:
+        text = f"{text}（{risk}）" if text else risk
+    return f"🎟 {text}" if text else ""
 
 
 def load_env():
@@ -40,7 +52,7 @@ load_env()
 
 import ai  # noqa: E402
 from feishu import build_card, send  # noqa: E402
-from sources import generic_rss, github_trending, hn, hf_models, hf_papers, reddit  # noqa: E402
+from sources import deals, generic_rss, github_trending, hn, hf_models, hf_papers, reddit  # noqa: E402
 import store  # noqa: E402
 
 
@@ -123,7 +135,7 @@ def collect(cfg):
     buckets = {}
     scopes = parse_scope()
     stats = {name: {"attempted": 0, "failed": 0}
-             for name in ("hn", "rss", "trending", "radar", "papers")}
+             for name in ("hn", "rss", "trending", "radar", "papers", "deals")}
     stats["reddit"] = {"attempted": 0, "failed": []}
     drops = {}
 
@@ -213,6 +225,31 @@ def collect(cfg):
             except Exception as e:
                 stats["papers"]["failed"] += 1
                 log.warning("拉取 HF 论文日报失败: %s", e)
+
+    if "deals" in scopes:
+        dc = cfg.get("deals") or {}
+        stats["deals"]["attempted"] += 1
+        try:
+            ditems = deals.fetch_deals(limit=int(dc.get("fetch_limit") or 25))
+            if ai.enabled() and ditems:
+                try:
+                    judged = ai.judge_deals(ditems)
+                    keep = {d["i"] for d in judged}
+                    by_idx = {d["i"]: d for d in judged}
+                    dropped = [it["id"] for i, it in enumerate(ditems) if i not in keep]
+                    if dropped:
+                        drops["deals:radar"] = dropped
+                    ditems = [dict(it, body="\n".join(
+                        x for x in (_deal_note(by_idx[i]), it.get("body") or "") if x))
+                        for i, it in enumerate(ditems) if i in keep]
+                    log.info("[deals:radar] 羊毛判定：%d/%d 条可领",
+                             len(ditems), len(ditems) + len(dropped))
+                except Exception as e:
+                    log.warning("[deals:radar] 羊毛判定失败，按未过滤推送: %s", e)
+            buckets["deals:radar"] = ditems[:int(dc.get("limit") or 10)]
+        except Exception as e:
+            stats["deals"]["failed"] += 1
+            log.warning("拉取羊毛雷达失败: %s", e)
 
     stats["drops"] = drops
     return buckets, stats
@@ -327,7 +364,8 @@ def hn_content(post):
     return ""
 
 
-def build_generic_card(name, items, fmt, sort_key, max_items, label="RSS", buttons=None):
+def build_generic_card(name, items, fmt, sort_key, max_items, label="RSS",
+                       buttons=None, color="green"):
     ordered = sorted(items, key=sort_key)[:max_items]
     body_cap, zh_cap = per_item_caps(len(ordered))
 
@@ -363,7 +401,8 @@ def build_generic_card(name, items, fmt, sort_key, max_items, label="RSS", butto
 
     if summary:
         lines.insert(0, f"**🤖 AI 总结**：{summary}")
-    return build_card(f"{label} · {name} · {len(items)} 条更新", "green", lines,
+    name_part = f"{name} · " if name else ""
+    return build_card(f"{label} · {name_part}{len(items)} 条更新", color, lines,
                       buttons=buttons)
 
 
@@ -386,7 +425,7 @@ def run(dry_run=False):
 
     # 范围内全部源拉取失败时标记，最终以非零码退出触发告警
     dead = []
-    for name in ("reddit", "hn", "rss", "trending", "radar", "papers"):
+    for name in ("reddit", "hn", "rss", "trending", "radar", "papers", "deals"):
         if name not in parse_scope() or not stats[name]["attempted"]:
             continue
         s = stats[name]
@@ -425,6 +464,12 @@ def run(dry_run=False):
             }[source]
             card = build_generic_card(name, fresh, fmt, sort_key, max_items,
                                       label=label, buttons=buttons)
+        elif source == "deals":
+            card = build_generic_card(
+                "", fresh, fmt, sort_key, max_items,
+                label="🧧 羊毛雷达", color="carmine",
+                buttons=[("OpenRouter 免费模型",
+                          "https://openrouter.ai/models?max_price=0", "primary")])
         elif source == "rss":
             card = build_generic_card(name, fresh, fmt, sort_key, max_items, label="📰 RSS")
         else:
@@ -434,12 +479,15 @@ def run(dry_run=False):
                 {"tag": "note", "elements": [{"tag": "plain_text",
                                               "content": f"另有 {len(fresh) - max_items} 条将在后续卡片推送"}]}
             )
-        # rss 排空模式只记录展示条目 + 被相关性过滤剔除的条目；其余源全量记录
+        # rss 排空模式只记录展示条目 + 被相关性过滤剔除的条目；羊毛雷达全量记录
+        # 已推条目和被判定掉的线索（避免每小时反复重判）；其余源全量记录
         record_ids = [str(it["id"]) for it in fresh]
         if source == "rss":
             shown = {str(it["id"]) for it in sorted(fresh, key=sort_key)[:max_items]}
             record_ids = ([i for i in record_ids if i in shown]
                           + list(stats.get("drops", {}).get(key, [])))
+        elif source == "deals":
+            record_ids = record_ids + list(stats.get("drops", {}).get(key, []))
         pending.append((key, record_ids, card))
 
     # 发送阶段：成功才记录为已推送，失败留给下轮重试

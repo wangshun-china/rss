@@ -34,6 +34,61 @@ FILTER_PROMPT = """你是信息流过滤器。判断每条编号内容是否与�
 标准从严：拿不准的一律视为不相关。编号按原样输出，不要增删。"""
 
 
+JUDGE_PROMPT = """你是"薅羊毛"信息审核员。用户给出若干条编号线索（可能是帖子标题、清单更新、模型上新），逐条判断是否为【现在可领取的 LLM/AI 免费额度或免费服务】。
+排除：纯讨论/提问/吐槽、新闻评论、crypto 空投或代币、已明显过期的活动、无法确认真实性的小道消息。
+只输出一个 JSON 对象（禁止 markdown 代码块围栏）：
+{"deals": [{"i": 编号, "risk": "none|phone|card|time-limited", "note": "15字内说明领什么/怎么领/风险"}]}
+risk 含义：none=直接注册即领；phone=需手机号；card=需绑卡或实名；time-limited=限时活动。
+没有一条是真羊毛时输出 {"deals": []}。编号按原样，不要编造。"""
+
+
+def judge_deals(items, timeout=90):
+    """返回 [{"i": 下标, "risk": str, "note": str}]，仅保留判定为真羊毛的条目。
+
+    判定接口失败时抛异常，由调用方决定放行策略。
+    """
+    numbered = "\n".join(f"[{i}] {it['title']} | {(it.get('body') or '')[:200]}"
+                         for i, it in enumerate(items))
+    payload = {
+        "model": MODEL,
+        "messages": [
+            {"role": "system", "content": JUDGE_PROMPT},
+            {"role": "user", "content": numbered},
+        ],
+        "temperature": 0,
+    }
+    headers = {"Authorization": f"Bearer {KEY}", "Content-Type": "application/json"}
+    resp = None
+    last_err = ""
+    for attempt in range(3):
+        try:
+            resp = requests.post(f"{BASE}/chat/completions",
+                                 headers=headers, json=payload, timeout=timeout)
+        except requests.RequestException as e:
+            last_err = str(e)
+            time.sleep(6 * (attempt + 1))
+            continue
+        if resp.status_code not in (429, 500, 502, 503, 504):
+            break
+        last_err = f"HTTP {resp.status_code}"
+        time.sleep((10, 25)[attempt] if attempt < 2 else 25)
+    if resp is None or resp.status_code != 200:
+        raise RuntimeError(f"AI 判定接口失败: {last_err}")
+
+    data = _parse_json(resp.json()["choices"][0]["message"]["content"])
+    deals = []
+    for d in data.get("deals") or []:
+        try:
+            i = int(d.get("i"))
+        except (TypeError, ValueError):
+            continue
+        if 0 <= i < len(items):
+            deals.append({"i": i,
+                          "risk": (d.get("risk") or "none").strip() or "none",
+                          "note": (d.get("note") or "").strip()[:60]})
+    return deals
+
+
 def filter_relevant(items, topic, timeout=60):
     """逐条判断是否与 topic 相关，返回相关下标集合。失败时放行全部（宁可多推不可漏推）。"""
     numbered = "\n".join(f"[{i}] {(t.get('text') or t.get('body') or '').strip()[:400]}"
