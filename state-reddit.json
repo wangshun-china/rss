@@ -115,6 +115,12 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1w7q92n",
+    "1w7nmc8",
+    "1w7pdaf",
+    "1w7pphh",
+    "1w7qgxw",
+    "1w7qigg",
     "1w7lxeb",
     "1w7m6jy",
     "1w7l2wo",
@@ -608,13 +614,7 @@
     "1w1cbb0",
     "1w1c27j",
     "1w1bna1",
-    "1w19xuy",
-    "1w19hjv",
-    "1w19bdt",
-    "1w1996t",
-    "1w18v86",
-    "1w18pu9",
-    "1w18b1k"
+    "1w19xuy"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,23 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1w7r3u1",
+    "1w7p5nv",
+    "1w7ru5l",
+    "1w7sla5",
+    "1w7sjll",
+    "1w7o699",
+    "1w7r9ah",
+    "1w7r2vj",
+    "1w7pjpp",
+    "1w7p3ba",
+    "1w7otwn",
+    "1w7on19",
+    "1w7nla1",
+    "1w7rmbk",
+    "1w7psy7",
+    "1w7ql9q",
+    "1w7ntve",
     "1w7kph0",
     "1w7mekm",
     "1w7mwbb",
@@ -1137,26 +1154,12 @@
     "1w49lff",
     "1w3z4wt",
     "1w47yd8",
-    "1w3oha6",
-    "1w3y5xt",
-    "1w4cd7w",
-    "1w3jydv",
-    "1w484tz",
-    "1w3i0yv",
-    "1w47j7y",
-    "1w38vay",
-    "1w3tx9t",
-    "1w45dve",
-    "1w46dbl",
-    "1w3pfdc",
-    "1w3uzzj",
-    "1w4czs7",
-    "1w43lan",
-    "1w46k48",
-    "1w41wca",
-    "1w3z5vm"
+    "1w3oha6"
   ],
   "reddit:LLMDevs": [
+    "1w7mzre",
+    "1w7se6u",
+    "1w7om0q",
     "1w7l74v",
     "1w7lj2n",
     "1w7l2t4",
@@ -1497,6 +1500,16 @@
     "1vxk719"
   ],
   "reddit:singularity": [
+    "1w7od9d",
+    "1w7q91u",
+    "1w7rid4",
+    "1w7oud6",
+    "1w7qlzj",
+    "1w7pbyp",
+    "1w7rr6u",
+    "1w7pjdw",
+    "1w7qpky",
+    "1w7pj6a",
     "1w7l201",
     "1w7la9y",
     "1w7m4fi",
@@ -1923,6 +1936,8 @@
     "1vwkffs"
   ],
   "hn:front": [
+    "49571634",
+    "49546284",
     "49570772",
     "49570545",
     "49567310",
@@ -2500,6 +2515,7 @@
     "https://huggingface.co/blog/real-world-voiceeq"
   ],
   "rss:openai": [
+    "https://openai.com/index/gpt-6-astra",
     "https://openai.com/index/daybreak-for-frontline-defenders",
     "https://openai.com/index/legora-financial-statement-review-with-astra",
     "https://openai.com/index/playco-game-prototyping-with-astra",
@@ -2744,6 +2760,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/0/998/695.htm",
+    "https://www.ithome.com/0/998/693.htm",
+    "https://www.ithome.com/0/998/692.htm",
+    "https://www.ithome.com/0/998/691.htm",
+    "https://www.ithome.com/0/998/690.htm",
+    "https://www.ithome.com/0/998/689.htm",
+    "https://www.ithome.com/0/998/687.htm",
+    "https://www.ithome.com/0/998/686.htm",
+    "https://www.ithome.com/0/998/685.htm",
+    "https://www.ithome.com/0/998/684.htm",
     "https://www.ithome.com/0/998/645.htm",
     "https://www.ithome.com/0/998/644.htm",
     "https://www.ithome.com/0/998/643.htm",
