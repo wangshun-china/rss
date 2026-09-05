@@ -115,6 +115,10 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1w7lxeb",
+    "1w7m6jy",
+    "1w7l2wo",
+    "1w7kgzl",
     "1w7i64e",
     "1w7i7mz",
     "1w7jnlx",
@@ -610,11 +614,7 @@
     "1w1996t",
     "1w18v86",
     "1w18pu9",
-    "1w18b1k",
-    "1w17zbg",
-    "1w16nfx",
-    "1w16kts",
-    "1w166ig"
+    "1w18b1k"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,16 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1w7kph0",
+    "1w7mekm",
+    "1w7mwbb",
+    "1w7mqzn",
+    "1w7lqh1",
+    "1w7lav3",
+    "1w7l6pk",
+    "1w7knvc",
+    "1w7mqfj",
+    "1w7lev0",
     "1w7hr8x",
     "1w7j8e5",
     "1w7hx6h",
@@ -1144,19 +1154,12 @@
     "1w43lan",
     "1w46k48",
     "1w41wca",
-    "1w3z5vm",
-    "1w49d9w",
-    "1w3qyq4",
-    "1w3d7b1",
-    "1w483vp",
-    "1w4d098",
-    "1w4cvdi",
-    "1w4c8r8",
-    "1w2xapb",
-    "1w363of",
-    "1w49vmz"
+    "1w3z5vm"
   ],
   "reddit:LLMDevs": [
+    "1w7l74v",
+    "1w7lj2n",
+    "1w7l2t4",
     "1w7j5yf",
     "1w7earv",
     "1w7e4ah",
@@ -1494,6 +1497,11 @@
     "1vxk719"
   ],
   "reddit:singularity": [
+    "1w7l201",
+    "1w7la9y",
+    "1w7m4fi",
+    "1w7m0ui",
+    "1w7m7lu",
     "1w7hkn0",
     "1w7gwe4",
     "1w7j042",
@@ -1915,6 +1923,9 @@
     "1vwkffs"
   ],
   "hn:front": [
+    "49570772",
+    "49570545",
+    "49567310",
     "49569896",
     "49569366",
     "49562219",
@@ -2539,6 +2550,7 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/4/astra-pelicans/",
     "https://simonwillison.net/2026/Sep/4/rogue-agent-wikis/",
     "https://simonwillison.net/2026/Sep/4/august-newsletter/",
     "https://simonwillison.net/2026/Sep/3/gpt6-astra/",
@@ -2707,6 +2719,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/0/998/645.htm",
+    "https://www.ithome.com/0/998/644.htm",
+    "https://www.ithome.com/0/998/643.htm",
+    "https://www.ithome.com/0/998/642.htm",
+    "https://www.ithome.com/0/998/641.htm",
+    "https://www.ithome.com/0/998/640.htm",
+    "https://www.ithome.com/0/998/639.htm",
+    "https://www.ithome.com/0/998/638.htm",
+    "https://www.ithome.com/0/998/637.htm",
+    "https://www.ithome.com/0/998/636.htm",
     "https://www.ithome.com/0/998/630.htm",
     "https://www.ithome.com/0/998/629.htm",
     "https://www.ithome.com/0/998/628.htm",
