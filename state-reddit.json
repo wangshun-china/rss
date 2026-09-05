@@ -115,6 +115,14 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1w825pc",
+    "1w821fg",
+    "1w85blf",
+    "1w82kpd",
+    "1w84mod",
+    "1w854iq",
+    "1w84qia",
+    "1w84k0z",
     "1w7y261",
     "1w7y3sa",
     "1w7zz1o",
@@ -606,15 +614,7 @@
     "1w1nxru",
     "1w1nhpp",
     "1w1nc1c",
-    "1w1nbx5",
-    "1w1mgq8",
-    "1w1meuk",
-    "1w1lu77",
-    "1w1lq7u",
-    "1w1lnw7",
-    "1w1ldli",
-    "1w1l3a2",
-    "1w1kt83"
+    "1w1nbx5"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,18 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1w81w5b",
+    "1w83cl0",
+    "1w832p9",
+    "1w844zm",
+    "1w81yi7",
+    "1w81m0t",
+    "1w85u5o",
+    "1w85bbv",
+    "1w84n7f",
+    "1w84lwp",
+    "1w84crs",
+    "1w8476y",
     "1vt5drr",
     "1w801bh",
     "1w80umw",
@@ -1142,21 +1154,14 @@
     "1w4jmo3",
     "1w4gsvx",
     "1w4f49c",
-    "1w4llxy",
-    "1w4helo",
-    "1w4kx0l",
-    "1w4gyxq",
-    "1w4jwhi",
-    "1w4j6hz",
-    "1w4j1ad",
-    "1w4hrgl",
-    "1w4grbc",
-    "1w4nlss",
-    "1w4nelm",
-    "1w4mwcx",
-    "1w4mp79"
+    "1w4llxy"
   ],
   "reddit:LLMDevs": [
+    "1w81y6t",
+    "1w863pk",
+    "1w85phr",
+    "1w84qyx",
+    "1w83x9p",
     "1w817kr",
     "1w8104s",
     "1w7zdgc",
@@ -1508,6 +1513,12 @@
     "1vxk719"
   ],
   "reddit:singularity": [
+    "1w82zm5",
+    "1w85dqz",
+    "1w84ngu",
+    "1w83uc9",
+    "1w85cwa",
+    "1w84mrh",
     "1w7z3f6",
     "1w7z1rr",
     "1w7zdmb",
@@ -1963,6 +1974,9 @@
     "1vwkffs"
   ],
   "hn:front": [
+    "49575034",
+    "49576124",
+    "49573680",
     "49533840",
     "49571465",
     "49574167",
@@ -2596,6 +2610,7 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/5/blender-coding-agents-macos/",
     "https://simonwillison.net/2026/Sep/4/astra-pelicans/",
     "https://simonwillison.net/2026/Sep/4/rogue-agent-wikis/",
     "https://simonwillison.net/2026/Sep/4/august-newsletter/",
@@ -2790,6 +2805,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/0/998/818.htm",
+    "https://www.ithome.com/0/998/817.htm",
+    "https://www.ithome.com/0/998/816.htm",
+    "https://www.ithome.com/0/998/815.htm",
+    "https://www.ithome.com/0/998/814.htm",
+    "https://www.ithome.com/0/998/813.htm",
+    "https://www.ithome.com/0/998/812.htm",
+    "https://www.ithome.com/0/998/811.htm",
+    "https://www.ithome.com/0/998/810.htm",
+    "https://www.ithome.com/0/998/809.htm",
     "https://www.ithome.com/0/998/808.htm",
     "https://www.ithome.com/0/998/807.htm",
     "https://www.ithome.com/0/998/805.htm",
@@ -3027,6 +3052,9 @@
     "https://www.ithome.com/0/997/153.htm"
   ],
   "rss:solidot": [
+    "https://www.solidot.org/story?sid=85297",
+    "https://www.solidot.org/story?sid=85296",
+    "https://www.solidot.org/story?sid=85295",
     "https://www.solidot.org/story?sid=85294",
     "https://www.solidot.org/story?sid=85293",
     "https://www.solidot.org/story?sid=85292",
