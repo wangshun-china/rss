@@ -115,6 +115,11 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1w90igd",
+    "1w90zdc",
+    "1w9108x",
+    "1w8zgo8",
+    "1w8zcrm",
     "1w8vx6w",
     "1w8us6t",
     "1w8xl1o",
@@ -609,12 +614,7 @@
     "1w2ak8o",
     "1w29ukk",
     "1w296bx",
-    "1w28z8p",
-    "1w28alw",
-    "1w27woy",
-    "1w26y0w",
-    "1w25l10",
-    "1w24xvk"
+    "1w28z8p"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,17 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1w91i3b",
+    "1w8zmj8",
+    "1w91fj0",
+    "1w9226e",
+    "1w920vb",
+    "1w91tc0",
+    "1w916v3",
+    "1w90d7g",
+    "1w8z6xv",
+    "1w8yns5",
+    "1w90wze",
     "1w8v7ba",
     "1w8v86s",
     "1w8uqck",
@@ -1143,20 +1154,11 @@
     "1w548w8",
     "1w53v50",
     "1w53ld6",
-    "1w57dsw",
-    "1w571af",
-    "1w5316q",
-    "1w56a3o",
-    "1w55f93",
-    "1w559w4",
-    "1w54xnn",
-    "1w53nct",
-    "1w508ii",
-    "1w4zyr5",
-    "1w514lz",
-    "1w4x3yx"
+    "1w57dsw"
   ],
   "reddit:LLMDevs": [
+    "1w914yj",
+    "1w90h8w",
     "1w8wlbb",
     "1w8xd5r",
     "1w8wjbr",
@@ -1536,6 +1538,18 @@
     "1vxk719"
   ],
   "reddit:singularity": [
+    "1w8xokf",
+    "1w914qw",
+    "1w91khx",
+    "1w8zrwi",
+    "1w8y8gv",
+    "1w8y6cf",
+    "1w8yzm8",
+    "1w8yzwj",
+    "1w90ugu",
+    "1w90sll",
+    "1w926vc",
+    "1w919t6",
     "1w8x95r",
     "1w8xjlb",
     "1w8waw0",
@@ -2023,21 +2037,15 @@
     "1vxzsxc",
     "1vxtp6g",
     "1vxrifa",
-    "1vxpnh5",
-    "1vxn8xk",
-    "1vxn0ma",
-    "1vxm8gq",
-    "1vxjk0i",
-    "1vxj42t",
-    "1vxifkl",
-    "1vxi7or",
-    "1vxg41n",
-    "1vxg3xh",
-    "1vxfqhd",
-    "1vxfgi4",
-    "1vx7hk4"
+    "1vxpnh5"
   ],
   "hn:front": [
+    "49586171",
+    "49586898",
+    "49586698",
+    "49531619",
+    "49529398",
+    "49546198",
     "49585644",
     "49585627",
     "49585161",
@@ -2646,6 +2654,8 @@
     "https://huggingface.co/blog/real-world-voiceeq"
   ],
   "rss:openai": [
+    "https://openai.com/index/an-alien-mind",
+    "https://openai.com/index/research-acceleration-view-inside-openai",
     "https://openai.com/index/gpt-6-astra",
     "https://openai.com/index/daybreak-for-frontline-defenders",
     "https://openai.com/index/legora-financial-statement-review-with-astra",
@@ -2697,6 +2707,7 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/6/the-purpose-of-dns-is-to-spread-scams/",
     "https://simonwillison.net/2026/Sep/6/zach-kehs/",
     "https://simonwillison.net/2026/Sep/5/introducing-gpt-6-astra-for-developers/",
     "https://simonwillison.net/2026/Sep/5/blender-coding-agents-macos/",
@@ -2915,6 +2926,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/0/999/025.htm",
+    "https://www.ithome.com/0/999/024.htm",
+    "https://www.ithome.com/0/999/022.htm",
+    "https://www.ithome.com/0/999/021.htm",
+    "https://www.ithome.com/0/999/020.htm",
+    "https://www.ithome.com/0/999/018.htm",
+    "https://www.ithome.com/0/999/017.htm",
+    "https://www.ithome.com/0/999/016.htm",
+    "https://www.ithome.com/0/999/015.htm",
+    "https://www.ithome.com/0/999/014.htm",
     "https://www.ithome.com/0/999/012.htm",
     "https://www.ithome.com/0/999/011.htm",
     "https://www.ithome.com/0/999/009.htm",
@@ -3231,6 +3252,9 @@
     "https://www.ithome.com/0/997/153.htm"
   ],
   "rss:solidot": [
+    "https://www.solidot.org/story?sid=85300",
+    "https://www.solidot.org/story?sid=85299",
+    "https://www.solidot.org/story?sid=85298",
     "https://www.solidot.org/story?sid=85297",
     "https://www.solidot.org/story?sid=85296",
     "https://www.solidot.org/story?sid=85295",
