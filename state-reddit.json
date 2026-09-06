@@ -115,6 +115,12 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1w92x3j",
+    "1w9404e",
+    "1w92am7",
+    "1w93yj7",
+    "1w94cj4",
+    "1w92jg7",
     "1w90igd",
     "1w90zdc",
     "1w9108x",
@@ -608,13 +614,7 @@
     "1w2dtsc",
     "1w2dkqq",
     "1w2dixo",
-    "1w2dij0",
-    "1w2ckar",
-    "1w2b2j0",
-    "1w2ak8o",
-    "1w29ukk",
-    "1w296bx",
-    "1w28z8p"
+    "1w2dij0"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,13 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1w92gbq",
+    "1w92kzx",
+    "1w94xij",
+    "1w94w4o",
+    "1w94nqb",
+    "1w935ob",
+    "1w94197",
     "1w91i3b",
     "1w8zmj8",
     "1w91fj0",
@@ -1147,16 +1154,13 @@
     "1w55vwg",
     "1w5a1l5",
     "1w5a16v",
-    "1w59uh6",
-    "1w59otv",
-    "1w58l5u",
-    "1w58iue",
-    "1w548w8",
-    "1w53v50",
-    "1w53ld6",
-    "1w57dsw"
+    "1w59uh6"
   ],
   "reddit:LLMDevs": [
+    "1w95it0",
+    "1w94fsh",
+    "1w94fkv",
+    "1w92jdo",
     "1w914yj",
     "1w90h8w",
     "1w8wlbb",
@@ -1538,6 +1542,14 @@
     "1vxk719"
   ],
   "reddit:singularity": [
+    "1w93mgg",
+    "1w93s6v",
+    "1w92g1t",
+    "1w93uwa",
+    "1w959f0",
+    "1w94ol9",
+    "1w92qu5",
+    "1w94y78",
     "1w8xokf",
     "1w914qw",
     "1w91khx",
@@ -2029,17 +2041,13 @@
     "1vy7cry",
     "1vy6klj",
     "1vy6bmm",
-    "1vy5iqs",
-    "1vy4yds",
-    "1vy2jbc",
-    "1vy2cfa",
-    "1vy29d7",
-    "1vxzsxc",
-    "1vxtp6g",
-    "1vxrifa",
-    "1vxpnh5"
+    "1vy5iqs"
   ],
   "hn:front": [
+    "49589003",
+    "49588080",
+    "49588988",
+    "49587636",
     "49586171",
     "49586898",
     "49586698",
@@ -2707,6 +2715,7 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/6/theres-no-limit-to-how-bad-code-can-get/",
     "https://simonwillison.net/2026/Sep/6/the-purpose-of-dns-is-to-spread-scams/",
     "https://simonwillison.net/2026/Sep/6/zach-kehs/",
     "https://simonwillison.net/2026/Sep/5/introducing-gpt-6-astra-for-developers/",
@@ -2926,6 +2935,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/0/999/040.htm",
+    "https://www.ithome.com/0/999/039.htm",
+    "https://www.ithome.com/0/999/037.htm",
+    "https://www.ithome.com/0/999/036.htm",
+    "https://www.ithome.com/0/999/035.htm",
+    "https://www.ithome.com/0/999/034.htm",
+    "https://www.ithome.com/0/999/033.htm",
+    "https://www.ithome.com/0/999/030.htm",
+    "https://www.ithome.com/0/999/027.htm",
+    "https://www.ithome.com/0/999/026.htm",
     "https://www.ithome.com/0/999/025.htm",
     "https://www.ithome.com/0/999/024.htm",
     "https://www.ithome.com/0/999/022.htm",
