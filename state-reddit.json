@@ -2711,6 +2711,16 @@
     "https://simonwillison.net/2026/Aug/15/sighting-391300422/"
   ],
   "trending:all": [
+    "mattpocock/skills@2026-09-06",
+    "affaan-m/ecc@2026-09-06",
+    "dietrichgebert/ponytail@2026-09-06",
+    "nousresearch/hermes-agent@2026-09-06",
+    "fmtlib/fmt@2026-09-06",
+    "anthropics/skills@2026-09-06",
+    "cathrynlavery/diagram-design@2026-09-06",
+    "anomalyco/opencode@2026-09-06",
+    "ruvnet/ruflo@2026-09-06",
+    "humanlayer/skills@2026-09-06",
     "mattpocock/skills@2026-09-05",
     "dietrichgebert/ponytail@2026-09-05",
     "fmtlib/fmt@2026-09-05",
@@ -2764,6 +2774,16 @@
     "demo/x"
   ],
   "radar:all": [
+    "deepseek-ai/deepseek-v4-flash-vision-exp@2026-09-06",
+    "xhtoken/spark-x2.5-4b@2026-09-06",
+    "zai-org/glm-5.3@2026-09-06",
+    "openai-community/gpt2@2026-09-06",
+    "breezeblue/breeze-tts-2@2026-09-06",
+    "ifm/k2-horizon-mova-36b-a4b@2026-09-06",
+    "tencent/hy4-preview@2026-09-06",
+    "obliteratus/qwen3.8-27b-obliterated@2026-09-06",
+    "jackrong/qwopus3.8-27b-flash-gguf@2026-09-06",
+    "jonathancoletti/qwen3.8-27b-uncensored-gguf@2026-09-06",
     "deepseek-ai/deepseek-v4-flash-vision-exp@2026-09-05",
     "zai-org/glm-5.3@2026-09-05",
     "xhtoken/spark-x2.5-4b@2026-09-05",
@@ -2817,6 +2837,7 @@
     "demo/m"
   ],
   "papers:daily": [
+    "hfpaper-2609.03199",
     "hfpaper-2609.04199",
     "hfpaper-2609.04148",
     "hfpaper-2608.26730",
