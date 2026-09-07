@@ -115,6 +115,10 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1w9dlf1",
+    "1w9bz4i",
+    "1w9dzn8",
+    "1w9c8u7",
     "1w9ad9q",
     "1w9b1eg",
     "1w9b9bs",
@@ -610,11 +614,7 @@
     "1w2gmn5",
     "1w2ghic",
     "1w2germ",
-    "1w2g5se",
-    "1w2fy6a",
-    "1w2f1lf",
-    "1w2eumr",
-    "1w2elkb"
+    "1w2g5se"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,18 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1w9bxno",
+    "1w9dluw",
+    "1w9c1sh",
+    "1w9cpwo",
+    "1w9e1qp",
+    "1w9dm9p",
+    "1w9dlgv",
+    "1w9dbcb",
+    "1w9dama",
+    "1w9d03e",
+    "1w9d1w3",
+    "1w9c421",
     "1w9aygp",
     "1w9aqve",
     "1w9bcfd",
@@ -1142,21 +1154,10 @@
     "1w55u5r",
     "1w5b6jc",
     "1w5agxc",
-    "1w5bw90",
-    "1w58del",
-    "1w55qi4",
-    "1w5cn1h",
-    "1w59zq5",
-    "1w59uvp",
-    "1w556it",
-    "1w5buqe",
-    "1w598gs",
-    "1w53745",
-    "1w58axe",
-    "1w542aq",
-    "1w55f57"
+    "1w5bw90"
   ],
   "reddit:LLMDevs": [
+    "1w9e24m",
     "1w9a5v2",
     "1w9akk9",
     "1w99yd5",
@@ -1548,6 +1549,9 @@
     "1vxk719"
   ],
   "reddit:singularity": [
+    "1w9cbcb",
+    "1w9dmf3",
+    "1w9ckf2",
     "1w9ag49",
     "1w9aeyk",
     "1w99iy1",
@@ -2044,12 +2048,10 @@
     "1vynw03",
     "1vynk48",
     "1vymb03",
-    "1vym7jb",
-    "1vyk818",
-    "1vyjst8",
-    "1vyjimo"
+    "1vym7jb"
   ],
   "hn:front": [
+    "49589722",
     "49590512",
     "49590611",
     "49554622",
@@ -2727,6 +2729,7 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/6/research-acceleration-the-view-inside-openai/",
     "https://simonwillison.net/2026/Sep/6/theres-no-limit-to-how-bad-code-can-get/",
     "https://simonwillison.net/2026/Sep/6/the-purpose-of-dns-is-to-spread-scams/",
     "https://simonwillison.net/2026/Sep/6/zach-kehs/",
@@ -2947,6 +2950,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/0/999/067.htm",
+    "https://www.ithome.com/0/999/066.htm",
+    "https://www.ithome.com/0/999/065.htm",
+    "https://www.ithome.com/0/999/064.htm",
+    "https://www.ithome.com/0/999/063.htm",
+    "https://www.ithome.com/0/999/062.htm",
+    "https://www.ithome.com/0/999/061.htm",
+    "https://www.ithome.com/0/999/060.htm",
+    "https://www.ithome.com/0/999/059.htm",
+    "https://www.ithome.com/0/999/058.htm",
     "https://www.ithome.com/0/999/057.htm",
     "https://www.ithome.com/0/999/056.htm",
     "https://www.ithome.com/0/999/055.htm",
@@ -3300,6 +3313,7 @@
     "https://www.ithome.com/0/997/153.htm"
   ],
   "rss:solidot": [
+    "https://www.solidot.org/story?sid=85301",
     "https://www.solidot.org/story?sid=85300",
     "https://www.solidot.org/story?sid=85299",
     "https://www.solidot.org/story?sid=85298",
@@ -3363,6 +3377,7 @@
     "https://www.solidot.org/story?sid=85238"
   ],
   "rss:sspai": [
+    "https://sspai.com/post/114250",
     "https://sspai.com/post/114076",
     "https://sspai.com/post/114040",
     "https://sspai.com/post/114175",
