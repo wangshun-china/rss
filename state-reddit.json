@@ -2783,6 +2783,16 @@
     "https://simonwillison.net/2026/Aug/15/sighting-391300422/"
   ],
   "trending:all": [
+    "affaan-m/ecc@2026-09-07",
+    "mattpocock/skills@2026-09-07",
+    "cathrynlavery/diagram-design@2026-09-07",
+    "nousresearch/hermes-agent@2026-09-07",
+    "openai/skills@2026-09-07",
+    "anomalyco/opencode@2026-09-07",
+    "blader/humanizer@2026-09-07",
+    "llvm/llvm-project@2026-09-07",
+    "dietrichgebert/ponytail@2026-09-07",
+    "ruvnet/ruflo@2026-09-07",
     "mattpocock/skills@2026-09-06",
     "affaan-m/ecc@2026-09-06",
     "dietrichgebert/ponytail@2026-09-06",
@@ -2846,6 +2856,16 @@
     "demo/x"
   ],
   "radar:all": [
+    "deepseek-ai/deepseek-v4-flash-vision-exp@2026-09-07",
+    "xhtoken/spark-x2.5-4b@2026-09-07",
+    "zai-org/glm-5.3@2026-09-07",
+    "breezeblue/breeze-tts-2@2026-09-07",
+    "openai-community/gpt2@2026-09-07",
+    "ifm/k2-horizon-mova-36b-a4b@2026-09-07",
+    "dealignai/glm-5.3-cybersecurity-fp8@2026-09-07",
+    "jackrong/qwopus3.8-27b-flash-gguf@2026-09-07",
+    "obliteratus/qwen3.8-27b-obliterated@2026-09-07",
+    "tencent/hy4-preview@2026-09-07",
     "deepseek-ai/deepseek-v4-flash-vision-exp@2026-09-06",
     "xhtoken/spark-x2.5-4b@2026-09-06",
     "zai-org/glm-5.3@2026-09-06",
