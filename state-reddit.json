@@ -115,6 +115,10 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1wb35xo",
+    "1wb3t30",
+    "1wb527l",
+    "1wb2ws5",
     "1waz5a0",
     "1waydqj",
     "1wazp0v",
@@ -610,11 +614,7 @@
     "1w393ht",
     "1w3hhv1",
     "1w2fmmq",
-    "1w3bh6f",
-    "1w4azx0",
-    "1w404zy",
-    "1w404vc",
-    "1w3b0ox"
+    "1w3bh6f"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,15 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1wb1xht",
+    "1wb312h",
+    "1wb2z3j",
+    "1wb3dfw",
+    "1wb2dl1",
+    "1wb1rb7",
+    "1wb2nb6",
+    "1wb3p16",
+    "1wb2i8x",
     "1wawozx",
     "1wazam9",
     "1wax8i2",
@@ -1145,18 +1154,11 @@
     "1w6rj3g",
     "1w6qmj5",
     "1w6ukon",
-    "1w6ujy2",
-    "1w6pcq8",
-    "1w6tug6",
-    "1w6nzxh",
-    "1w6qe30",
-    "1w6r4n6",
-    "1w6t7i8",
-    "1w6ohgc",
-    "1w6qp00",
-    "1w6qu3a"
+    "1w6ujy2"
   ],
   "reddit:LLMDevs": [
+    "1wb4l5k",
+    "1wb4iqe",
     "1wb04jj",
     "1waxfh8",
     "1wb1py0",
@@ -1610,6 +1612,16 @@
     "1vxk719"
   ],
   "reddit:singularity": [
+    "1wb3yc0",
+    "1wb1rs0",
+    "1wb4brl",
+    "1wb1vzl",
+    "1wb4bhs",
+    "1wb3ald",
+    "1wb2lig",
+    "1wb314s",
+    "1wb50fx",
+    "1wb51gz",
     "1wazg2q",
     "1wawkq5",
     "1waxm7z",
@@ -2099,19 +2111,13 @@
     "1w1dq48",
     "1w120cw",
     "1w1dird",
-    "1w1g1k9",
-    "1w1823q",
-    "1w1pn6j",
-    "1w10ty7",
-    "1w0ur6v",
-    "1w0rmif",
-    "1w0l1di",
-    "1w16ejc",
-    "1w0mn1a",
-    "1w0xisb",
-    "1w0rwlx"
+    "1w1g1k9"
   ],
   "hn:front": [
+    "49591563",
+    "49616354",
+    "49609174",
+    "49613068",
     "49614720",
     "49615537",
     "49600901",
@@ -2779,6 +2785,7 @@
     "tag:github.com,2008:Repository/155220641/v5.10.3"
   ],
   "rss:gh-vllm": [
+    "tag:github.com,2008:Repository/599547518/v0.29.0",
     "tag:github.com,2008:Repository/599547518/v0.29.0rc6",
     "tag:github.com,2008:Repository/599547518/v0.29.0rc5",
     "tag:github.com,2008:Repository/599547518/v0.29.0rc4",
@@ -2898,6 +2905,7 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/8/introducing-chatgpt-images-25/",
     "https://simonwillison.net/2026/Sep/7/llm/",
     "https://simonwillison.net/2026/Sep/7/creepy-crawlies/",
     "https://simonwillison.net/2026/Sep/7/jakub-pachocki/",
@@ -3172,6 +3180,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/0/999/954.htm",
+    "https://www.ithome.com/0/999/953.htm",
+    "https://www.ithome.com/0/999/949.htm",
+    "https://www.ithome.com/0/999/952.htm",
+    "https://www.ithome.com/0/999/950.htm",
+    "https://www.ithome.com/0/999/948.htm",
+    "https://www.ithome.com/0/999/947.htm",
+    "https://www.ithome.com/0/999/946.htm",
+    "https://www.ithome.com/0/999/945.htm",
+    "https://www.ithome.com/0/999/944.htm",
     "https://www.ithome.com/0/999/943.htm",
     "https://www.ithome.com/0/999/942.htm",
     "https://www.ithome.com/0/999/941.htm",
