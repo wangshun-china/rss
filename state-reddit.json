@@ -115,6 +115,7 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1wb6cp9",
     "1wb35xo",
     "1wb3t30",
     "1wb527l",
@@ -613,8 +614,7 @@
     "1w3dpu3",
     "1w393ht",
     "1w3hhv1",
-    "1w2fmmq",
-    "1w3bh6f"
+    "1w2fmmq"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,10 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1wb7190",
+    "1wb5gt6",
+    "1wb55ge",
+    "1wb6av6",
     "1wb1xht",
     "1wb312h",
     "1wb2z3j",
@@ -1150,13 +1154,10 @@
     "1w6sp4h",
     "1w6tqxs",
     "1w6t2e4",
-    "1w6waw0",
-    "1w6rj3g",
-    "1w6qmj5",
-    "1w6ukon",
-    "1w6ujy2"
+    "1w6waw0"
   ],
   "reddit:LLMDevs": [
+    "1wb6m2y",
     "1wb4l5k",
     "1wb4iqe",
     "1wb04jj",
@@ -1612,6 +1613,16 @@
     "1vxk719"
   ],
   "reddit:singularity": [
+    "1wb5et4",
+    "1wb5c41",
+    "1wb6ajo",
+    "1wb7ml2",
+    "1wb7i7m",
+    "1wb7c3s",
+    "1wb7ft7",
+    "1wb718n",
+    "1wb7oan",
+    "1wb7k85",
     "1wb3yc0",
     "1wb1rs0",
     "1wb4brl",
@@ -2101,19 +2112,11 @@
     "1w23bd2",
     "1w1e3h5",
     "1w1tdzp",
-    "1w1hws9",
-    "1w1wt5y",
-    "1w1d01y",
-    "1w1a5li",
-    "1w1r84t",
-    "1w1bly3",
-    "1w11kz8",
-    "1w1dq48",
-    "1w120cw",
-    "1w1dird",
-    "1w1g1k9"
+    "1w1hws9"
   ],
   "hn:front": [
+    "49616968",
+    "49617255",
     "49591563",
     "49616354",
     "49609174",
@@ -2905,6 +2908,8 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/9/terence-tao/",
+    "https://simonwillison.net/2026/Sep/8/on-navier-stokes/",
     "https://simonwillison.net/2026/Sep/8/introducing-chatgpt-images-25/",
     "https://simonwillison.net/2026/Sep/7/llm/",
     "https://simonwillison.net/2026/Sep/7/creepy-crawlies/",
@@ -3180,6 +3185,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/0/999/979.htm",
+    "https://www.ithome.com/0/999/978.htm",
+    "https://www.ithome.com/0/999/977.htm",
+    "https://www.ithome.com/0/999/976.htm",
+    "https://www.ithome.com/0/999/974.htm",
+    "https://www.ithome.com/0/999/973.htm",
+    "https://www.ithome.com/0/999/972.htm",
+    "https://www.ithome.com/0/999/971.htm",
+    "https://www.ithome.com/0/999/970.htm",
+    "https://www.ithome.com/0/999/969.htm",
     "https://www.ithome.com/0/999/954.htm",
     "https://www.ithome.com/0/999/953.htm",
     "https://www.ithome.com/0/999/949.htm",
@@ -3740,6 +3755,7 @@
     "https://www.solidot.org/story?sid=85238"
   ],
   "rss:sspai": [
+    "https://sspai.com/post/114352",
     "https://sspai.com/prime/story/sidecar-optimizations",
     "https://sspai.com/post/114327",
     "https://sspai.com/post/114312",
