@@ -115,6 +115,8 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1wc2cs2",
+    "1wc30q1",
     "1wby2cm",
     "1wc0ekw",
     "1wbyhg4",
@@ -612,9 +614,7 @@
     "1w4f234",
     "1w4jsrj",
     "1w4f4tr",
-    "1w4f7x5",
-    "1w4d52c",
-    "1vzxdui"
+    "1w4f7x5"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,15 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1wc2dc9",
+    "1wc0ywy",
+    "1wc2e5i",
+    "1wc25ji",
+    "1wc3444",
+    "1wc2qw8",
+    "1wc1dmr",
+    "1wc2tvs",
+    "1wc3avt",
     "1wbx66j",
     "1wbyhuf",
     "1wc05iu",
@@ -1145,18 +1154,12 @@
     "1w7r3u1",
     "1w7p5nv",
     "1w7ru5l",
-    "1w7sla5",
-    "1w7sjll",
-    "1w7o699",
-    "1w7r9ah",
-    "1w7r2vj",
-    "1w7pjpp",
-    "1w7p3ba",
-    "1w7otwn",
-    "1w7on19",
-    "1w7nla1"
+    "1w7sla5"
   ],
   "reddit:LLMDevs": [
+    "1wc33b9",
+    "1wc2khu",
+    "1wc1uvd",
     "1wc0jpm",
     "1wbzidn",
     "1wbys4e",
@@ -1641,6 +1644,10 @@
     "1vxk719"
   ],
   "reddit:singularity": [
+    "1wc2eqb",
+    "1wc2ckl",
+    "1wc3qd6",
+    "1wc37mv",
     "1wbx0o5",
     "1wbxq7y",
     "1wbznhs",
@@ -2136,13 +2143,10 @@
     "1w4wc0p",
     "1w4yajb",
     "1w4zv5s",
-    "1w4x4tf",
-    "1w4z5q9",
-    "1w4xcas",
-    "1w51wt0",
-    "1w510z4"
+    "1w4x4tf"
   ],
   "hn:front": [
+    "49629886",
     "49626373",
     "49630931",
     "49630253",
@@ -2904,6 +2908,7 @@
     "https://huggingface.co/blog/real-world-voiceeq"
   ],
   "rss:openai": [
+    "https://openai.com/index/ai-policy-window",
     "https://openai.com/index/gpt-6-astra-next-generation-work",
     "https://openai.com/index/paul-christiano-joins-openai-foundation-board",
     "https://openai.com/index/codex-quantum-computing-experiments",
@@ -2967,6 +2972,7 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/9/blender-viewer/",
     "https://simonwillison.net/2026/Sep/9/terence-tao/",
     "https://simonwillison.net/2026/Sep/8/on-navier-stokes/",
     "https://simonwillison.net/2026/Sep/8/introducing-chatgpt-images-25/",
@@ -3272,6 +3278,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/000/550.htm",
+    "https://www.ithome.com/1/000/549.htm",
+    "https://www.ithome.com/1/000/548.htm",
+    "https://www.ithome.com/1/000/547.htm",
+    "https://www.ithome.com/1/000/546.htm",
+    "https://www.ithome.com/1/000/544.htm",
+    "https://www.ithome.com/1/000/543.htm",
+    "https://www.ithome.com/1/000/542.htm",
+    "https://www.ithome.com/1/000/541.htm",
+    "https://www.ithome.com/1/000/540.htm",
     "https://www.ithome.com/1/000/533.htm",
     "https://www.ithome.com/1/000/531.htm",
     "https://www.ithome.com/1/000/529.htm",
@@ -3761,17 +3777,7 @@
     "https://www.ithome.com/0/997/196.htm",
     "https://www.ithome.com/0/997/195.htm",
     "https://www.ithome.com/0/997/194.htm",
-    "https://www.ithome.com/0/997/193.htm",
-    "https://www.ithome.com/0/997/191.htm",
-    "https://www.ithome.com/0/997/189.htm",
-    "https://www.ithome.com/0/996/723.htm",
-    "https://www.ithome.com/0/997/188.htm",
-    "https://www.ithome.com/0/997/187.htm",
-    "https://www.ithome.com/0/997/186.htm",
-    "https://www.ithome.com/0/997/185.htm",
-    "https://www.ithome.com/0/997/184.htm",
-    "https://www.ithome.com/0/997/183.htm",
-    "https://www.ithome.com/0/997/180.htm"
+    "https://www.ithome.com/0/997/193.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85333",
@@ -3869,6 +3875,7 @@
     "https://www.solidot.org/story?sid=85238"
   ],
   "rss:sspai": [
+    "https://sspai.com/post/114394",
     "https://sspai.com/post/114393",
     "https://sspai.com/post/114392",
     "https://sspai.com/post/114366",
