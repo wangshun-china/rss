@@ -115,6 +115,8 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1wd19c7",
+    "1wd0nja",
     "1wcxxm8",
     "1wcwa7i",
     "1wcwith",
@@ -612,9 +614,7 @@
     "1w5l941",
     "1w5dtqd",
     "1w5g46f",
-    "1w5jaq9",
-    "1w5m7ad",
-    "1w5eb7o"
+    "1w5jaq9"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,17 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1wd12fr",
+    "1wd15a1",
+    "1wczg8p",
+    "1wd212a",
+    "1wd0giv",
+    "1wd02je",
+    "1wd0227",
+    "1wd23g1",
+    "1wd03e9",
+    "1wd03a2",
+    "1wd1au4",
     "1wcwv5n",
     "1wcz4cv",
     "1wcx3d2",
@@ -1143,18 +1154,7 @@
     "1w8wmsv",
     "1w8wa2c",
     "1w8tzf1",
-    "1w8tqus",
-    "1w8ugc0",
-    "1w8tlll",
-    "1w8ukiq",
-    "1w8ofdg",
-    "1w8p8tn",
-    "1w8qe0u",
-    "1w8skpx",
-    "1w8r5tj",
-    "1w8rf8g",
-    "1w8r0x0",
-    "1w8qvq0"
+    "1w8tqus"
   ],
   "reddit:LLMDevs": [
     "1wcy08o",
@@ -1659,6 +1659,12 @@
     "1vxvnbi"
   ],
   "reddit:singularity": [
+    "1wd05zw",
+    "1wd0yu9",
+    "1wd1yd4",
+    "1wczt8k",
+    "1wd1xlm",
+    "1wd03yf",
     "1wcw6m0",
     "1wcw4al",
     "1wcynv9",
@@ -2152,15 +2158,12 @@
     "1w6ilr7",
     "1w6hslg",
     "1w6jb8b",
-    "1w6fg2w",
-    "1w6knep",
-    "1w6kb2f",
-    "1w6jue1",
-    "1w6jemk",
-    "1w6izbe",
-    "1w6aeoo"
+    "1w6fg2w"
   ],
   "hn:front": [
+    "49587121",
+    "49650326",
+    "49649213",
     "49647134",
     "49645393",
     "49645754",
@@ -3042,12 +3045,14 @@
     "https://openai.com/index/previewing-ultrafast"
   ],
   "rss:ruanyifeng": [
+    "tag:www.ruanyifeng.com,2026:/blog//1.2556",
     "tag:www.ruanyifeng.com,2026:/blog//1.2555",
     "tag:www.ruanyifeng.com,2026:/blog//1.2554",
     "tag:www.ruanyifeng.com,2026:/blog//1.2553",
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/10/trynix/",
     "https://simonwillison.net/2026/Sep/10/shopify-react-native/",
     "https://simonwillison.net/2026/Sep/10/calif-research/",
     "https://simonwillison.net/2026/Sep/9/blender-viewer/",
@@ -3385,6 +3390,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/001/088.htm",
+    "https://www.ithome.com/1/001/087.htm",
+    "https://www.ithome.com/1/001/086.htm",
+    "https://www.ithome.com/1/001/085.htm",
+    "https://www.ithome.com/1/001/084.htm",
+    "https://www.ithome.com/1/001/083.htm",
+    "https://www.ithome.com/1/001/082.htm",
+    "https://www.ithome.com/1/001/081.htm",
+    "https://www.ithome.com/1/001/080.htm",
+    "https://www.ithome.com/1/001/079.htm",
     "https://www.ithome.com/1/000/998.htm",
     "https://www.ithome.com/1/001/042.htm",
     "https://www.ithome.com/1/001/041.htm",
@@ -3874,17 +3889,7 @@
     "https://www.ithome.com/0/998/150.htm",
     "https://www.ithome.com/0/998/149.htm",
     "https://www.ithome.com/0/998/147.htm",
-    "https://www.ithome.com/0/998/146.htm",
-    "https://www.ithome.com/0/998/145.htm",
-    "https://www.ithome.com/0/998/143.htm",
-    "https://www.ithome.com/0/998/142.htm",
-    "https://www.ithome.com/0/998/141.htm",
-    "https://www.ithome.com/0/998/140.htm",
-    "https://www.ithome.com/0/998/138.htm",
-    "https://www.ithome.com/0/998/040.htm",
-    "https://www.ithome.com/0/998/038.htm",
-    "https://www.ithome.com/0/998/037.htm",
-    "https://www.ithome.com/0/998/036.htm"
+    "https://www.ithome.com/0/998/146.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85341",
@@ -3991,6 +3996,7 @@
     "https://www.solidot.org/story?sid=85238"
   ],
   "rss:sspai": [
+    "https://sspai.com/post/114439",
     "https://sspai.com/post/114384",
     "https://sspai.com/post/114394",
     "https://sspai.com/post/114393",
