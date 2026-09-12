@@ -3172,6 +3172,16 @@
     "https://simonwillison.net/2026/Aug/15/sighting-391300422/"
   ],
   "trending:all": [
+    "ayghri/i-have-adhd@2026-09-12",
+    "bilawalsidhu/gods-eye-view@2026-09-12",
+    "nab138/iloader@2026-09-12",
+    "melgarafael/deskcommcrm@2026-09-12",
+    "vastsa/pi-desktop@2026-09-12",
+    "armory3d/armorpaint@2026-09-12",
+    "alsk1992/cloddsbot@2026-09-12",
+    "nashsu/llm_wiki@2026-09-12",
+    "obra/superpowers@2026-09-12",
+    "sonarr/sonarr@2026-09-12",
     "ayghri/i-have-adhd@2026-09-11",
     "bilawalsidhu/gods-eye-view@2026-09-11",
     "obra/superpowers@2026-09-11",
@@ -3285,6 +3295,16 @@
     "demo/x"
   ],
   "radar:all": [
+    "deepseek-ai/deepseek-v4.1-flash@2026-09-12",
+    "openbmb/minicpm5-2b@2026-09-12",
+    "xhtoken/spark-x2.5-4b@2026-09-12",
+    "nex-agi/nex-n2.5-mini@2026-09-12",
+    "nex-agi/nex-n2.5-pro@2026-09-12",
+    "dealignai/glm-5.3-cybersecurity-fp8@2026-09-12",
+    "deepseek-ai/deepseek-v4-flash-vision-exp@2026-09-12",
+    "openbmb/minicpm5-2b-gguf@2026-09-12",
+    "openai-community/gpt2@2026-09-12",
+    "ifm/k2-horizon-mova-36b-a4b@2026-09-12",
     "deepseek-ai/deepseek-v4.1-flash@2026-09-11",
     "openbmb/minicpm5-2b@2026-09-11",
     "xhtoken/spark-x2.5-4b@2026-09-11",
@@ -3398,6 +3418,9 @@
     "demo/m"
   ],
   "papers:daily": [
+    "hfpaper-2609.07064",
+    "hfpaper-2609.08149",
+    "hfpaper-2609.11317",
     "hfpaper-2608.12564",
     "hfpaper-2609.10715",
     "hfpaper-2609.08572",
