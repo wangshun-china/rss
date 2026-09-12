@@ -115,6 +115,9 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1wepx7w",
+    "1weobt6",
+    "1weolwq",
     "1wemcdc",
     "1wel0ub",
     "1weng3o",
@@ -611,10 +614,7 @@
     "1w71oyi",
     "1w70qrd",
     "1w6z8hy",
-    "1w6t0a9",
-    "1w6ozbj",
-    "1w6nywh",
-    "1w6p3s7"
+    "1w6t0a9"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,15 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1werfk2",
+    "1wercsn",
+    "1wer5d7",
+    "1weqnlt",
+    "1wepdno",
+    "1wepa9b",
+    "1weoqv6",
+    "1wepo26",
+    "1wep0r4",
     "1wemvl4",
     "1wempkp",
     "1wenyuv",
@@ -1145,18 +1154,10 @@
     "1waqe1b",
     "1waq5qx",
     "1wakldv",
-    "1wapdj1",
-    "1wap6vb",
-    "1wap21o",
-    "1wak70m",
-    "1wanula",
-    "1wanp2k",
-    "1wamglb",
-    "1walq99",
-    "1wal45u",
-    "1waklvs"
+    "1wapdj1"
   ],
   "reddit:LLMDevs": [
+    "1wepx40",
     "1wemiwo",
     "1wekzj9",
     "1weha5l",
@@ -1655,10 +1656,19 @@
     "1vz9nso",
     "1vz9llp",
     "1vz91re",
-    "1vz8357",
-    "1vz7cho"
+    "1vz8357"
   ],
   "reddit:singularity": [
+    "1weoufm",
+    "1weqmr7",
+    "1weovv9",
+    "1weqhg2",
+    "1wequci",
+    "1wequz9",
+    "1weralf",
+    "1weqto9",
+    "1weq6lq",
+    "1wer1jg",
     "1wemejz",
     "1wel7o1",
     "1wen2aq",
@@ -2148,19 +2158,14 @@
     "1w814t0",
     "1w7tc7p",
     "1w7u3pr",
-    "1w7xe37",
-    "1w7wpiq",
-    "1w7u0fu",
-    "1w7velc",
-    "1w7tor2",
-    "1w7xjii",
-    "1w7xi2i",
-    "1w7od9d",
-    "1w7q91u",
-    "1w7rid4",
-    "1w7oud6"
+    "1w7xe37"
   ],
   "hn:front": [
+    "49675902",
+    "49625056",
+    "49676324",
+    "49672842",
+    "49623933",
     "49658672",
     "49672510",
     "49673098",
@@ -2655,12 +2660,7 @@
     "49449507",
     "49395802",
     "49445873",
-    "49449576",
-    "49450722",
-    "49445884",
-    "49446442",
-    "49448872",
-    "49450448"
+    "49449576"
   ],
   "rss:arxiv-cs-cl": [
     "oai:arXiv.org:2609.11101v1",
@@ -2955,6 +2955,7 @@
     "tag:github.com,2008:Repository/155220641/v5.10.3"
   ],
   "rss:gh-vllm": [
+    "tag:github.com,2008:Repository/599547518/v0.29.1rc0",
     "tag:github.com,2008:Repository/599547518/proto-v0.1.0",
     "tag:github.com,2008:Repository/599547518/v0.29.0",
     "tag:github.com,2008:Repository/599547518/v0.29.0rc6",
@@ -3091,6 +3092,7 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/12/sighting-399708714/",
     "https://simonwillison.net/2026/Sep/12/paul-ford/",
     "https://simonwillison.net/2026/Sep/12/openai-agents-rubygems/",
     "https://simonwillison.net/2026/Sep/11/so-you-want-to-use-openrouter/",
@@ -3494,6 +3496,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/001/669.htm",
+    "https://www.ithome.com/1/001/668.htm",
+    "https://www.ithome.com/1/001/667.htm",
+    "https://www.ithome.com/1/001/666.htm",
+    "https://www.ithome.com/1/001/665.htm",
+    "https://www.ithome.com/1/001/664.htm",
+    "https://www.ithome.com/1/001/663.htm",
+    "https://www.ithome.com/1/001/662.htm",
+    "https://www.ithome.com/1/001/661.htm",
+    "https://www.ithome.com/1/001/660.htm",
     "https://www.ithome.com/1/001/659.htm",
     "https://www.ithome.com/1/001/658.htm",
     "https://www.ithome.com/1/001/657.htm",
@@ -3983,17 +3995,7 @@
     "https://www.ithome.com/0/998/808.htm",
     "https://www.ithome.com/0/998/807.htm",
     "https://www.ithome.com/0/998/805.htm",
-    "https://www.ithome.com/0/998/790.htm",
-    "https://www.ithome.com/0/998/789.htm",
-    "https://www.ithome.com/0/998/788.htm",
-    "https://www.ithome.com/0/998/787.htm",
-    "https://www.ithome.com/0/998/786.htm",
-    "https://www.ithome.com/0/998/785.htm",
-    "https://www.ithome.com/0/998/784.htm",
-    "https://www.ithome.com/0/998/772.htm",
-    "https://www.ithome.com/0/998/771.htm",
-    "https://www.ithome.com/0/998/765.htm",
-    "https://www.ithome.com/0/998/760.htm"
+    "https://www.ithome.com/0/998/790.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85357",
