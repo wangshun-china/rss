@@ -3176,6 +3176,16 @@
     "https://simonwillison.net/2026/Aug/15/sighting-391300422/"
   ],
   "trending:all": [
+    "bilawalsidhu/gods-eye-view@2026-09-13",
+    "melgarafael/deskcommcrm@2026-09-13",
+    "asgeirtj/system_prompts_leaks@2026-09-13",
+    "nab138/iloader@2026-09-13",
+    "flowseal/zapret-discord-youtube@2026-09-13",
+    "jihe520/mathmodelagent@2026-09-13",
+    "sonarr/sonarr@2026-09-13",
+    "alsk1992/cloddsbot@2026-09-13",
+    "yuliskov/smarttube@2026-09-13",
+    "shubhamsaboo/awesome-llm-apps@2026-09-13",
     "ayghri/i-have-adhd@2026-09-12",
     "bilawalsidhu/gods-eye-view@2026-09-12",
     "nab138/iloader@2026-09-12",
@@ -3299,6 +3309,16 @@
     "demo/x"
   ],
   "radar:all": [
+    "deepseek-ai/deepseek-v4.1-flash@2026-09-13",
+    "openbmb/minicpm5-2b@2026-09-13",
+    "nex-agi/nex-n2.5-mini@2026-09-13",
+    "edge0/edge0-35b-a3b-preview@2026-09-13",
+    "xhtoken/spark-x2.5-4b@2026-09-13",
+    "nex-agi/nex-n2.5-pro@2026-09-13",
+    "dealignai/glm-5.3-cybersecurity-fp8@2026-09-13",
+    "openbmb/minicpm5-2b-gguf@2026-09-13",
+    "openai-community/gpt2@2026-09-13",
+    "deepseek-ai/deepseek-v4-flash-vision-exp@2026-09-13",
     "deepseek-ai/deepseek-v4.1-flash@2026-09-12",
     "openbmb/minicpm5-2b@2026-09-12",
     "xhtoken/spark-x2.5-4b@2026-09-12",
@@ -3422,6 +3442,7 @@
     "demo/m"
   ],
   "papers:daily": [
+    "hfpaper-2609.11412",
     "hfpaper-2609.07064",
     "hfpaper-2609.08149",
     "hfpaper-2609.11317",
