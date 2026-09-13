@@ -115,6 +115,9 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1wesoz4",
+    "1wers2v",
+    "1wets6i",
     "1wepx7w",
     "1weobt6",
     "1weolwq",
@@ -611,10 +614,7 @@
     "1w70d85",
     "1w6zud0",
     "1w71vg1",
-    "1w71oyi",
-    "1w70qrd",
-    "1w6z8hy",
-    "1w6t0a9"
+    "1w71oyi"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,8 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1wet0m0",
+    "1werw2u",
     "1werfk2",
     "1wercsn",
     "1wer5d7",
@@ -1152,11 +1154,10 @@
     "1wao1h2",
     "1wapc9a",
     "1waqe1b",
-    "1waq5qx",
-    "1wakldv",
-    "1wapdj1"
+    "1waq5qx"
   ],
   "reddit:LLMDevs": [
+    "1wetgn4",
     "1wepx40",
     "1wemiwo",
     "1wekzj9",
@@ -1655,10 +1656,14 @@
     "1vz9p8s",
     "1vz9nso",
     "1vz9llp",
-    "1vz91re",
-    "1vz8357"
+    "1vz91re"
   ],
   "reddit:singularity": [
+    "1werol6",
+    "1wesm54",
+    "1wetbkm",
+    "1werk75",
+    "1wet4k9",
     "1weoufm",
     "1weqmr7",
     "1weovv9",
@@ -2153,14 +2158,11 @@
     "1w7y22x",
     "1w7ygxw",
     "1w7y3a7",
-    "1w80q6x",
-    "1w81cbm",
-    "1w814t0",
-    "1w7tc7p",
-    "1w7u3pr",
-    "1w7xe37"
+    "1w80q6x"
   ],
   "hn:front": [
+    "49619848",
+    "49676820",
     "49675902",
     "49625056",
     "49676324",
@@ -2658,9 +2660,7 @@
     "49448665",
     "49448210",
     "49449507",
-    "49395802",
-    "49445873",
-    "49449576"
+    "49395802"
   ],
   "rss:arxiv-cs-cl": [
     "oai:arXiv.org:2609.11101v1",
@@ -3092,6 +3092,7 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/12/astra-running-routes/",
     "https://simonwillison.net/2026/Sep/12/sighting-399708714/",
     "https://simonwillison.net/2026/Sep/12/paul-ford/",
     "https://simonwillison.net/2026/Sep/12/openai-agents-rubygems/",
@@ -3496,6 +3497,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/001/683.htm",
+    "https://www.ithome.com/1/001/682.htm",
+    "https://www.ithome.com/1/001/681.htm",
+    "https://www.ithome.com/1/001/680.htm",
+    "https://www.ithome.com/1/001/679.htm",
+    "https://www.ithome.com/1/001/678.htm",
+    "https://www.ithome.com/1/001/677.htm",
+    "https://www.ithome.com/1/001/676.htm",
+    "https://www.ithome.com/1/001/675.htm",
+    "https://www.ithome.com/1/001/674.htm",
     "https://www.ithome.com/1/001/669.htm",
     "https://www.ithome.com/1/001/668.htm",
     "https://www.ithome.com/1/001/667.htm",
@@ -3985,17 +3996,7 @@
     "https://www.ithome.com/0/998/818.htm",
     "https://www.ithome.com/0/998/817.htm",
     "https://www.ithome.com/0/998/816.htm",
-    "https://www.ithome.com/0/998/815.htm",
-    "https://www.ithome.com/0/998/814.htm",
-    "https://www.ithome.com/0/998/813.htm",
-    "https://www.ithome.com/0/998/812.htm",
-    "https://www.ithome.com/0/998/811.htm",
-    "https://www.ithome.com/0/998/810.htm",
-    "https://www.ithome.com/0/998/809.htm",
-    "https://www.ithome.com/0/998/808.htm",
-    "https://www.ithome.com/0/998/807.htm",
-    "https://www.ithome.com/0/998/805.htm",
-    "https://www.ithome.com/0/998/790.htm"
+    "https://www.ithome.com/0/998/815.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85357",
