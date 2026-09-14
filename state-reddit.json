@@ -115,6 +115,9 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1wfpwhj",
+    "1wfpvw5",
+    "1wfpyvv",
     "1wfm3v4",
     "1wflenb",
     "1wfmzez",
@@ -611,10 +614,7 @@
     "1w7jh50",
     "1w7ji00",
     "1w7ee1c",
-    "1w7dlo5",
-    "1w7gmko",
-    "1w7flic",
-    "1w7eyu3"
+    "1w7dlo5"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,15 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1wfnikw",
+    "1wfo8ti",
+    "1wfpydl",
+    "1wfp3rc",
+    "1wfp054",
+    "1wfnk8p",
+    "1wfnira",
+    "1wfncdr",
+    "1wfof5u",
     "1wfmpr2",
     "1wfkp9i",
     "1wfjmj6",
@@ -1145,18 +1154,10 @@
     "1wbgexg",
     "1wbg7k5",
     "1wbg7jb",
-    "1wbg13g",
-    "1wbdy8r",
-    "1wbdxdn",
-    "1wbi3bs",
-    "1wbfath",
-    "1wbbhsy",
-    "1wbdewu",
-    "1wb7q0d",
-    "1wbb1z4",
-    "1wb9fwy"
+    "1wbg13g"
   ],
   "reddit:LLMDevs": [
+    "1wektiw",
     "1wfjek2",
     "1wf8kbw",
     "1wf81lw",
@@ -1655,10 +1656,15 @@
     "1vzwvrm",
     "1vzwhim",
     "1vzvv5q",
-    "1vzv8jz",
-    "1vzuh00"
+    "1vzv8jz"
   ],
   "reddit:singularity": [
+    "1vso1mh",
+    "1wfnrqj",
+    "1wfpwzt",
+    "1wfob1w",
+    "1wfpq6v",
+    "1wfpiqw",
     "1wfm9np",
     "1wfm2ws",
     "1wfl10r",
@@ -2152,15 +2158,10 @@
     "1w9b6r4",
     "1w96hyl",
     "1w97g02",
-    "1w98360",
-    "1w98a77",
-    "1w96mpn",
-    "1w93mgg",
-    "1w93s6v",
-    "1w92g1t",
-    "1w93uwa"
+    "1w98360"
   ],
   "hn:front": [
+    "49689460",
     "49688695",
     "49642645",
     "49688157",
@@ -2659,8 +2660,7 @@
     "49468083",
     "49466917",
     "49461817",
-    "49447057",
-    "49467922"
+    "49447057"
   ],
   "rss:arxiv-cs-cl": [
     "oai:arXiv.org:2609.11101v1",
@@ -3092,6 +3092,8 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/14/commit-rewriter/",
+    "https://simonwillison.net/2026/Sep/13/shot-scraper/",
     "https://simonwillison.net/2026/Sep/12/astra-running-routes/",
     "https://simonwillison.net/2026/Sep/12/sighting-399708714/",
     "https://simonwillison.net/2026/Sep/12/paul-ford/",
@@ -3518,6 +3520,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/001/902.htm",
+    "https://www.ithome.com/1/001/901.htm",
+    "https://www.ithome.com/1/001/900.htm",
+    "https://www.ithome.com/1/001/899.htm",
+    "https://www.ithome.com/1/001/898.htm",
+    "https://www.ithome.com/1/001/897.htm",
+    "https://www.ithome.com/1/001/896.htm",
+    "https://www.ithome.com/1/001/895.htm",
+    "https://www.ithome.com/1/001/894.htm",
+    "https://www.ithome.com/1/001/893.htm",
     "https://www.ithome.com/1/001/879.htm",
     "https://www.ithome.com/1/001/878.htm",
     "https://www.ithome.com/1/001/877.htm",
@@ -4007,17 +4019,7 @@
     "https://www.ithome.com/0/999/014.htm",
     "https://www.ithome.com/0/999/012.htm",
     "https://www.ithome.com/0/999/011.htm",
-    "https://www.ithome.com/0/999/009.htm",
-    "https://www.ithome.com/0/999/004.htm",
-    "https://www.ithome.com/0/999/003.htm",
-    "https://www.ithome.com/0/999/002.htm",
-    "https://www.ithome.com/0/999/001.htm",
-    "https://www.ithome.com/0/998/999.htm",
-    "https://www.ithome.com/0/998/998.htm",
-    "https://www.ithome.com/0/998/997.htm",
-    "https://www.ithome.com/0/998/949.htm",
-    "https://www.ithome.com/0/998/948.htm",
-    "https://www.ithome.com/0/998/947.htm"
+    "https://www.ithome.com/0/999/009.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85362",
@@ -4145,6 +4147,7 @@
     "https://www.solidot.org/story?sid=85238"
   ],
   "rss:sspai": [
+    "https://sspai.com/post/114539",
     "https://sspai.com/post/113880",
     "https://sspai.com/post/114461",
     "https://sspai.com/post/114458",
