@@ -115,6 +115,9 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1wgjg9a",
+    "1wgj0xb",
+    "1wgkzs4",
     "1wgeo55",
     "1wgg4sx",
     "1wggmwm",
@@ -611,10 +614,7 @@
     "1w8ga5y",
     "1w8gyez",
     "1w8hkkh",
-    "1w8hf4k",
-    "1w8gzy2",
-    "1w8gpj6",
-    "1w8dw2g"
+    "1w8hf4k"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,10 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1wgk4wp",
+    "1wgj8we",
+    "1wgloco",
+    "1wgjrje",
     "1wge6gc",
     "1wgera0",
     "1wghjmn",
@@ -1150,13 +1154,11 @@
     "1wc60v9",
     "1wc2dc9",
     "1wc0ywy",
-    "1wc2e5i",
-    "1wc25ji",
-    "1wc3444",
-    "1wc2qw8",
-    "1wc1dmr"
+    "1wc2e5i"
   ],
   "reddit:LLMDevs": [
+    "1wgiwz2",
+    "1wgirtl",
     "1wgeo1a",
     "1wgf4pg",
     "1wgim6a",
@@ -1654,11 +1656,15 @@
     "1w0rlys",
     "1w0x8yu",
     "1w0xmju",
-    "1w0x009",
-    "1w117wi",
-    "1w0r3vk"
+    "1w0x009"
   ],
   "reddit:singularity": [
+    "1wgjtrh",
+    "1wgj5yg",
+    "1wgkuzv",
+    "1wgkfmk",
+    "1wgixnx",
+    "1wgk2xm",
     "1wgecxn",
     "1wgfiz8",
     "1wghbxa",
@@ -2152,13 +2158,7 @@
     "1wa8a63",
     "1wa7f6x",
     "1wa7109",
-    "1wa1a5n",
-    "1wa3o5j",
-    "1wa3g87",
-    "1wa52jc",
-    "1wa3ygh",
-    "1wa3k6h",
-    "1wa4zou"
+    "1wa1a5n"
   ],
   "hn:front": [
     "49697893",
@@ -3576,6 +3576,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/002/357.htm",
+    "https://www.ithome.com/1/002/356.htm",
+    "https://www.ithome.com/1/002/355.htm",
+    "https://www.ithome.com/1/002/354.htm",
+    "https://www.ithome.com/1/002/353.htm",
+    "https://www.ithome.com/1/002/352.htm",
+    "https://www.ithome.com/1/002/351.htm",
+    "https://www.ithome.com/1/002/350.htm",
+    "https://www.ithome.com/1/002/349.htm",
+    "https://www.ithome.com/1/002/348.htm",
     "https://www.ithome.com/1/002/311.htm",
     "https://www.ithome.com/1/002/310.htm",
     "https://www.ithome.com/1/002/308.htm",
@@ -4065,17 +4075,7 @@
     "https://www.ithome.com/0/999/197.htm",
     "https://www.ithome.com/0/999/180.htm",
     "https://www.ithome.com/0/999/176.htm",
-    "https://www.ithome.com/0/999/173.htm",
-    "https://www.ithome.com/0/999/067.htm",
-    "https://www.ithome.com/0/999/066.htm",
-    "https://www.ithome.com/0/999/065.htm",
-    "https://www.ithome.com/0/999/064.htm",
-    "https://www.ithome.com/0/999/063.htm",
-    "https://www.ithome.com/0/999/062.htm",
-    "https://www.ithome.com/0/999/061.htm",
-    "https://www.ithome.com/0/999/060.htm",
-    "https://www.ithome.com/0/999/059.htm",
-    "https://www.ithome.com/0/999/058.htm"
+    "https://www.ithome.com/0/999/173.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85376",
