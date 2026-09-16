@@ -3246,6 +3246,16 @@
     "https://simonwillison.net/2026/Aug/15/sighting-391300422/"
   ],
   "trending:all": [
+    "alibaba/open-code-review@2026-09-16",
+    "justvugg/colibri@2026-09-16",
+    "ever-co/ever-gauzy@2026-09-16",
+    "debpalash/voicestudio@2026-09-16",
+    "homebrew/brewui@2026-09-16",
+    "melgarafael/deskcommcrm@2026-09-16",
+    "alphaxiv/openresearch@2026-09-16",
+    "nationalsecurityagency/ghidra@2026-09-16",
+    "danny-avila/librechat@2026-09-16",
+    "pacifio/atlas@2026-09-16",
     "justvugg/colibri@2026-09-15",
     "alibaba/open-code-review@2026-09-15",
     "multimodal-art-projection/yue@2026-09-15",
@@ -3399,6 +3409,16 @@
     "demo/x"
   ],
   "radar:all": [
+    "deepseek-ai/deepseek-v4.1-flash@2026-09-16",
+    "edge0/edge0-35b-a3b-preview@2026-09-16",
+    "openbmb/minicpm5-2b@2026-09-16",
+    "nex-agi/nex-n2.5-mini@2026-09-16",
+    "nex-agi/nex-n2.5-pro@2026-09-16",
+    "tokenrhythm/neohorse-1-4b@2026-09-16",
+    "xhtoken/spark-x2.5-4b@2026-09-16",
+    "openai-community/gpt2@2026-09-16",
+    "meta-llama/llama-3.1-8b-instruct@2026-09-16",
+    "dealignai/deepseek-v4.1-flash-uncensored-fp8@2026-09-16",
     "deepseek-ai/deepseek-v4.1-flash@2026-09-15",
     "edge0/edge0-35b-a3b-preview@2026-09-15",
     "openbmb/minicpm5-2b@2026-09-15",
@@ -3552,6 +3572,11 @@
     "demo/m"
   ],
   "papers:daily": [
+    "hfpaper-2609.06986",
+    "hfpaper-2609.11873",
+    "hfpaper-2609.15364",
+    "hfpaper-2609.13285",
+    "hfpaper-2609.11977",
     "hfpaper-2609.11115",
     "hfpaper-2609.06107",
     "hfpaper-2609.11638",
