@@ -115,6 +115,13 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1whj1fv",
+    "1whib7d",
+    "1whiz3y",
+    "1whjezk",
+    "1whix2w",
+    "1whha0b",
+    "1whg3ae",
     "1whf7ov",
     "1whdgee",
     "1whdwlw",
@@ -607,14 +614,7 @@
     "1wa0aww",
     "1w9ylhh",
     "1w9skjz",
-    "1w9wvkb",
-    "1w9v6qp",
-    "1w9t83y",
-    "1w9ua08",
-    "1w9fwsw",
-    "1w9v4yz",
-    "1w9y7ii",
-    "1w9z7lk"
+    "1w9wvkb"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,12 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1whi2hu",
+    "1whhe79",
+    "1whithj",
+    "1whizvc",
+    "1wh91ip",
+    "1whi34i",
     "1whdxej",
     "1whcqa0",
     "1whf1ba",
@@ -1148,13 +1154,7 @@
     "1wcw7s7",
     "1wcxnv8",
     "1wcyorj",
-    "1wcxc7h",
-    "1wctcyl",
-    "1wcruyv",
-    "1wctz9d",
-    "1wcu8tg",
-    "1wcu3vt",
-    "1wcvpyn"
+    "1wcxc7h"
   ],
   "reddit:LLMDevs": [
     "1whcssy",
@@ -1659,6 +1659,15 @@
     "1w240o6"
   ],
   "reddit:singularity": [
+    "1vtqssh",
+    "1whhhfr",
+    "1whga47",
+    "1whgoci",
+    "1whgu7b",
+    "1whhegd",
+    "1whjfja",
+    "1whgaus",
+    "1whij8b",
     "1waxm7z",
     "1whdyf9",
     "1whc2kr",
@@ -2149,18 +2158,11 @@
     "1wb5et4",
     "1wb5c41",
     "1wb6ajo",
-    "1wb7ml2",
-    "1wb7i7m",
-    "1wb7c3s",
-    "1wb7ft7",
-    "1wb718n",
-    "1wb7oan",
-    "1wb7k85",
-    "1wb3yc0",
-    "1wb1rs0",
-    "1wb4brl"
+    "1wb7ml2"
   ],
   "hn:front": [
+    "49717638",
+    "49715927",
     "49716476",
     "49713262",
     "49717558",
@@ -2658,9 +2660,7 @@
     "49496918",
     "49469786",
     "49433554",
-    "49463888",
-    "49453232",
-    "49494182"
+    "49463888"
   ],
   "rss:arxiv-cs-cl": [
     "oai:arXiv.org:2609.13721v1",
@@ -3156,6 +3156,7 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/15/gemini-live/",
     "https://simonwillison.net/2026/Sep/14/the-contagion-of-fear/",
     "https://simonwillison.net/2026/Sep/14/influences/",
     "https://simonwillison.net/2026/Sep/14/laurie-voss/",
@@ -3638,6 +3639,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/002/755.htm",
+    "https://www.ithome.com/1/002/852.htm",
+    "https://www.ithome.com/1/002/851.htm",
+    "https://www.ithome.com/1/002/850.htm",
+    "https://www.ithome.com/1/002/849.htm",
+    "https://www.ithome.com/1/002/848.htm",
+    "https://www.ithome.com/1/002/847.htm",
+    "https://www.ithome.com/1/002/846.htm",
+    "https://www.ithome.com/1/002/845.htm",
+    "https://www.ithome.com/1/002/844.htm",
     "https://www.ithome.com/1/002/818.htm",
     "https://www.ithome.com/1/002/817.htm",
     "https://www.ithome.com/1/002/816.htm",
@@ -4127,17 +4138,7 @@
     "https://www.ithome.com/0/999/808.htm",
     "https://www.ithome.com/0/999/807.htm",
     "https://www.ithome.com/0/999/806.htm",
-    "https://www.ithome.com/0/999/805.htm",
-    "https://www.ithome.com/0/999/623.htm",
-    "https://www.ithome.com/0/999/622.htm",
-    "https://www.ithome.com/0/999/620.htm",
-    "https://www.ithome.com/0/999/616.htm",
-    "https://www.ithome.com/0/999/613.htm",
-    "https://www.ithome.com/0/999/608.htm",
-    "https://www.ithome.com/0/999/607.htm",
-    "https://www.ithome.com/0/999/606.htm",
-    "https://www.ithome.com/0/999/604.htm",
-    "https://www.ithome.com/0/999/602.htm"
+    "https://www.ithome.com/0/999/805.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85388",
@@ -4290,6 +4291,7 @@
     "https://www.solidot.org/story?sid=85238"
   ],
   "rss:sspai": [
+    "https://sspai.com/post/114638",
     "https://sspai.com/post/114613",
     "https://sspai.com/post/114565",
     "https://sspai.com/post/47126",
