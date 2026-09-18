@@ -115,6 +115,10 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1wj9u19",
+    "1wja9ml",
+    "1wjc5wj",
+    "1wj9g7m",
     "1wj6c4l",
     "1wj84nz",
     "1wj62hl",
@@ -610,11 +614,7 @@
     "1wce3vu",
     "1wccuff",
     "1wccdjn",
-    "1wc6krf",
-    "1wc6fsk",
-    "1wc5t3s",
-    "1wc97an",
-    "1wc6lkb"
+    "1wc6krf"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,12 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1wjaev2",
+    "1wjb4ar",
+    "1wjaeaq",
+    "1wjcfih",
+    "1wja2ru",
+    "1wja5n4",
     "1wj6l0y",
     "1wj7v4y",
     "1wj7iua",
@@ -1148,15 +1154,12 @@
     "1weizes",
     "1wejmzv",
     "1wehgt5",
-    "1wejca1",
-    "1weixvt",
-    "1weiq5y",
-    "1weiofg",
-    "1weg2u2",
-    "1wehlro",
-    "1wei7eg"
+    "1wejca1"
   ],
   "reddit:LLMDevs": [
+    "1wjah26",
+    "1wjc73o",
+    "1wjaxet",
     "1wj7qty",
     "1wiv9pc",
     "1wiyu5g",
@@ -1653,12 +1656,13 @@
     "1w3yejc",
     "1w3utc4",
     "1w3artx",
-    "1w3mt16",
-    "1w3b7jw",
-    "1w3lw6g",
-    "1w3df96"
+    "1w3mt16"
   ],
   "reddit:singularity": [
+    "1wjauca",
+    "1wj9dna",
+    "1wjbomb",
+    "1wjbjlb",
     "1wj7beg",
     "1wj5pzw",
     "1wj84rw",
@@ -2154,13 +2158,12 @@
     "1wcobum",
     "1wcp6hh",
     "1wcoblk",
-    "1wcp1xa",
-    "1wcqd4h",
-    "1wcma9n",
-    "1wcfr0i",
-    "1wcjb89"
+    "1wcp1xa"
   ],
   "hn:front": [
+    "49746654",
+    "49746117",
+    "49743483",
     "49745570",
     "49745940",
     "49746163",
@@ -2657,10 +2660,7 @@
     "49509655",
     "49524447",
     "49510514",
-    "49517448",
-    "49511856",
-    "49503521",
-    "49467636"
+    "49517448"
   ],
   "rss:arxiv-cs-cl": [
     "oai:arXiv.org:2609.17755v1",
@@ -3144,6 +3144,7 @@
     "https://huggingface.co/blog/real-world-voiceeq"
   ],
   "rss:openai": [
+    "https://openai.com/index/cooley-gopublic",
     "https://openai.com/index/astra-for-law",
     "https://openai.com/index/model-misalignment-reporting-framework",
     "https://openai.com/index/how-to-connect-ai-usage-to-business-value",
@@ -3218,6 +3219,7 @@
     "https://openai.com/index/previewing-ultrafast"
   ],
   "rss:ruanyifeng": [
+    "tag:www.ruanyifeng.com,2026:/blog//1.2557",
     "tag:www.ruanyifeng.com,2026:/blog//1.2556",
     "tag:www.ruanyifeng.com,2026:/blog//1.2555",
     "tag:www.ruanyifeng.com,2026:/blog//1.2554",
@@ -3225,6 +3227,8 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/17/targeted-attacks-on-rustaceans/",
+    "https://simonwillison.net/2026/Sep/17/how-to-write-with-an-llm/",
     "https://simonwillison.net/2026/Sep/17/compaction-summaries/",
     "https://simonwillison.net/2026/Sep/16/datasette/",
     "https://simonwillison.net/2026/Sep/16/datasette-2/",
@@ -3766,6 +3770,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/003/904.htm",
+    "https://www.ithome.com/1/003/903.htm",
+    "https://www.ithome.com/1/003/902.htm",
+    "https://www.ithome.com/1/003/901.htm",
+    "https://www.ithome.com/1/003/900.htm",
+    "https://www.ithome.com/1/003/899.htm",
+    "https://www.ithome.com/1/003/898.htm",
+    "https://www.ithome.com/1/003/897.htm",
+    "https://www.ithome.com/1/003/896.htm",
+    "https://www.ithome.com/1/003/895.htm",
     "https://www.ithome.com/1/003/874.htm",
     "https://www.ithome.com/1/003/872.htm",
     "https://www.ithome.com/1/003/873.htm",
@@ -4255,17 +4269,7 @@
     "https://www.ithome.com/1/000/870.htm",
     "https://www.ithome.com/1/000/861.htm",
     "https://www.ithome.com/1/000/859.htm",
-    "https://www.ithome.com/1/000/856.htm",
-    "https://www.ithome.com/1/000/675.htm",
-    "https://www.ithome.com/1/000/650.htm",
-    "https://www.ithome.com/1/000/643.htm",
-    "https://www.ithome.com/1/000/634.htm",
-    "https://www.ithome.com/1/000/633.htm",
-    "https://www.ithome.com/1/000/632.htm",
-    "https://www.ithome.com/1/000/630.htm",
-    "https://www.ithome.com/1/000/629.htm",
-    "https://www.ithome.com/1/000/628.htm",
-    "https://www.ithome.com/1/000/627.htm"
+    "https://www.ithome.com/1/000/856.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85412",
@@ -4441,6 +4445,7 @@
     "https://www.solidot.org/story?sid=85238"
   ],
   "rss:sspai": [
+    "https://sspai.com/post/114699",
     "https://sspai.com/post/114557",
     "https://sspai.com/post/114643",
     "https://sspai.com/post/114451",
