@@ -115,6 +115,16 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1wk11dq",
+    "1wk22tw",
+    "1wk04cp",
+    "1wk14il",
+    "1wk0st3",
+    "1wk0w5b",
+    "1wk3k6w",
+    "1wk28e0",
+    "1wk306j",
+    "1wk1x2k",
     "1wjyn95",
     "1wjwhxc",
     "1wjvp7k",
@@ -604,17 +614,7 @@
     "1wcxxm8",
     "1wcwa7i",
     "1wcwith",
-    "1wcxa2v",
-    "1wcywl4",
-    "1wcyuhf",
-    "1wcxpdx",
-    "1wcw1if",
-    "1wcz5wr",
-    "1wcujgg",
-    "1wctos6",
-    "1wcsj6v",
-    "1wcvmuo",
-    "1wctnzd"
+    "1wcxa2v"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,23 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1wk1ljk",
+    "1wjzz69",
+    "1wk12g9",
+    "1wk142s",
+    "1wk1izh",
+    "1wk150h",
+    "1wk12ee",
+    "1wk0zh1",
+    "1wk0dzq",
+    "1wk026l",
+    "1wjzy7k",
+    "1wk2mcp",
+    "1wk20je",
+    "1wk1ry1",
+    "1wk1qar",
+    "1wk0zgv",
+    "1wk0gc1",
     "1wjxvwz",
     "1wjybnn",
     "1wjz6qv",
@@ -1137,26 +1154,10 @@
     "1wfrhmp",
     "1wfr21w",
     "1wfqljd",
-    "1wfu8eh",
-    "1wftxhp",
-    "1wfnikw",
-    "1wfo8ti",
-    "1wfpydl",
-    "1wfp3rc",
-    "1wfp054",
-    "1wfnk8p",
-    "1wfnira",
-    "1wfncdr",
-    "1wfof5u",
-    "1wfmpr2",
-    "1wfkp9i",
-    "1wfjmj6",
-    "1wfhahv",
-    "1wfgh2k",
-    "1wfkilh",
-    "1wfkeap"
+    "1wfu8eh"
   ],
   "reddit:LLMDevs": [
+    "1wk0oyy",
     "1mvuw5x",
     "1jzjf7e",
     "1wjx67a",
@@ -1655,10 +1656,11 @@
     "1w4hiqy",
     "1w4dqau",
     "1w4mnea",
-    "1w4is83",
-    "1w4njyz"
+    "1w4is83"
   ],
   "reddit:singularity": [
+    "1wk07j3",
+    "1wk0p4m",
     "1wjxket",
     "1wjvprk",
     "1wjwral",
@@ -2156,11 +2158,18 @@
     "1wcw4al",
     "1wcynv9",
     "1wcxzn3",
-    "1wcwmdg",
-    "1wcww1f",
-    "1wcwfjq"
+    "1wcwmdg"
   ],
   "hn:front": [
+    "49758736",
+    "49750694",
+    "49759466",
+    "49758028",
+    "49760187",
+    "49748553",
+    "49749369",
+    "49757050",
+    "49758580",
     "49753179",
     "49757520",
     "49755160",
@@ -2651,16 +2660,7 @@
     "49508225",
     "49535526",
     "49535284",
-    "49534132",
-    "49536375",
-    "49536079",
-    "49536384",
-    "49536114",
-    "49534524",
-    "49530989",
-    "49529132",
-    "49529621",
-    "49527748"
+    "49534132"
   ],
   "rss:arxiv-cs-cl": [
     "oai:arXiv.org:2609.19596v1",
@@ -3106,6 +3106,7 @@
     "tag:github.com,2008:Repository/155220641/v5.10.3"
   ],
   "rss:gh-vllm": [
+    "tag:github.com,2008:Repository/599547518/v0.30.0rc2",
     "tag:github.com,2008:Repository/599547518/v0.30.0rc1",
     "tag:github.com,2008:Repository/599547518/proto-v0.3.0",
     "tag:github.com,2008:Repository/599547518/proto-v0.2.0",
@@ -3257,6 +3258,7 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/18/probably-gonna-eat-you/",
     "https://simonwillison.net/2026/Sep/18/thariq-shihipar/",
     "https://simonwillison.net/2026/Sep/18/the-creative-spirit-of-who-framed-roger-rabbit/",
     "https://simonwillison.net/2026/Sep/17/targeted-attacks-on-rustaceans/",
@@ -3828,6 +3830,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/004/343.htm",
+    "https://www.ithome.com/1/004/342.htm",
+    "https://www.ithome.com/1/004/340.htm",
+    "https://www.ithome.com/1/004/339.htm",
+    "https://www.ithome.com/1/004/338.htm",
+    "https://www.ithome.com/1/004/337.htm",
+    "https://www.ithome.com/1/004/335.htm",
+    "https://www.ithome.com/1/004/334.htm",
+    "https://www.ithome.com/1/004/332.htm",
+    "https://www.ithome.com/1/004/331.htm",
     "https://www.ithome.com/1/004/330.htm",
     "https://www.ithome.com/1/004/329.htm",
     "https://www.ithome.com/1/004/328.htm",
@@ -4317,17 +4329,7 @@
     "https://www.ithome.com/1/001/082.htm",
     "https://www.ithome.com/1/001/081.htm",
     "https://www.ithome.com/1/001/080.htm",
-    "https://www.ithome.com/1/001/079.htm",
-    "https://www.ithome.com/1/000/998.htm",
-    "https://www.ithome.com/1/001/042.htm",
-    "https://www.ithome.com/1/001/041.htm",
-    "https://www.ithome.com/1/001/040.htm",
-    "https://www.ithome.com/1/001/039.htm",
-    "https://www.ithome.com/1/001/034.htm",
-    "https://www.ithome.com/1/001/037.htm",
-    "https://www.ithome.com/1/001/036.htm",
-    "https://www.ithome.com/1/001/035.htm",
-    "https://www.ithome.com/1/001/033.htm"
+    "https://www.ithome.com/1/001/079.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85423",
