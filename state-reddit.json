@@ -3324,6 +3324,16 @@
     "https://simonwillison.net/2026/Aug/15/sighting-391300422/"
   ],
   "trending:all": [
+    "alibaba/open-code-review@2026-09-18",
+    "cloudflare/security-audit-skill@2026-09-18",
+    "addyosmani/agent-skills@2026-09-18",
+    "tencent/browserskill@2026-09-18",
+    "alphaxiv/openresearch@2026-09-18",
+    "anthropics/claude-code@2026-09-18",
+    "nationalsecurityagency/ghidra@2026-09-18",
+    "anthropics/knowledge-work-plugins@2026-09-18",
+    "tencent/weknora@2026-09-18",
+    "abue-ammar/tinycast@2026-09-18",
     "alibaba/open-code-review@2026-09-17",
     "cloudflare/security-audit-skill@2026-09-17",
     "justvugg/colibri@2026-09-17",
@@ -3497,6 +3507,16 @@
     "demo/x"
   ],
   "radar:all": [
+    "edge0/edge0-35b-a3b-preview@2026-09-18",
+    "deepseek-ai/deepseek-v4.1-flash@2026-09-18",
+    "tokenrhythm/neohorse-1-4b@2026-09-18",
+    "openbmb/minicpm5-2b@2026-09-18",
+    "prism-ml/ternary-bonsai-2-27b-gguf@2026-09-18",
+    "harshatheg/qwen-2.5-1b-rlcd@2026-09-18",
+    "dealignai/deepseek-v4.1-flash-uncensored-fp8@2026-09-18",
+    "meta-llama/llama-3.1-8b-instruct@2026-09-18",
+    "agnes-ai/agnes-3.0-flash@2026-09-18",
+    "xingchen-agi/xing4.0-29b-a4b@2026-09-18",
     "deepseek-ai/deepseek-v4.1-flash@2026-09-17",
     "edge0/edge0-35b-a3b-preview@2026-09-17",
     "openbmb/minicpm5-2b@2026-09-17",
@@ -3670,6 +3690,12 @@
     "demo/m"
   ],
   "papers:daily": [
+    "hfpaper-2609.17488",
+    "hfpaper-2609.18708",
+    "hfpaper-2609.17708",
+    "hfpaper-2609.18805",
+    "hfpaper-2609.18094",
+    "hfpaper-2609.18487",
     "hfpaper-2609.16679",
     "hfpaper-2609.14005",
     "hfpaper-2609.16034",
