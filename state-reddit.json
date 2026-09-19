@@ -115,6 +115,12 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1wk6ez4",
+    "1wk4ytg",
+    "1wk41v3",
+    "1wk4v1p",
+    "1wk5lqk",
+    "1wk5bur",
     "1wk11dq",
     "1wk22tw",
     "1wk04cp",
@@ -608,13 +614,7 @@
     "1wd70zb",
     "1wd87ce",
     "1wd660a",
-    "1wd4mro",
-    "1wd19c7",
-    "1wd0nja",
-    "1wcxxm8",
-    "1wcwa7i",
-    "1wcwith",
-    "1wcxa2v"
+    "1wd4mro"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,15 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1wk5nw4",
+    "1wk7eui",
+    "1wk5qsy",
+    "1wk690o",
+    "1wk6vp4",
+    "1wk60fk",
+    "1wk3vzl",
+    "1wk748t",
+    "1wk6zup",
     "1wk1ljk",
     "1wjzz69",
     "1wk12g9",
@@ -1145,18 +1154,11 @@
     "1wfwfw3",
     "1wfxpf1",
     "1wfx5rm",
-    "1wfq5y5",
-    "1wfv0a5",
-    "1wfv680",
-    "1wfthmj",
-    "1wfs8oa",
-    "1wfrwb6",
-    "1wfrhmp",
-    "1wfr21w",
-    "1wfqljd",
-    "1wfu8eh"
+    "1wfq5y5"
   ],
   "reddit:LLMDevs": [
+    "1wk7c55",
+    "1wk3y4m",
     "1wk0oyy",
     "1mvuw5x",
     "1jzjf7e",
@@ -1654,11 +1656,18 @@
     "1w4rmbk",
     "1w4oaqg",
     "1w4hiqy",
-    "1w4dqau",
-    "1w4mnea",
-    "1w4is83"
+    "1w4dqau"
   ],
   "reddit:singularity": [
+    "1wk49ld",
+    "1wk61n8",
+    "1wk4kml",
+    "1wk64m3",
+    "1wk6fwf",
+    "1wk5w8s",
+    "1wk6hzr",
+    "1wk5f3m",
+    "1wk6koi",
     "1wk07j3",
     "1wk0p4m",
     "1wjxket",
@@ -2149,18 +2158,11 @@
     "1wd2v9v",
     "1wd3f4o",
     "1wd05zw",
-    "1wd0yu9",
-    "1wd1yd4",
-    "1wczt8k",
-    "1wd1xlm",
-    "1wd03yf",
-    "1wcw6m0",
-    "1wcw4al",
-    "1wcynv9",
-    "1wcxzn3",
-    "1wcwmdg"
+    "1wd0yu9"
   ],
   "hn:front": [
+    "49744704",
+    "49746626",
     "49758736",
     "49750694",
     "49759466",
@@ -2658,9 +2660,7 @@
     "49533497",
     "49524863",
     "49508225",
-    "49535526",
-    "49535284",
-    "49534132"
+    "49535526"
   ],
   "rss:arxiv-cs-cl": [
     "oai:arXiv.org:2609.19596v1",
@@ -3175,6 +3175,7 @@
     "https://huggingface.co/blog/real-world-voiceeq"
   ],
   "rss:openai": [
+    "https://openai.com/index/hex-gpt-6-astra",
     "https://openai.com/index/cooley-gopublic",
     "https://openai.com/index/astra-for-law",
     "https://openai.com/index/model-misalignment-reporting-framework",
@@ -3258,6 +3259,7 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/18/gemini-hacked-three-companies/",
     "https://simonwillison.net/2026/Sep/18/probably-gonna-eat-you/",
     "https://simonwillison.net/2026/Sep/18/thariq-shihipar/",
     "https://simonwillison.net/2026/Sep/18/the-creative-spirit-of-who-framed-roger-rabbit/",
@@ -3830,6 +3832,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/004/354.htm",
+    "https://www.ithome.com/1/004/344.htm",
+    "https://www.ithome.com/1/004/353.htm",
+    "https://www.ithome.com/1/004/352.htm",
+    "https://www.ithome.com/1/004/351.htm",
+    "https://www.ithome.com/1/004/350.htm",
+    "https://www.ithome.com/1/004/349.htm",
+    "https://www.ithome.com/1/004/348.htm",
+    "https://www.ithome.com/1/004/347.htm",
+    "https://www.ithome.com/1/004/346.htm",
     "https://www.ithome.com/1/004/343.htm",
     "https://www.ithome.com/1/004/342.htm",
     "https://www.ithome.com/1/004/340.htm",
@@ -4319,17 +4331,7 @@
     "https://www.ithome.com/1/001/220.htm",
     "https://www.ithome.com/1/001/219.htm",
     "https://www.ithome.com/1/001/217.htm",
-    "https://www.ithome.com/1/001/216.htm",
-    "https://www.ithome.com/1/001/088.htm",
-    "https://www.ithome.com/1/001/087.htm",
-    "https://www.ithome.com/1/001/086.htm",
-    "https://www.ithome.com/1/001/085.htm",
-    "https://www.ithome.com/1/001/084.htm",
-    "https://www.ithome.com/1/001/083.htm",
-    "https://www.ithome.com/1/001/082.htm",
-    "https://www.ithome.com/1/001/081.htm",
-    "https://www.ithome.com/1/001/080.htm",
-    "https://www.ithome.com/1/001/079.htm"
+    "https://www.ithome.com/1/001/216.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85423",
