@@ -115,6 +115,13 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1wkyny9",
+    "1wl06np",
+    "1wl0qmv",
+    "1wkz5a4",
+    "1wkypcs",
+    "1wl0gfo",
+    "1wl12c8",
     "1wkxx8e",
     "1wkwz69",
     "1wkwec5",
@@ -607,14 +614,7 @@
     "1wearn3",
     "1wea0fl",
     "1we9eg5",
-    "1we8mrh",
-    "1we6lrn",
-    "1we5jne",
-    "1we6tau",
-    "1we6mkg",
-    "1we7ay2",
-    "1we6u8h",
-    "1we2rp2"
+    "1we8mrh"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,12 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1wkzoxu",
+    "1wl0wub",
+    "1wl0m04",
+    "1wkyngb",
+    "1wl04fh",
+    "1wl0nt6",
     "1wkvqxc",
     "1wkwg4y",
     "1wkw8zb",
@@ -1148,13 +1154,7 @@
     "1wgk4wp",
     "1wgj8we",
     "1wgloco",
-    "1wgjrje",
-    "1wge6gc",
-    "1wgera0",
-    "1wghjmn",
-    "1wge81x",
-    "1wgiis2",
-    "1wgihhb"
+    "1wgjrje"
   ],
   "reddit:LLMDevs": [
     "1wkwsg7",
@@ -1659,6 +1659,8 @@
     "1w56i5z"
   ],
   "reddit:singularity": [
+    "1wkz8qw",
+    "1wl0w65",
     "1wkwzzj",
     "1wkw0ln",
     "1wkxlqp",
@@ -2156,11 +2158,12 @@
     "1wdn0j1",
     "1wdot72",
     "1wdpph6",
-    "1wdmkbw",
-    "1wdl63d",
-    "1wdfunr"
+    "1wdmkbw"
   ],
   "hn:front": [
+    "49766966",
+    "49769944",
+    "49742697",
     "49766611",
     "49767937",
     "49730069",
@@ -2657,10 +2660,7 @@
     "49546800",
     "49508405",
     "49546753",
-    "49524428",
-    "49541458",
-    "49508608",
-    "49537553"
+    "49524428"
   ],
   "rss:arxiv-cs-cl": [
     "oai:arXiv.org:2609.19596v1",
@@ -3260,6 +3260,7 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/19/datasette-auth-github/",
     "https://simonwillison.net/2026/Sep/19/sighting-401567341/",
     "https://simonwillison.net/2026/Sep/18/gemini-hacked-three-companies/",
     "https://simonwillison.net/2026/Sep/18/probably-gonna-eat-you/",
@@ -3857,6 +3858,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/004/583.htm",
+    "https://www.ithome.com/1/004/582.htm",
+    "https://www.ithome.com/1/004/581.htm",
+    "https://www.ithome.com/1/004/580.htm",
+    "https://www.ithome.com/1/004/579.htm",
+    "https://www.ithome.com/1/004/578.htm",
+    "https://www.ithome.com/1/004/577.htm",
+    "https://www.ithome.com/1/004/576.htm",
+    "https://www.ithome.com/1/004/575.htm",
+    "https://www.ithome.com/1/004/574.htm",
     "https://www.ithome.com/1/004/572.htm",
     "https://www.ithome.com/1/004/570.htm",
     "https://www.ithome.com/1/004/569.htm",
@@ -4346,17 +4357,7 @@
     "https://www.ithome.com/1/001/571.htm",
     "https://www.ithome.com/1/001/570.htm",
     "https://www.ithome.com/1/001/568.htm",
-    "https://www.ithome.com/1/001/563.htm",
-    "https://www.ithome.com/1/001/521.htm",
-    "https://www.ithome.com/1/001/520.htm",
-    "https://www.ithome.com/1/001/518.htm",
-    "https://www.ithome.com/1/001/517.htm",
-    "https://www.ithome.com/1/001/516.htm",
-    "https://www.ithome.com/1/001/515.htm",
-    "https://www.ithome.com/1/001/514.htm",
-    "https://www.ithome.com/1/001/512.htm",
-    "https://www.ithome.com/1/001/511.htm",
-    "https://www.ithome.com/1/001/510.htm"
+    "https://www.ithome.com/1/001/563.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85426",
