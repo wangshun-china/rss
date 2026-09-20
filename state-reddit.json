@@ -3363,6 +3363,16 @@
     "https://simonwillison.net/2026/Aug/15/sighting-391300422/"
   ],
   "trending:all": [
+    "cloudflare/security-audit-skill@2026-09-20",
+    "trycua/cua@2026-09-20",
+    "addyosmani/agent-skills@2026-09-20",
+    "coder/coder@2026-09-20",
+    "anthropics/claude-code@2026-09-20",
+    "open-dev-society/openstock@2026-09-20",
+    "higgsfield-ai/higgsfield@2026-09-20",
+    "docling-project/docling@2026-09-20",
+    "cloudflare/quiche@2026-09-20",
+    "asciimoo/hister@2026-09-20",
     "cloudflare/security-audit-skill@2026-09-19",
     "anthropics/claude-code@2026-09-19",
     "alibaba/open-code-review@2026-09-19",
@@ -3556,6 +3566,16 @@
     "demo/x"
   ],
   "radar:all": [
+    "prism-ml/ternary-bonsai-2-27b-gguf@2026-09-20",
+    "deepseek-ai/deepseek-v4.1-flash@2026-09-20",
+    "xingchen-agi/xing4.0-29b-a4b@2026-09-20",
+    "harshatheg/qwen-2.5-1b-rlcd@2026-09-20",
+    "openbmb/minicpm5-2b@2026-09-20",
+    "prism-ml/ternary-bonsai-2-27b-mlx-2bit@2026-09-20",
+    "meta-llama/llama-3.1-8b-instruct@2026-09-20",
+    "edge0/edge0-35b-a3b-preview@2026-09-20",
+    "dealignai/deepseek-v4.1-flash-uncensored-fp8@2026-09-20",
+    "tokenrhythm/neohorse-1-9b@2026-09-20",
     "deepseek-ai/deepseek-v4.1-flash@2026-09-19",
     "prism-ml/ternary-bonsai-2-27b-gguf@2026-09-19",
     "xingchen-agi/xing4.0-29b-a4b@2026-09-19",
@@ -3749,6 +3769,9 @@
     "demo/m"
   ],
   "papers:daily": [
+    "hfpaper-2609.18323",
+    "hfpaper-2609.20804",
+    "hfpaper-2609.20800",
     "hfpaper-2609.19969",
     "hfpaper-2609.20519",
     "hfpaper-2609.20511",
