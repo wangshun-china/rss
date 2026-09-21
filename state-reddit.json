@@ -115,6 +115,15 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1wlvv8h",
+    "1wlu9rd",
+    "1wlvoq7",
+    "1wlvb3y",
+    "1wlu9pd",
+    "1wlvaus",
+    "1wlxpaw",
+    "1wlxj3v",
+    "1wlwg8i",
     "1wlqxeu",
     "1wlt577",
     "1wltts7",
@@ -605,16 +614,7 @@
     "1wffgdh",
     "1wffbrg",
     "1wff8mj",
-    "1wfenvj",
-    "1wf6nbi",
-    "1wfbnhc",
-    "1wf8ur9",
-    "1wf9uc5",
-    "1wf69ug",
-    "1wfba8g",
-    "1wfcewd",
-    "1wfc64h",
-    "1wfb3y3"
+    "1wfenvj"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,9 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1wlvgg4",
+    "1wlukc9",
+    "1wlx5ev",
     "1wlrjox",
     "1wlrtu4",
     "1wlqp0d",
@@ -1151,12 +1154,14 @@
     "1wh7isk",
     "1wh8rie",
     "1whb3s5",
-    "1whagpp",
-    "1wh7v5h",
-    "1wharc5",
-    "1wha5yc"
+    "1whagpp"
   ],
   "reddit:LLMDevs": [
+    "1wlvlwk",
+    "1wlvhtc",
+    "1wlu8ty",
+    "1wlxpjl",
+    "1wlv9hf",
     "1wltrsa",
     "1wlqbtb",
     "1wlolz1",
@@ -1651,14 +1656,13 @@
     "1w6gbri",
     "1w6gbb9",
     "1w6alkg",
-    "1w6f26b",
-    "1w6d4ab",
-    "1w6cd52",
-    "1w6c3wg",
-    "1w63ar9",
-    "1w64iys"
+    "1w6f26b"
   ],
   "reddit:singularity": [
+    "1wlxqgm",
+    "1wlwh61",
+    "1wlxgt3",
+    "1wlw6k6",
     "1wlsgdk",
     "1wlsxtl",
     "1wlqbfd",
@@ -2154,13 +2158,13 @@
     "1we6hqr",
     "1we53en",
     "1we4g7y",
-    "1we3gvx",
-    "1we70cu",
-    "1we4pz4",
-    "1we7b91",
-    "1we0hbv"
+    "1we3gvx"
   ],
   "hn:front": [
+    "49780630",
+    "49780064",
+    "49780797",
+    "49780820",
     "49777841",
     "49777467",
     "49777111",
@@ -2656,11 +2660,7 @@
     "49562657",
     "49563386",
     "49559522",
-    "49561320",
-    "49507072",
-    "49557206",
-    "49544618",
-    "49538069"
+    "49561320"
   ],
   "rss:arxiv-cs-cl": [
     "oai:arXiv.org:2609.19596v1",
@@ -3260,6 +3260,8 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/20/llm-keys-ui/",
+    "https://simonwillison.net/2026/Sep/20/datasette-explain/",
     "https://simonwillison.net/2026/Sep/20/voxium/",
     "https://simonwillison.net/2026/Sep/19/datasette-auth-github/",
     "https://simonwillison.net/2026/Sep/19/sighting-401567341/",
@@ -3882,6 +3884,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/005/024.htm",
+    "https://www.ithome.com/1/005/023.htm",
+    "https://www.ithome.com/1/005/022.htm",
+    "https://www.ithome.com/1/005/021.htm",
+    "https://www.ithome.com/1/005/020.htm",
+    "https://www.ithome.com/1/005/019.htm",
+    "https://www.ithome.com/1/005/018.htm",
+    "https://www.ithome.com/1/005/017.htm",
+    "https://www.ithome.com/1/005/016.htm",
+    "https://www.ithome.com/1/005/015.htm",
     "https://www.ithome.com/1/005/013.htm",
     "https://www.ithome.com/1/005/012.htm",
     "https://www.ithome.com/1/005/011.htm",
@@ -4371,17 +4383,7 @@
     "https://www.ithome.com/1/001/722.htm",
     "https://www.ithome.com/1/001/720.htm",
     "https://www.ithome.com/1/001/719.htm",
-    "https://www.ithome.com/1/001/716.htm",
-    "https://www.ithome.com/1/001/683.htm",
-    "https://www.ithome.com/1/001/682.htm",
-    "https://www.ithome.com/1/001/681.htm",
-    "https://www.ithome.com/1/001/680.htm",
-    "https://www.ithome.com/1/001/679.htm",
-    "https://www.ithome.com/1/001/678.htm",
-    "https://www.ithome.com/1/001/677.htm",
-    "https://www.ithome.com/1/001/676.htm",
-    "https://www.ithome.com/1/001/675.htm",
-    "https://www.ithome.com/1/001/674.htm"
+    "https://www.ithome.com/1/001/716.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85436",
@@ -4581,6 +4583,7 @@
     "https://www.solidot.org/story?sid=85238"
   ],
   "rss:sspai": [
+    "https://sspai.com/post/114788",
     "https://sspai.com/post/114495",
     "https://sspai.com/post/114717",
     "https://sspai.com/post/114641",
