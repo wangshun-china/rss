@@ -3388,6 +3388,16 @@
     "https://simonwillison.net/2026/Aug/15/sighting-391300422/"
   ],
   "trending:all": [
+    "affaan-m/ecc@2026-09-21",
+    "builderio/agent-native@2026-09-21",
+    "cloudflare/security-audit-skill@2026-09-21",
+    "trycua/cua@2026-09-21",
+    "anthropics/financial-services@2026-09-21",
+    "paperless-ngx/paperless-ngx@2026-09-21",
+    "anthropics/claude-code@2026-09-21",
+    "mihail911/modern-software-dev-assignments@2026-09-21",
+    "higgsfield-ai/higgsfield@2026-09-21",
+    "open-dev-society/openstock@2026-09-21",
     "cloudflare/security-audit-skill@2026-09-20",
     "trycua/cua@2026-09-20",
     "addyosmani/agent-skills@2026-09-20",
@@ -3591,6 +3601,16 @@
     "demo/x"
   ],
   "radar:all": [
+    "prism-ml/ternary-bonsai-2-27b-gguf@2026-09-21",
+    "deepseek-ai/deepseek-v4.1-flash@2026-09-21",
+    "xingchen-agi/xing4.0-29b-a4b@2026-09-21",
+    "harshatheg/qwen-2.5-1b-rlcd@2026-09-21",
+    "prism-ml/ternary-bonsai-2-27b-mlx-2bit@2026-09-21",
+    "openbmb/minicpm5-2b@2026-09-21",
+    "tokenrhythm/neohorse-1-9b@2026-09-21",
+    "dealignai/deepseek-v4.1-flash-uncensored-fp8@2026-09-21",
+    "edge0/edge0-35b-a3b-preview@2026-09-21",
+    "audnai/penclaw-glm-5.3-abliterated@2026-09-21",
     "prism-ml/ternary-bonsai-2-27b-gguf@2026-09-20",
     "deepseek-ai/deepseek-v4.1-flash@2026-09-20",
     "xingchen-agi/xing4.0-29b-a4b@2026-09-20",
@@ -3794,6 +3814,7 @@
     "demo/m"
   ],
   "papers:daily": [
+    "hfpaper-2609.17496",
     "hfpaper-2609.18323",
     "hfpaper-2609.20804",
     "hfpaper-2609.20800",
