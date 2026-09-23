@@ -3449,6 +3449,14 @@
     "https://simonwillison.net/2026/Aug/15/sighting-391300422/"
   ],
   "trending:all": [
+    "anthropics/financial-services@2026-09-23",
+    "agent-substrate/substrate@2026-09-23",
+    "dream-num/univer@2026-09-23",
+    "davila7/claude-code-templates@2026-09-23",
+    "google/ax@2026-09-23",
+    "mvt-project/mvt@2026-09-23",
+    "superdesigndev/treg@2026-09-23",
+    "browser-use/video-use@2026-09-23",
     "builderio/agent-native@2026-09-22",
     "trycua/cua@2026-09-22",
     "open-dev-society/openstock@2026-09-22",
@@ -3672,6 +3680,16 @@
     "demo/x"
   ],
   "radar:all": [
+    "prism-ml/ternary-bonsai-2-27b-gguf@2026-09-23",
+    "xingchen-agi/xing4.0-29b-a4b@2026-09-23",
+    "deepseek-ai/deepseek-v4.1-flash@2026-09-23",
+    "harshatheg/qwen-2.5-1b-rlcd@2026-09-23",
+    "altworld/hemmingway-1@2026-09-23",
+    "xiaomimimo/mimo-v2.6-pro-rl@2026-09-23",
+    "xiaomimimo/mimo-v2.6-flash-rl@2026-09-23",
+    "prism-ml/ternary-bonsai-2-27b-mlx-2bit@2026-09-23",
+    "yandex/aliceai-foundation-80b-a3b-base@2026-09-23",
+    "tokenrhythm/neohorse-1-9b@2026-09-23",
     "prism-ml/ternary-bonsai-2-27b-gguf@2026-09-22",
     "xingchen-agi/xing4.0-29b-a4b@2026-09-22",
     "deepseek-ai/deepseek-v4.1-flash@2026-09-22",
@@ -3895,6 +3913,15 @@
     "demo/m"
   ],
   "papers:daily": [
+    "hfpaper-2609.23088",
+    "hfpaper-2609.24984",
+    "hfpaper-2609.25001",
+    "hfpaper-2609.22966",
+    "hfpaper-2609.13814",
+    "hfpaper-2609.24220",
+    "hfpaper-2609.23863",
+    "hfpaper-2609.25270",
+    "hfpaper-2609.24997",
     "hfpaper-2609.15779",
     "hfpaper-2609.22068",
     "hfpaper-2609.21346",
