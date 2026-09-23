@@ -115,6 +115,10 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1wnot97",
+    "1wno2ej",
+    "1wnrh76",
+    "1wnq3ox",
     "1wnn6ui",
     "1wnky7x",
     "1wnjbwn",
@@ -610,11 +614,7 @@
     "1whjezk",
     "1whix2w",
     "1whha0b",
-    "1whg3ae",
-    "1whf7ov",
-    "1whdgee",
-    "1whdwlw",
-    "1whfox6"
+    "1whg3ae"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,27 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1wnpit2",
+    "1wnoqmh",
+    "1wnp7lh",
+    "1wnr0ir",
+    "1wnqzzg",
+    "1wnor1r",
+    "1wnpgi2",
+    "1wnqooh",
+    "1wnotfy",
+    "1wno45k",
+    "1wnq4l7",
+    "1wnpzpo",
+    "1wnoczc",
+    "1wnqhdo",
+    "1wnj4jl",
+    "1wnqlm0",
+    "1wnqjry",
+    "1wnpwjg",
+    "1wnp8x8",
+    "1wnp1hk",
+    "1wnorzh",
     "1wnkgie",
     "1wnkvys",
     "1wnk240",
@@ -1133,30 +1154,11 @@
     "1wjmnqg",
     "1wjnpbk",
     "1wjkyvs",
-    "1wjmo1i",
-    "1wjjrp0",
-    "1wjnzt2",
-    "1wjnvrw",
-    "1wjnt6k",
-    "1wjjsny",
-    "1wjnq92",
-    "1wjk65z",
-    "1wjjred",
-    "1wjj80p",
-    "1wjir0g",
-    "1wjfwgx",
-    "1wjl9hz",
-    "1wjmpag",
-    "1wjit2z",
-    "1wjfmnf",
-    "1wjhzvr",
-    "1wje9kd",
-    "1wjfxv9",
-    "1wjif0c",
-    "1wjddmm",
-    "1wje5y9"
+    "1wjmo1i"
   ],
   "reddit:LLMDevs": [
+    "1wnpkbj",
+    "1wnpefa",
     "1wnn7m7",
     "1wnj7m6",
     "1wno1ml",
@@ -1654,11 +1656,14 @@
     "1w9idh8",
     "1w9fqle",
     "1w9e24m",
-    "1w9a5v2",
-    "1w9akk9",
-    "1w99yd5"
+    "1w9a5v2"
   ],
   "reddit:singularity": [
+    "1wnolng",
+    "1wnrei7",
+    "1wnrjsl",
+    "1wnqid4",
+    "1wnrc4e",
     "1wnjtqa",
     "1wnn1p8",
     "1wnk0kh",
@@ -2153,14 +2158,10 @@
     "1wfkr87",
     "1wfmffi",
     "1wfmlb5",
-    "1wfn2h4",
-    "1wfn357",
-    "1wfm5nd",
-    "1wfifhq",
-    "1wfj1ul",
-    "1wfhs1q"
+    "1wfn2h4"
   ],
   "hn:front": [
+    "49808023",
     "49806430",
     "49805278",
     "49758709",
@@ -2659,8 +2660,7 @@
     "49585161",
     "49582656",
     "49584083",
-    "49541888",
-    "49584637"
+    "49541888"
   ],
   "rss:arxiv-cs-cl": [
     "oai:arXiv.org:2609.22152v1",
@@ -3335,6 +3335,9 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Sep/22/opus-and-sol-and-luna/",
+    "https://simonwillison.net/2026/Sep/22/llm/",
+    "https://simonwillison.net/2026/Sep/22/llm-anthropic/",
     "https://simonwillison.net/2026/Sep/22/therealcornpop/",
     "https://simonwillison.net/2026/Sep/22/llm-typesafe/",
     "https://simonwillison.net/2026/Sep/21/jev/",
@@ -4014,6 +4017,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/006/026.htm",
+    "https://www.ithome.com/1/006/025.htm",
+    "https://www.ithome.com/1/006/024.htm",
+    "https://www.ithome.com/1/006/023.htm",
+    "https://www.ithome.com/1/006/022.htm",
+    "https://www.ithome.com/1/006/021.htm",
+    "https://www.ithome.com/1/006/020.htm",
+    "https://www.ithome.com/1/006/019.htm",
+    "https://www.ithome.com/1/006/018.htm",
+    "https://www.ithome.com/1/006/017.htm",
     "https://www.ithome.com/1/005/997.htm",
     "https://www.ithome.com/1/005/996.htm",
     "https://www.ithome.com/1/005/995.htm",
@@ -4503,17 +4516,7 @@
     "https://www.ithome.com/1/002/286.htm",
     "https://www.ithome.com/1/002/284.htm",
     "https://www.ithome.com/1/002/283.htm",
-    "https://www.ithome.com/1/002/280.htm",
-    "https://www.ithome.com/1/002/278.htm",
-    "https://www.ithome.com/1/002/277.htm",
-    "https://www.ithome.com/1/002/276.htm",
-    "https://www.ithome.com/1/002/274.htm",
-    "https://www.ithome.com/1/002/255.htm",
-    "https://www.ithome.com/1/002/273.htm",
-    "https://www.ithome.com/1/002/248.htm",
-    "https://www.ithome.com/1/002/245.htm",
-    "https://www.ithome.com/1/002/244.htm",
-    "https://www.ithome.com/1/002/243.htm"
+    "https://www.ithome.com/1/002/280.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85456",
@@ -4732,6 +4735,7 @@
     "https://www.solidot.org/story?sid=85238"
   ],
   "rss:sspai": [
+    "https://sspai.com/post/114889",
     "https://sspai.com/post/114878",
     "https://sspai.com/post/114551",
     "https://sspai.com/post/114479",
