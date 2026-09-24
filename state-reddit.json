@@ -115,6 +115,10 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1wonvcg",
+    "1wom3fe",
+    "1woo52a",
+    "1woo22j",
     "1woi2ho",
     "1wohy4v",
     "1woj51u",
@@ -610,11 +614,7 @@
     "1wi9fau",
     "1wib9kj",
     "1wi9ka0",
-    "1wibgez",
-    "1wicmy5",
-    "1wi9dhn",
-    "1wiag69",
-    "1wi5rx2"
+    "1wibgez"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,19 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1wolaq1",
+    "1wolpas",
+    "1wombbw",
+    "1wonykl",
+    "1womwzx",
+    "1wonh3k",
+    "1wonbeq",
+    "1won1j7",
+    "1womlsb",
+    "1womh71",
+    "1wolgkm",
+    "1wokz57",
+    "1wokt3p",
     "1wol22c",
     "1wohpdm",
     "1woijhq",
@@ -1141,22 +1154,12 @@
     "1wkvqxc",
     "1wkwg4y",
     "1wkw8zb",
-    "1wkwrhr",
-    "1wkw3ky",
-    "1wkyazz",
-    "1wky2em",
-    "1wkxt21",
-    "1wkyezn",
-    "1wkx8w0",
-    "1wkwwia",
-    "1wkw19k",
-    "1wkxa47",
-    "1wkwjv0",
-    "1wkvj3q",
-    "1wksm10",
-    "1wku51x"
+    "1wkwrhr"
   ],
   "reddit:LLMDevs": [
+    "1womafv",
+    "1womr7l",
+    "1wofjam",
     "1woiwbb",
     "1wod9cu",
     "1woeruj",
@@ -1653,12 +1656,18 @@
     "1waom4u",
     "1wal3ui",
     "1wamquq",
-    "1waptr7",
-    "1wapoao",
-    "1wanasu",
-    "1wan2hu"
+    "1waptr7"
   ],
   "reddit:singularity": [
+    "1womrew",
+    "1won9ci",
+    "1womdes",
+    "1won4j0",
+    "1woojll",
+    "1wondv0",
+    "1womawv",
+    "1womvbv",
+    "1womowa",
     "1wok9tq",
     "1wohzqj",
     "1woj6x6",
@@ -2149,18 +2158,13 @@
     "1wgmibj",
     "1wgjtrh",
     "1wgj5yg",
-    "1wgkuzv",
-    "1wgkfmk",
-    "1wgixnx",
-    "1wgk2xm",
-    "1wgecxn",
-    "1wgfiz8",
-    "1wghbxa",
-    "1wgg889",
-    "1wgezow",
-    "1wghmwp"
+    "1wgkuzv"
   ],
   "hn:front": [
+    "49824268",
+    "49823582",
+    "49822555",
+    "49820065",
     "49818698",
     "49815982",
     "49814236",
@@ -2656,11 +2660,7 @@
     "49593563",
     "49591876",
     "49577129",
-    "49590738",
-    "49589914",
-    "49590595",
-    "49548196",
-    "49589722"
+    "49590738"
   ],
   "rss:arxiv-cs-cl": [
     "oai:arXiv.org:2609.25447v1",
@@ -4091,6 +4091,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/006/533.htm",
+    "https://www.ithome.com/1/006/532.htm",
+    "https://www.ithome.com/1/006/531.htm",
+    "https://www.ithome.com/1/006/530.htm",
+    "https://www.ithome.com/1/006/529.htm",
+    "https://www.ithome.com/1/006/528.htm",
+    "https://www.ithome.com/1/006/527.htm",
+    "https://www.ithome.com/1/006/526.htm",
+    "https://www.ithome.com/1/006/525.htm",
+    "https://www.ithome.com/1/006/524.htm",
     "https://www.ithome.com/1/006/509.htm",
     "https://www.ithome.com/1/006/510.htm",
     "https://www.ithome.com/1/006/508.htm",
@@ -4580,17 +4590,7 @@
     "https://www.ithome.com/1/002/792.htm",
     "https://www.ithome.com/1/002/791.htm",
     "https://www.ithome.com/1/002/790.htm",
-    "https://www.ithome.com/1/002/789.htm",
-    "https://www.ithome.com/1/002/788.htm",
-    "https://www.ithome.com/1/002/787.htm",
-    "https://www.ithome.com/1/002/786.htm",
-    "https://www.ithome.com/1/002/783.htm",
-    "https://www.ithome.com/1/002/782.htm",
-    "https://www.ithome.com/1/002/781.htm",
-    "https://www.ithome.com/1/002/779.htm",
-    "https://www.ithome.com/1/002/778.htm",
-    "https://www.ithome.com/1/002/777.htm",
-    "https://www.ithome.com/1/002/776.htm"
+    "https://www.ithome.com/1/002/789.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85467",
@@ -4819,6 +4819,7 @@
     "https://www.solidot.org/story?sid=85238"
   ],
   "rss:sspai": [
+    "https://sspai.com/post/114913",
     "https://sspai.com/post/114904",
     "https://sspai.com/post/114901",
     "https://sspai.com/post/114211",
