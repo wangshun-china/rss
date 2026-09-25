@@ -3521,6 +3521,16 @@
     "https://simonwillison.net/2026/Aug/15/sighting-391300422/"
   ],
   "trending:all": [
+    "rohitg00/ai-engineering-from-scratch@2026-09-25",
+    "vectorize-io/hindsight@2026-09-25",
+    "dream-num/univer@2026-09-25",
+    "google/ax@2026-09-25",
+    "nvidia/model-optimizer@2026-09-25",
+    "fxembed/fxembed@2026-09-25",
+    "anthropics/financial-services@2026-09-25",
+    "hkuds/cli-anything@2026-09-25",
+    "mvt-project/mvt@2026-09-25",
+    "obra/superpowers@2026-09-25",
     "anthropics/financial-services@2026-09-24",
     "google/ax@2026-09-24",
     "davila7/claude-code-templates@2026-09-24",
@@ -3762,6 +3772,16 @@
     "demo/x"
   ],
   "radar:all": [
+    "prism-ml/ternary-bonsai-2-27b-gguf@2026-09-25",
+    "xingchen-agi/xing4.0-29b-a4b@2026-09-25",
+    "altworld/hemmingway-1@2026-09-25",
+    "deepseek-ai/deepseek-v4.1-flash@2026-09-25",
+    "xiaomimimo/mimo-v2.6-pro-rl@2026-09-25",
+    "xiaomimimo/mimo-v2.6-flash-rl@2026-09-25",
+    "edge0/audio8-asr-infinite@2026-09-25",
+    "yandex/aliceai-foundation-80b-a3b-base@2026-09-25",
+    "prism-ml/ternary-bonsai-2-27b-mlx-2bit@2026-09-25",
+    "harshatheg/qwen-2.5-1b-rlcd@2026-09-25",
     "prism-ml/ternary-bonsai-2-27b-gguf@2026-09-24",
     "xingchen-agi/xing4.0-29b-a4b@2026-09-24",
     "altworld/hemmingway-1@2026-09-24",
@@ -4005,6 +4025,14 @@
     "demo/m"
   ],
   "papers:daily": [
+    "hfpaper-2609.26780",
+    "hfpaper-2609.23038",
+    "hfpaper-2609.24308",
+    "hfpaper-2609.27334",
+    "hfpaper-2609.28654",
+    "hfpaper-2609.22947",
+    "hfpaper-2609.26355",
+    "hfpaper-2609.27891",
     "hfpaper-2609.25804",
     "hfpaper-2609.24981",
     "hfpaper-2609.24058",
