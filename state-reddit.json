@@ -3527,6 +3527,16 @@
     "https://simonwillison.net/2026/Aug/15/sighting-391300422/"
   ],
   "trending:all": [
+    "paperclipai/paperclip@2026-09-27",
+    "vectorize-io/hindsight@2026-09-27",
+    "nvidia/model-optimizer@2026-09-27",
+    "dream-num/univer@2026-09-27",
+    "tensorflow/tensorflow@2026-09-27",
+    "rohitg00/ai-engineering-from-scratch@2026-09-27",
+    "openbao/openbao@2026-09-27",
+    "block/buzz@2026-09-27",
+    "microsoft/vscode@2026-09-27",
+    "zhaoxuya520/reverse-skill@2026-09-27",
     "paperclipai/paperclip@2026-09-26",
     "anthropics/claude-plugins-official@2026-09-26",
     "vectorize-io/hindsight@2026-09-26",
@@ -3788,6 +3798,16 @@
     "demo/x"
   ],
   "radar:all": [
+    "xingchen-agi/xing4.0-29b-a4b@2026-09-27",
+    "prism-ml/ternary-bonsai-2-27b-gguf@2026-09-27",
+    "edge0/audio8-asr-infinite@2026-09-27",
+    "altworld/hemmingway-1@2026-09-27",
+    "xiaomimimo/mimo-v2.6-pro-rl@2026-09-27",
+    "xiaomimimo/mimo-v2.6-flash-rl@2026-09-27",
+    "deepseek-ai/deepseek-v4.1-flash@2026-09-27",
+    "yandex/aliceai-foundation-80b-a3b-base@2026-09-27",
+    "aikidosec/altar-1@2026-09-27",
+    "orcarouter/orcasaq-2-27b@2026-09-27",
     "xingchen-agi/xing4.0-29b-a4b@2026-09-26",
     "prism-ml/ternary-bonsai-2-27b-gguf@2026-09-26",
     "altworld/hemmingway-1@2026-09-26",
