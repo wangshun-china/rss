@@ -16,7 +16,8 @@ import yaml
 log = logging.getLogger("rss")
 BASE = os.path.dirname(os.path.abspath(__file__))
 
-ALL_SCOPES = {"reddit", "hn", "rss", "trending", "radar", "papers", "deals"}
+ALL_SCOPES = {"reddit", "hn", "rss", "trending", "radar", "papers", "deals",
+              "zenwatch"}
 
 # 羊毛判定 risk 标签 -> 中文提示
 _DEAL_RISK = {"phone": "需手机号", "card": "需绑卡/实名", "time-limited": "限时活动"}
@@ -52,7 +53,7 @@ load_env()
 
 import ai  # noqa: E402
 from feishu import build_card, send  # noqa: E402
-from sources import deals, generic_rss, github_trending, hn, hf_models, hf_papers, reddit  # noqa: E402
+from sources import deals, generic_rss, github_trending, hn, hf_models, hf_papers, opencode_watch, reddit  # noqa: E402
 import store  # noqa: E402
 
 
@@ -104,6 +105,12 @@ def per_item_caps(n, budget=22000):
     return per // 3, per // 5
 
 
+def now_stamp():
+    """北京时间日期戳（YYYY-MM-DD）。"""
+    from datetime import datetime, timedelta, timezone
+    return datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d")
+
+
 # 正文不超过该长度时原文+全文翻译直接展示；更长则只展示 AI 提炼的要点，
 # 细节通过标题链接看原文——长文塞卡片里没法读，靠摘要保证不丢关键信息
 SHORT_BODY = 600
@@ -125,9 +132,10 @@ def parse_scope():
     return set(scope.split(",")) if scope != "all" else set(ALL_SCOPES)
 
 
-def collect(cfg):
+def collect(cfg, store_data=None):
     """拉取源集合，返回 (buckets, stats)。
 
+    store_data 供 zenwatch 读取上次免费名单快照（对比出下线事件）。
     stats 记录各范围 attempted/failed，供 run() 在范围内全部源失败时以非零码
     退出触发告警；stats["drops"] 记录被相关性过滤剔除的条目 id（run() 会把
     它们记入去重状态，避免每小时反复重判同一批被过滤内容）。
@@ -135,7 +143,8 @@ def collect(cfg):
     buckets = {}
     scopes = parse_scope()
     stats = {name: {"attempted": 0, "failed": 0}
-             for name in ("hn", "rss", "trending", "radar", "papers", "deals")}
+             for name in ("hn", "rss", "trending", "radar", "papers", "deals",
+                          "zenwatch")}
     stats["reddit"] = {"attempted": 0, "failed": []}
     drops = {}
 
@@ -250,6 +259,39 @@ def collect(cfg):
         except Exception as e:
             stats["deals"]["failed"] += 1
             log.warning("拉取羊毛雷达失败: %s", e)
+
+    if "zenwatch" in scopes:
+        wc = cfg.get("opencode_watch") or {}
+        providers = wc.get("providers") or ["opencode-go"]
+        stats["zenwatch"]["attempted"] += 1
+        try:
+            snapshot = opencode_watch.fetch_free_models(providers)
+            prev = (store_data or {}).get("_zenwatch_known") or {}
+            items = []
+            for prov, cur in snapshot.items():
+                gone = sorted(set(prev.get(prov) or []) - set(cur["free"]))
+                for mid in gone:
+                    remaining = ", ".join(cur["free"]) or "（无）"
+                    items.append({
+                        # id 带日期：模型下线后又回归再下线，隔天仍会再报
+                        "id": f"zenwatch-{prov}-{mid.lower()}-{now_stamp()}",
+                        "title": f"{cur['label']} 免费模型下线：{mid}",
+                        "url": cur["doc"],
+                        "author": "models.dev",
+                        "time": None,
+                        "body": (f"该模型已不在 {cur['label']} 免费名单中，"
+                                 f"当前剩 {len(cur['free'])} 个免费模型：{remaining}"),
+                    })
+            if not prev:
+                log.info("[zenwatch] 首次运行记录基线：%s",
+                         {k: len(v["free"]) for k, v in snapshot.items()})
+            elif items:
+                log.info("[zenwatch] 检测到 %d 个免费模型下线", len(items))
+            buckets["zenwatch:opencode"] = items
+            stats["zenwatch_known"] = {k: v["free"] for k, v in snapshot.items()}
+        except Exception as e:
+            stats["zenwatch"]["failed"] += 1
+            log.warning("OpenCode 免费模型探测失败: %s", e)
 
     stats["drops"] = drops
     return buckets, stats
@@ -406,6 +448,16 @@ def build_generic_card(name, items, fmt, sort_key, max_items, label="RSS",
                       buttons=buttons)
 
 
+def build_zenwatch_card(items):
+    """免费模型下线告警卡：事件本身就是中文，无需 AI 增强。"""
+    lines = [f"**📉 {p['title']}**\n{p['body']}" for p in items]
+    return build_card(
+        f"📉 OpenCode 免费模型下线 · {len(items)} 个", "red", lines,
+        buttons=[("OpenCode Go 文档", "https://opencode.ai/docs/go", "primary"),
+                 ("OpenCode Zen 文档", "https://opencode.ai/docs/zen")],
+    )
+
+
 def run(dry_run=False):
     load_env()
     with open(os.path.join(BASE, "config.yaml"), encoding="utf-8") as f:
@@ -421,11 +473,16 @@ def run(dry_run=False):
         raise SystemExit("缺少 FEISHU_WEBHOOK（.env 或 GitHub Secrets）")
 
     store_data = store.load()
-    buckets, stats = collect(cfg)
+    buckets, stats = collect(cfg, store_data)
+    # zenwatch 快照每轮都更新进状态（无论是否有下线事件）
+    known = stats.pop("zenwatch_known", None)
+    if known is not None:
+        store_data["_zenwatch_known"] = known
 
     # 范围内全部源拉取失败时标记，最终以非零码退出触发告警
     dead = []
-    for name in ("reddit", "hn", "rss", "trending", "radar", "papers", "deals"):
+    for name in ("reddit", "hn", "rss", "trending", "radar", "papers", "deals",
+                 "zenwatch"):
         if name not in parse_scope() or not stats[name]["attempted"]:
             continue
         s = stats[name]
@@ -450,7 +507,9 @@ def run(dry_run=False):
             continue
         total_new += len(fresh)
         source, name = key.split(":", 1)
-        if source == "hn":
+        if source == "zenwatch":
+            card = build_zenwatch_card(fresh)
+        elif source == "hn":
             card = build_hn_card(fresh, fmt, max_items)
         elif source in ("trending", "radar", "papers"):
             label, buttons = {

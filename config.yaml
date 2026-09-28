@@ -76,6 +76,12 @@ deals:
   fetch_limit: 25
   limit: 10
 
+# 📉 OpenCode 免费模型下线监视（models.dev 官方目录，cost=0 自动判定免费）：
+# 每小时探测一次，只在有模型下线时推送告警，其余时间静默。
+# 当前只盯 OpenCode Go；要加盯 OpenCode Zen 把 "opencode" 也加进 providers。
+opencode_watch:
+  providers: [opencode-go]
+
 push:
   # 单张卡片最多展示条数，超出部分折叠为"+N"
   max_items_per_card: 10
