@@ -3532,6 +3532,15 @@
     "https://simonwillison.net/2026/Aug/15/sighting-391300422/"
   ],
   "trending:all": [
+    "paperclipai/paperclip@2026-09-28",
+    "vectorize-io/hindsight@2026-09-28",
+    "debpalash/voicestudio@2026-09-28",
+    "rohitg00/ai-engineering-from-scratch@2026-09-28",
+    "infinityloop1308/pipepipe@2026-09-28",
+    "vercel-labs/scriptc@2026-09-28",
+    "mvschwarz/openrig@2026-09-28",
+    "dream-num/univer@2026-09-28",
+    "willfaust/madeira@2026-09-28",
     "paperclipai/paperclip@2026-09-27",
     "vectorize-io/hindsight@2026-09-27",
     "nvidia/model-optimizer@2026-09-27",
@@ -3803,6 +3812,16 @@
     "demo/x"
   ],
   "radar:all": [
+    "edge0/audio8-asr-infinite@2026-09-28",
+    "xingchen-agi/xing4.0-29b-a4b@2026-09-28",
+    "altworld/hemmingway-1@2026-09-28",
+    "prism-ml/ternary-bonsai-2-27b-gguf@2026-09-28",
+    "xiaomimimo/mimo-v2.6-pro-rl@2026-09-28",
+    "xiaomimimo/mimo-v2.6-flash-rl@2026-09-28",
+    "yandex/aliceai-foundation-80b-a3b-base@2026-09-28",
+    "deepseek-ai/deepseek-v4.1-flash@2026-09-28",
+    "aikidosec/altar-1@2026-09-28",
+    "orcarouter/orcasaq-2-27b@2026-09-28",
     "xingchen-agi/xing4.0-29b-a4b@2026-09-27",
     "prism-ml/ternary-bonsai-2-27b-gguf@2026-09-27",
     "edge0/audio8-asr-infinite@2026-09-27",
@@ -4076,6 +4095,10 @@
     "demo/m"
   ],
   "papers:daily": [
+    "hfpaper-2609.31620",
+    "hfpaper-2609.28416",
+    "hfpaper-2609.29421",
+    "hfpaper-2609.31394",
     "hfpaper-2609.29845",
     "hfpaper-2609.30221",
     "hfpaper-2609.23407",
