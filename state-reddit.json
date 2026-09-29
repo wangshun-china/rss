@@ -3538,6 +3538,14 @@
     "https://simonwillison.net/2026/Aug/15/sighting-391300422/"
   ],
   "trending:all": [
+    "debpalash/voicestudio@2026-09-29",
+    "paperclipai/paperclip@2026-09-29",
+    "vectorize-io/hindsight@2026-09-29",
+    "nawfalmotii79/plfm_radar@2026-09-29",
+    "cs341-illinois/coursebook@2026-09-29",
+    "byoungd/up@2026-09-29",
+    "mvschwarz/openrig@2026-09-29",
+    "dream-num/univer@2026-09-29",
     "paperclipai/paperclip@2026-09-28",
     "vectorize-io/hindsight@2026-09-28",
     "debpalash/voicestudio@2026-09-28",
@@ -3818,6 +3826,16 @@
     "demo/x"
   ],
   "radar:all": [
+    "edge0/audio8-asr-infinite@2026-09-29",
+    "xingchen-agi/xing4.0-29b-a4b@2026-09-29",
+    "prism-ml/ternary-bonsai-2-27b-gguf@2026-09-29",
+    "xiaomimimo/mimo-v2.6-pro-rl@2026-09-29",
+    "altworld/hemmingway-1@2026-09-29",
+    "xiaomimimo/mimo-v2.6-flash-rl@2026-09-29",
+    "deepseek-ai/deepseek-v4.1-flash@2026-09-29",
+    "orcarouter/orcasaq-2-27b@2026-09-29",
+    "ukisai/swift-1.5-qwen3.8-27b-gsq-rco-gguf@2026-09-29",
+    "yandex/aliceai-foundation-80b-a3b-base@2026-09-29",
     "edge0/audio8-asr-infinite@2026-09-28",
     "xingchen-agi/xing4.0-29b-a4b@2026-09-28",
     "altworld/hemmingway-1@2026-09-28",
@@ -4101,6 +4119,16 @@
     "demo/m"
   ],
   "papers:daily": [
+    "hfpaper-2609.33295",
+    "hfpaper-2609.35432",
+    "hfpaper-2609.35748",
+    "hfpaper-2609.34327",
+    "hfpaper-2609.35347",
+    "hfpaper-2609.33781",
+    "hfpaper-2609.33642",
+    "hfpaper-2609.33772",
+    "hfpaper-2609.33616",
+    "hfpaper-2609.32862",
     "hfpaper-2609.31620",
     "hfpaper-2609.28416",
     "hfpaper-2609.29421",
