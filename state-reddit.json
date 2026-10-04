@@ -3576,6 +3576,16 @@
     "https://simonwillison.net/2026/Aug/15/sighting-391300422/"
   ],
   "trending:all": [
+    "dietrichgebert/ponytail@2026-10-04",
+    "pbakaus/impeccable@2026-10-04",
+    "affaan-m/ecc@2026-10-04",
+    "effect-ts/effect@2026-10-04",
+    "juliusbrussee/caveman@2026-10-04",
+    "panniantong/agent-reach@2026-10-04",
+    "pingdotgg/t3code@2026-10-04",
+    "thedotmack/claude-mem@2026-10-04",
+    "cloudflare/cloudflare-os@2026-10-04",
+    "addyosmani/agent-skills@2026-10-04",
     "panniantong/agent-reach@2026-10-03",
     "juliusbrussee/caveman@2026-10-03",
     "obra/superpowers@2026-10-03",
@@ -3894,6 +3904,16 @@
     "demo/x"
   ],
   "radar:all": [
+    "aleph-alpha/kolibri-1@2026-10-04",
+    "orcarouter/orcasaq-2-cyber-27b-uncensored-gguf@2026-10-04",
+    "prism-ml/ternary-bonsai-2-27b-gguf@2026-10-04",
+    "venastine-research/xing4.0-29b-a4b-gguf@2026-10-04",
+    "deepseek-ai/deepseek-v4.1-flash@2026-10-04",
+    "infatoshi/glm-5.3-uncensored-exl3-3.0bpw@2026-10-04",
+    "naiveai/naive-n0.5-flash@2026-10-04",
+    "edge0/audio8-asr-infinite@2026-10-04",
+    "ukisai/swift-1.5-qwen3.8-27b-gsq-rco-gguf@2026-10-04",
+    "zai-org/glm-5.3@2026-10-04",
     "orcarouter/orcasaq-2-cyber-27b-uncensored-gguf@2026-10-03",
     "prism-ml/ternary-bonsai-2-27b-gguf@2026-10-03",
     "deepseek-ai/deepseek-v4.1-flash@2026-10-03",
@@ -4217,6 +4237,7 @@
     "demo/m"
   ],
   "papers:daily": [
+    "hfpaper-2609.32993",
     "hfpaper-2610.01762",
     "hfpaper-2609.35259",
     "hfpaper-2609.36585",
