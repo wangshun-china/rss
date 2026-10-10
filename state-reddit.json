@@ -3627,6 +3627,16 @@
     "https://simonwillison.net/2026/Aug/15/sighting-391300422/"
   ],
   "trending:all": [
+    "morluto/rea@2026-10-10",
+    "boykopovar/anyps5@2026-10-10",
+    "mattpocock/skills@2026-10-10",
+    "cathrynlavery/diagram-design@2026-10-10",
+    "alibaba/open-code-review@2026-10-10",
+    "anthropics/knowledge-work-plugins@2026-10-10",
+    "berriai/litellm@2026-10-10",
+    "addyosmani/agent-skills@2026-10-10",
+    "storytold/artcraft@2026-10-10",
+    "robbyant/lingbot-map@2026-10-10",
     "boykopovar/anyps5@2026-10-09",
     "cathrynlavery/diagram-design@2026-10-09",
     "morluto/rea@2026-10-09",
@@ -4004,6 +4014,16 @@
     "demo/x"
   ],
   "radar:all": [
+    "aleph-alpha/kolibri-1@2026-10-10",
+    "jialinyyzz/humanizer@2026-10-10",
+    "venastine-research/xing4.0-29b-a4b-gguf@2026-10-10",
+    "conwayresearch/underdog-saluki-27b-1.0@2026-10-10",
+    "prism-ml/ternary-bonsai-2-27b-gguf@2026-10-10",
+    "deepseek-ai/deepseek-v4.1-flash@2026-10-10",
+    "orcarouter/orcasaq-2-cyber-27b-uncensored-gguf@2026-10-10",
+    "infatoshi/glm-5.3-uncensored-exl3-3.0bpw@2026-10-10",
+    "ukisai/swift-1.5-qwen3.8-27b-gsq-rco-gguf@2026-10-10",
+    "jonathancoletti/qwen3.8-27b-uncensored-gguf@2026-10-10",
     "aleph-alpha/kolibri-1@2026-10-09",
     "jialinyyzz/humanizer@2026-10-09",
     "venastine-research/xing4.0-29b-a4b-gguf@2026-10-09",
@@ -4387,6 +4407,14 @@
     "demo/m"
   ],
   "papers:daily": [
+    "hfpaper-2610.12421",
+    "hfpaper-2501.09223",
+    "hfpaper-2610.12461",
+    "hfpaper-2610.09087",
+    "hfpaper-2610.06801",
+    "hfpaper-2610.12289",
+    "hfpaper-2610.11794",
+    "hfpaper-2610.02967",
     "hfpaper-2610.06100",
     "hfpaper-2610.08077",
     "hfpaper-2610.12242",
