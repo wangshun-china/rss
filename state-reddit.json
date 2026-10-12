@@ -3630,6 +3630,14 @@
     "https://simonwillison.net/2026/Aug/15/sighting-391300422/"
   ],
   "trending:all": [
+    "morluto/rea@2026-10-12",
+    "boykopovar/anyps5@2026-10-12",
+    "storytold/artcraft@2026-10-12",
+    "cathrynlavery/diagram-design@2026-10-12",
+    "bilawalsidhu/gods-eye-view@2026-10-12",
+    "pytorch/pytorch@2026-10-12",
+    "lyogavin/airllm@2026-10-12",
+    "chrislgarry/apollo-11@2026-10-12",
     "morluto/rea@2026-10-11",
     "boykopovar/anyps5@2026-10-11",
     "storytold/artcraft@2026-10-11",
@@ -4027,6 +4035,16 @@
     "demo/x"
   ],
   "radar:all": [
+    "jialinyyzz/humanizer@2026-10-12",
+    "aleph-alpha/kolibri-1@2026-10-12",
+    "venastine-research/xing4.0-29b-a4b-gguf@2026-10-12",
+    "conwayresearch/underdog-saluki-27b-1.0@2026-10-12",
+    "prism-ml/ternary-bonsai-2-27b-gguf@2026-10-12",
+    "deepseek-ai/deepseek-v4.1-flash@2026-10-12",
+    "dealignai/deepseek-v4.1-flash-uncensored-fp8@2026-10-12",
+    "jetbrains/mellum2.1-12b-a2.5b-thinking@2026-10-12",
+    "ukisai/swift-1.5-qwen3.8-27b-gsq-rco-gguf@2026-10-12",
+    "orcarouter/orcasaq-2-cyber-27b-uncensored-gguf@2026-10-12",
     "jialinyyzz/humanizer@2026-10-11",
     "aleph-alpha/kolibri-1@2026-10-11",
     "venastine-research/xing4.0-29b-a4b-gguf@2026-10-11",
@@ -4430,6 +4448,16 @@
     "demo/m"
   ],
   "papers:daily": [
+    "hfpaper-2610.13395",
+    "hfpaper-2610.12341",
+    "hfpaper-2610.07987",
+    "hfpaper-2609.38748",
+    "hfpaper-2610.13021",
+    "hfpaper-2610.07121",
+    "hfpaper-2610.12611",
+    "hfpaper-2610.12572",
+    "hfpaper-2610.13113",
+    "hfpaper-2610.12423",
     "hfpaper-2610.12421",
     "hfpaper-2501.09223",
     "hfpaper-2610.12461",
