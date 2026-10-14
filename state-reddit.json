@@ -115,6 +115,9 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1x5e5gp",
+    "1x5cdht",
+    "1x5c7au",
     "1x5ak2n",
     "1x57zpx",
     "1x5720r",
@@ -611,10 +614,7 @@
     "1wyzvjz",
     "1wyzu4k",
     "1wz7r6f",
-    "1wyz1y6",
-    "1wyuqha",
-    "1wyuoht",
-    "1wyycbs"
+    "1wyz1y6"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,19 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1x5c232",
+    "1x5ev66",
+    "1x5eblc",
+    "1x5cxjn",
+    "1x5c28n",
+    "1x5e8d5",
+    "1x5cprz",
+    "1x5dc4z",
+    "1x5d5bg",
+    "1x5cpyz",
+    "1x5ckv5",
+    "1x5ckjo",
+    "1x5cc7g",
     "1s7fepn",
     "1x5b5ek",
     "1x58ooh",
@@ -1141,22 +1154,11 @@
     "1x2dw02",
     "1x2bb23",
     "1x2db8f",
-    "1x2cubw",
-    "1x2fw9t",
-    "1x2bg4g",
-    "1x2f36x",
-    "1x2ez3d",
-    "1x2dq3a",
-    "1x2dksu",
-    "1x2dhsk",
-    "1x29q4r",
-    "1x2cj9d",
-    "1x2c6z3",
-    "1x2bv3h",
-    "1x2augi",
-    "1x29pss"
+    "1x2cubw"
   ],
   "reddit:LLMDevs": [
+    "1x5enxg",
+    "1x5e1q3",
     "1x578yw",
     "1x58qog",
     "1x5au4n",
@@ -1654,11 +1656,14 @@
     "1wthevl",
     "1wthccq",
     "1wthbtq",
-    "1wthbox",
-    "1wtha5e",
-    "1wth9zx"
+    "1wthbox"
   ],
   "reddit:singularity": [
+    "1x5cbvp",
+    "1x5e3id",
+    "1x5d2z6",
+    "1x5e3mk",
+    "1x5ce3c",
     "1x56x7s",
     "1x58mbn",
     "1x582df",
@@ -2153,14 +2158,10 @@
     "1wv4vif",
     "1wvfbua",
     "1wv0c7o",
-    "1wva279",
-    "1wuz9sg",
-    "1wv3p21",
-    "1wuj72j",
-    "1wuys4z",
-    "1wvb4jp"
+    "1wva279"
   ],
   "hn:front": [
+    "50072286",
     "50054092",
     "50078141",
     "50077020",
@@ -2659,8 +2660,7 @@
     "49795686",
     "49808023",
     "49806430",
-    "49805278",
-    "49758709"
+    "49805278"
   ],
   "rss:arxiv-cs-cl": [
     "oai:arXiv.org:2610.12939v1",
@@ -3165,6 +3165,7 @@
     "oai:arXiv.org:2609.12537v1"
   ],
   "rss:deepmind": [
+    "https://deepmind.google/blog/on-device-ai-scam-detection-mddi/",
     "https://deepmind.google/blog/developing-gemini-4-argon-responsibly-and-safely/",
     "https://deepmind.google/blog/gemini-4-argon-for-robotics/",
     "https://deepmind.google/blog/introducing-gemini-4-argon/",
@@ -3469,6 +3470,7 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Oct/13/llm-gemini/",
     "https://simonwillison.net/2026/Oct/13/redesigning-source-control-at-anthropic/",
     "https://simonwillison.net/2026/Oct/13/web-edit/",
     "https://simonwillison.net/2026/Oct/12/llm-meta-ai/",
@@ -4747,6 +4749,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/012/659.htm",
+    "https://www.ithome.com/1/012/658.htm",
+    "https://www.ithome.com/1/012/657.htm",
+    "https://www.ithome.com/1/012/656.htm",
+    "https://www.ithome.com/1/012/655.htm",
+    "https://www.ithome.com/1/012/653.htm",
+    "https://www.ithome.com/1/012/652.htm",
+    "https://www.ithome.com/1/012/651.htm",
+    "https://www.ithome.com/1/012/650.htm",
+    "https://www.ithome.com/1/012/649.htm",
     "https://www.ithome.com/1/012/590.htm",
     "https://www.ithome.com/1/012/589.htm",
     "https://www.ithome.com/1/012/588.htm",
@@ -5236,17 +5248,7 @@
     "https://www.ithome.com/1/008/529.htm",
     "https://www.ithome.com/1/008/528.htm",
     "https://www.ithome.com/1/008/527.htm",
-    "https://www.ithome.com/1/008/526.htm",
-    "https://www.ithome.com/1/008/470.htm",
-    "https://www.ithome.com/1/008/469.htm",
-    "https://www.ithome.com/1/008/467.htm",
-    "https://www.ithome.com/1/008/466.htm",
-    "https://www.ithome.com/1/008/465.htm",
-    "https://www.ithome.com/1/008/463.htm",
-    "https://www.ithome.com/1/008/449.htm",
-    "https://www.ithome.com/1/008/446.htm",
-    "https://www.ithome.com/1/008/445.htm",
-    "https://www.ithome.com/1/008/444.htm"
+    "https://www.ithome.com/1/008/526.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85603",
@@ -5598,6 +5600,7 @@
     "https://www.solidot.org/story?sid=85238"
   ],
   "rss:sspai": [
+    "https://sspai.com/post/116138",
     "https://sspai.com/post/116068",
     "https://sspai.com/post/115400",
     "https://sspai.com/post/116028",
