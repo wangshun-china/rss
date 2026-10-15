@@ -115,6 +115,16 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1x6wwx2",
+    "1x6yk1f",
+    "1x6yuc1",
+    "1x6x5tk",
+    "1x70e5r",
+    "1x6yage",
+    "1x6wtqd",
+    "1x6youd",
+    "1x6xl4j",
+    "1x703wl",
     "1x6s7el",
     "1x6vqft",
     "1x6stod",
@@ -604,17 +614,7 @@
     "1wzudla",
     "1wzs1t5",
     "1wzth65",
-    "1x08bns",
-    "1x08agc",
-    "1x088rd",
-    "1x02b88",
-    "1x083w0",
-    "1wzvs45",
-    "1wzwbs0",
-    "1x09g09",
-    "1x08abo",
-    "1x023z4",
-    "1x07x1z"
+    "1x08bns"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,19 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1x6x6x7",
+    "1x6xsp4",
+    "1x6zbbe",
+    "1x708pr",
+    "1x6zjk0",
+    "1x6xc1r",
+    "1x6x3hz",
+    "1x70l18",
+    "1x706du",
+    "1x703k1",
+    "1x6zmcg",
+    "1x6xwj4",
+    "1x6xkml",
     "1x6tpki",
     "1x6ra9v",
     "1x6vi6k",
@@ -1141,22 +1154,10 @@
     "1x3zte5",
     "1x3x1o8",
     "1x42h90",
-    "1x41mlr",
-    "1x3x3ct",
-    "1x3wvd3",
-    "1x45nhq",
-    "1x3xpab",
-    "1x4108d",
-    "1x40bg9",
-    "1x3uz9c",
-    "1x41rh1",
-    "1x41bxi",
-    "1x40uzs",
-    "1x45yjs",
-    "1x45t4j",
-    "1x45qz8"
+    "1x41mlr"
   ],
   "reddit:LLMDevs": [
+    "1x6z14d",
     "1x6uqqr",
     "1x6v5u7",
     "1x6v1ee",
@@ -1655,10 +1656,14 @@
     "1wtm8c6",
     "1wtm7ew",
     "1wtg2r2",
-    "1wtm0t3",
-    "1wtly13"
+    "1wtm0t3"
   ],
   "reddit:singularity": [
+    "1x6x735",
+    "1x6zuoc",
+    "1x6yibo",
+    "1x70k2b",
+    "1x6zoai",
     "1x6se5a",
     "1x6vcdy",
     "1x6tbsf",
@@ -2153,14 +2158,11 @@
     "1wwyk7q",
     "1wwt0nh",
     "1wwsxbv",
-    "1wwr56b",
-    "1wwopgk",
-    "1wwpjy5",
-    "1wwp5aw",
-    "1wwruw8",
-    "1wwrh3h"
+    "1wwr56b"
   ],
   "hn:front": [
+    "50109715",
+    "50108872",
     "50107379",
     "50105647",
     "50106738",
@@ -2658,9 +2660,7 @@
     "49823568",
     "49836374",
     "49837006",
-    "49836419",
-    "49830606",
-    "49823738"
+    "49836419"
   ],
   "rss:arxiv-cs-cl": [
     "oai:arXiv.org:2610.19367v1",
@@ -3343,6 +3343,7 @@
     "https://huggingface.co/blog/real-world-voiceeq"
   ],
   "rss:openai": [
+    "https://openai.com/index/introducing-the-rosalind-academic-plan",
     "https://openai.com/index/teaching-students-to-think-and-learn-through-questions",
     "https://openai.com/index/block-ai-powered-security",
     "https://openai.com/index/amp-beyond-coding",
@@ -4828,6 +4829,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/013/690.htm",
+    "https://www.ithome.com/1/013/696.htm",
+    "https://www.ithome.com/1/013/697.htm",
+    "https://www.ithome.com/1/013/687.htm",
+    "https://www.ithome.com/1/013/686.htm",
+    "https://www.ithome.com/1/013/685.htm",
+    "https://www.ithome.com/1/013/683.htm",
+    "https://www.ithome.com/1/013/682.htm",
+    "https://www.ithome.com/1/013/681.htm",
+    "https://www.ithome.com/1/013/680.htm",
     "https://www.ithome.com/1/013/679.htm",
     "https://www.ithome.com/1/013/678.htm",
     "https://www.ithome.com/1/013/677.htm",
@@ -5317,17 +5328,7 @@
     "https://www.ithome.com/1/009/541.htm",
     "https://www.ithome.com/1/009/540.htm",
     "https://www.ithome.com/1/009/539.htm",
-    "https://www.ithome.com/1/009/538.htm",
-    "https://www.ithome.com/1/009/413.htm",
-    "https://www.ithome.com/1/009/537.htm",
-    "https://www.ithome.com/1/009/536.htm",
-    "https://www.ithome.com/1/009/535.htm",
-    "https://www.ithome.com/1/009/534.htm",
-    "https://www.ithome.com/1/009/533.htm",
-    "https://www.ithome.com/1/009/531.htm",
-    "https://www.ithome.com/1/009/530.htm",
-    "https://www.ithome.com/1/009/529.htm",
-    "https://www.ithome.com/1/009/527.htm"
+    "https://www.ithome.com/1/009/538.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85625",
@@ -5889,11 +5890,11 @@
   "_zenwatch_known": {
     "opencode-go": [
       "cat-jam-free",
-      "longcat-2.5-preview-free",
-      "step-5-preview-free"
+      "longcat-2.5-preview-free"
     ]
   },
   "zenwatch:opencode": [
+    "zenwatch-opencode-go-step-5-preview-free-2026-10-16",
     "zenwatch-opencode-go-space-bunny-free-2026-10-15"
   ]
 }
