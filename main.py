@@ -266,12 +266,24 @@ def collect(cfg, store_data=None):
         stats["zenwatch"]["attempted"] += 1
         try:
             snapshot = opencode_watch.fetch_free_models(providers)
+            live = opencode_watch.fetch_live_models(providers)
             prev = (store_data or {}).get("_zenwatch_known") or {}
             items = []
+            effective = {}
             for prov, cur in snapshot.items():
-                gone = sorted(set(prev.get(prov) or []) - set(cur["free"]))
-                for mid in gone:
-                    remaining = ", ".join(cur["free"]) or "（无）"
+                served = live.get(prov)
+                if served:
+                    # 有效免费 = 目录标免费 且 实时接口仍在售
+                    eff = [m for m in cur["free"] if m in served]
+                else:
+                    # 实时接口不可用：沿用上轮基线，既不误报也不改动快照
+                    log.warning("[zenwatch] %s 实时接口不可用，本轮跳过下线判定", prov)
+                    eff = list(prev.get(prov) or cur["free"])
+                effective[prov] = eff
+                for mid in sorted(set(prev.get(prov) or []) - set(eff)):
+                    why = ("实时接口已不再提供（免费版下架，可能转为付费）"
+                           if served and mid not in served
+                           else "目录中已不再标记为免费")
                     items.append({
                         # id 带日期：模型下线后又回归再下线，隔天仍会再报
                         "id": f"zenwatch-{prov}-{mid.lower()}-{now_stamp()}",
@@ -279,16 +291,16 @@ def collect(cfg, store_data=None):
                         "url": cur["doc"],
                         "author": "models.dev",
                         "time": None,
-                        "body": (f"该模型已不在 {cur['label']} 免费名单中，"
-                                 f"当前剩 {len(cur['free'])} 个免费模型：{remaining}"),
+                        "body": (f"{why}。当前剩 {len(eff)} 个免费模型："
+                                 f"{', '.join(eff) or '（无）'}"),
                     })
             if not prev:
                 log.info("[zenwatch] 首次运行记录基线：%s",
-                         {k: len(v["free"]) for k, v in snapshot.items()})
+                         {k: len(v) for k, v in effective.items()})
             elif items:
                 log.info("[zenwatch] 检测到 %d 个免费模型下线", len(items))
             buckets["zenwatch:opencode"] = items
-            stats["zenwatch_known"] = {k: v["free"] for k, v in snapshot.items()}
+            stats["zenwatch_known"] = effective
         except Exception as e:
             stats["zenwatch"]["failed"] += 1
             log.warning("OpenCode 免费模型探测失败: %s", e)
