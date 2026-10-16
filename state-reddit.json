@@ -115,6 +115,10 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1x70qhu",
+    "1x721co",
+    "1x71uju",
+    "1x713h7",
     "1x6wwx2",
     "1x6yk1f",
     "1x6yuc1",
@@ -610,11 +614,7 @@
     "1wzvdqe",
     "1x03mrh",
     "1x06h7i",
-    "1x07qlh",
-    "1wzudla",
-    "1wzs1t5",
-    "1wzth65",
-    "1x08bns"
+    "1x07qlh"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,20 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1vt5drr",
+    "1x70qws",
+    "1x71xco",
+    "1x721px",
+    "1x73jfn",
+    "1x73haj",
+    "1x73gpb",
+    "1x739zr",
+    "1x72mal",
+    "1x725i7",
+    "1x71y04",
+    "1x719zc",
+    "1x7199x",
+    "1x70pgm",
     "1x6x6x7",
     "1x6xsp4",
     "1x6zbbe",
@@ -1140,23 +1154,11 @@
     "1x4a4ac",
     "1x4a0rn",
     "1x481i3",
-    "1x47c8i",
-    "1x467cj",
-    "1x45zzq",
-    "1x4bgr9",
-    "1x3y0ot",
-    "1x40zxz",
-    "1x43mml",
-    "1x3zdk8",
-    "1x42pf0",
-    "1x3yvt9",
-    "1x446nm",
-    "1x3zte5",
-    "1x3x1o8",
-    "1x42h90",
-    "1x41mlr"
+    "1x47c8i"
   ],
   "reddit:LLMDevs": [
+    "1x72uo8",
+    "1x727fw",
     "1x6z14d",
     "1x6uqqr",
     "1x6v5u7",
@@ -1654,11 +1656,18 @@
     "1wto05y",
     "1wtm8kf",
     "1wtm8c6",
-    "1wtm7ew",
-    "1wtg2r2",
-    "1wtm0t3"
+    "1wtm7ew"
   ],
   "reddit:singularity": [
+    "1x73h24",
+    "1x71sgi",
+    "1x72l9i",
+    "1x70t7r",
+    "1x73kgl",
+    "1x72twc",
+    "1x72d59",
+    "1x72qdh",
+    "1x72yo4",
     "1x6x735",
     "1x6zuoc",
     "1x6yibo",
@@ -2149,18 +2158,11 @@
     "1wwwihw",
     "1www0yg",
     "1www5hj",
-    "1wwyriz",
-    "1wwzehm",
-    "1wwzqxf",
-    "1wwzg8r",
-    "1wwvu2a",
-    "1wwzje5",
-    "1wwyk7q",
-    "1wwt0nh",
-    "1wwsxbv",
-    "1wwr56b"
+    "1wwyriz"
   ],
   "hn:front": [
+    "50080155",
+    "50109375",
     "50109715",
     "50108872",
     "50107379",
@@ -2658,9 +2660,7 @@
     "49841563",
     "49801436",
     "49823568",
-    "49836374",
-    "49837006",
-    "49836419"
+    "49836374"
   ],
   "rss:arxiv-cs-cl": [
     "oai:arXiv.org:2610.19367v1",
@@ -3343,6 +3343,7 @@
     "https://huggingface.co/blog/real-world-voiceeq"
   ],
   "rss:openai": [
+    "https://openai.com/index/sullivan-cromwell",
     "https://openai.com/index/introducing-the-rosalind-academic-plan",
     "https://openai.com/index/teaching-students-to-think-and-learn-through-questions",
     "https://openai.com/index/block-ai-powered-security",
@@ -4829,6 +4830,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/013/719.htm",
+    "https://www.ithome.com/1/013/717.htm",
+    "https://www.ithome.com/1/013/716.htm",
+    "https://www.ithome.com/1/013/715.htm",
+    "https://www.ithome.com/1/013/714.htm",
+    "https://www.ithome.com/1/013/713.htm",
+    "https://www.ithome.com/1/013/712.htm",
+    "https://www.ithome.com/1/012/491.htm",
+    "https://www.ithome.com/1/013/711.htm",
+    "https://www.ithome.com/1/013/710.htm",
     "https://www.ithome.com/1/013/690.htm",
     "https://www.ithome.com/1/013/696.htm",
     "https://www.ithome.com/1/013/697.htm",
@@ -5318,17 +5329,7 @@
     "https://www.ithome.com/1/009/574.htm",
     "https://www.ithome.com/1/009/573.htm",
     "https://www.ithome.com/1/009/572.htm",
-    "https://www.ithome.com/1/009/571.htm",
-    "https://www.ithome.com/1/009/570.htm",
-    "https://www.ithome.com/1/009/569.htm",
-    "https://www.ithome.com/1/009/568.htm",
-    "https://www.ithome.com/1/009/565.htm",
-    "https://www.ithome.com/1/009/559.htm",
-    "https://www.ithome.com/1/009/550.htm",
-    "https://www.ithome.com/1/009/541.htm",
-    "https://www.ithome.com/1/009/540.htm",
-    "https://www.ithome.com/1/009/539.htm",
-    "https://www.ithome.com/1/009/538.htm"
+    "https://www.ithome.com/1/009/571.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85625",
@@ -5701,6 +5702,7 @@
     "https://www.solidot.org/story?sid=85238"
   ],
   "rss:sspai": [
+    "https://sspai.com/post/116355",
     "https://sspai.com/post/116246",
     "https://sspai.com/post/116181",
     "https://sspai.com/post/116182",
