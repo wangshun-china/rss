@@ -115,6 +115,16 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1x8ley0",
+    "1x8ke24",
+    "1x8kces",
+    "1x8koix",
+    "1x8kiuh",
+    "1x8l18e",
+    "1x8lwa1",
+    "1x8lovk",
+    "1x8m0jj",
+    "1x8ldta",
     "1x8gtvs",
     "1x8i1h2",
     "1x8j6j8",
@@ -604,17 +614,7 @@
     "1x1rwof",
     "1x1tclb",
     "1x1w1nv",
-    "1x1tf1t",
-    "1x1s09m",
-    "1x1qyh0",
-    "1x1rtxi",
-    "1x1wode",
-    "1x1wy77",
-    "1x1wxdt",
-    "1x1vu73",
-    "1x1ldef",
-    "1x1lclx",
-    "1x1fnsy"
+    "1x1tf1t"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,15 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1x8kjz6",
+    "1x8igz3",
+    "1x8m064",
+    "1x8lae3",
+    "1x8l6he",
+    "1x8knxz",
+    "1x8k0b1",
+    "1x8jkcq",
+    "1x8jfve",
     "1x8gp1w",
     "1x8i2q7",
     "1x8iv1t",
@@ -1145,16 +1154,7 @@
     "1x5tsqp",
     "1x5tnp0",
     "1x5tf4m",
-    "1x5t3jz",
-    "1x5sro7",
-    "1x5sc1o",
-    "1x5sbk0",
-    "1x5s7fl",
-    "1x5or3q",
-    "1x5mxe7",
-    "1x5o1c6",
-    "1x5n9bh",
-    "1x5r6nw"
+    "1x5t3jz"
   ],
   "reddit:LLMDevs": [
     "1x8h4xd",
@@ -1659,6 +1659,8 @@
     "1wu6g2x"
   ],
   "reddit:singularity": [
+    "1x8lwr6",
+    "1x8li1y",
     "1x8hqv7",
     "1x8hxh3",
     "1x8j5tq",
@@ -2156,11 +2158,11 @@
     "1wz7eeb",
     "1wz1hlz",
     "1wysmxl",
-    "1wyu0ss",
-    "1wyw84m",
-    "1wyxdtu"
+    "1wyu0ss"
   ],
   "hn:front": [
+    "50127586",
+    "50126312",
     "50133401",
     "50100994",
     "50119315",
@@ -2658,9 +2660,7 @@
     "49836579",
     "49844657",
     "49832768",
-    "49857729",
-    "49827900",
-    "49833444"
+    "49857729"
   ],
   "rss:arxiv-cs-cl": [
     "oai:arXiv.org:2610.21098v1",
@@ -4899,6 +4899,9 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/014/410.htm",
+    "https://www.ithome.com/1/014/409.htm",
+    "https://www.ithome.com/1/014/407.htm",
     "https://www.ithome.com/1/014/406.htm",
     "https://www.ithome.com/1/014/405.htm",
     "https://www.ithome.com/1/014/404.htm",
@@ -5395,10 +5398,7 @@
     "https://www.ithome.com/1/010/101.htm",
     "https://www.ithome.com/1/010/097.htm",
     "https://www.ithome.com/1/010/096.htm",
-    "https://www.ithome.com/1/010/094.htm",
-    "https://www.ithome.com/1/010/093.htm",
-    "https://www.ithome.com/1/010/091.htm",
-    "https://www.ithome.com/1/010/090.htm"
+    "https://www.ithome.com/1/010/094.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85638",
