@@ -115,6 +115,11 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1x7w7dp",
+    "1x7xbf0",
+    "1x7x1a6",
+    "1x7vp40",
+    "1x7v9zt",
     "1x7sq8e",
     "1x7sbxs",
     "1x7s89u",
@@ -609,12 +614,7 @@
     "1x0yxrf",
     "1x0wyge",
     "1x12vox",
-    "1x11f7a",
-    "1x10vw6",
-    "1x0zh1a",
-    "1x0ye23",
-    "1x13slr",
-    "1x0xkk7"
+    "1x11f7a"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,19 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1x7v7gj",
+    "1x7w46m",
+    "1x7w5dv",
+    "1x7v49y",
+    "1x7vl6k",
+    "1x7x6o3",
+    "1x7wvwy",
+    "1x7wb9s",
+    "1x7vrzh",
+    "1x7vp4l",
+    "1x7xeq3",
+    "1x7x1gp",
+    "1x7uzhd",
     "1x7r7ul",
     "1x7rzpe",
     "1x7tcj3",
@@ -1141,22 +1154,12 @@
     "1x57q4t",
     "1x57hek",
     "1x578uj",
-    "1x56xvr",
-    "1x4zp6s",
-    "1x4zm61",
-    "1x5145b",
-    "1x4s9hp",
-    "1x540si",
-    "1x51hk1",
-    "1x4ssct",
-    "1x4yw9r",
-    "1x4v18f",
-    "1x53dea",
-    "1x4za5g",
-    "1x51zsk",
-    "1x52tbs"
+    "1x56xvr"
   ],
   "reddit:LLMDevs": [
+    "1x7vggz",
+    "1x7xd8q",
+    "1x7vs7k",
     "1x7r2um",
     "1x7td7n",
     "1x7ueof",
@@ -1653,12 +1656,11 @@
     "1wtxgst",
     "1wtxbsm",
     "1wtwxw1",
-    "1wtuqnn",
-    "1wtuotb",
-    "1wtu76j",
-    "1wttulq"
+    "1wtuqnn"
   ],
   "reddit:singularity": [
+    "1x7vivf",
+    "1x7vd96",
     "1x7s98a",
     "1x7u2hn",
     "1x7tb02",
@@ -2156,11 +2158,11 @@
     "1wypu8o",
     "1wys005",
     "1wyjzkb",
-    "1wys5yb",
-    "1wys0gr",
-    "1wyoqwl"
+    "1wys5yb"
   ],
   "hn:front": [
+    "50122878",
+    "50121004",
     "50122951",
     "50122431",
     "50124251",
@@ -2658,9 +2660,7 @@
     "49854161",
     "49852302",
     "49852065",
-    "49844896",
-    "49852717",
-    "49849985"
+    "49844896"
   ],
   "rss:arxiv-cs-cl": [
     "oai:arXiv.org:2610.21098v1",
@@ -3231,6 +3231,7 @@
     "tag:github.com,2008:Repository/155220641/v5.10.3"
   ],
   "rss:gh-vllm": [
+    "tag:github.com,2008:Repository/599547518/v0.32.0rc3",
     "tag:github.com,2008:Repository/599547518/v0.32.0rc2",
     "tag:github.com,2008:Repository/599547518/v0.32.0rc1",
     "tag:github.com,2008:Repository/599547518/proto-v0.6.0",
@@ -3346,6 +3347,7 @@
     "https://huggingface.co/blog/real-world-voiceeq"
   ],
   "rss:openai": [
+    "https://openai.com/index/itau-generative-ai",
     "https://openai.com/index/stack-overflow-chatgpt-plugin",
     "https://openai.com/index/sullivan-cromwell",
     "https://openai.com/index/introducing-the-rosalind-academic-plan",
@@ -4866,6 +4868,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/014/210.htm",
+    "https://www.ithome.com/1/014/209.htm",
+    "https://www.ithome.com/1/014/208.htm",
+    "https://www.ithome.com/1/014/205.htm",
+    "https://www.ithome.com/1/014/204.htm",
+    "https://www.ithome.com/1/014/202.htm",
+    "https://www.ithome.com/1/014/201.htm",
+    "https://www.ithome.com/1/014/200.htm",
+    "https://www.ithome.com/1/014/199.htm",
+    "https://www.ithome.com/1/014/198.htm",
     "https://www.ithome.com/1/014/191.htm",
     "https://www.ithome.com/1/014/189.htm",
     "https://www.ithome.com/1/014/188.htm",
@@ -5355,17 +5367,7 @@
     "https://www.ithome.com/1/009/739.htm",
     "https://www.ithome.com/1/009/738.htm",
     "https://www.ithome.com/1/009/737.htm",
-    "https://www.ithome.com/1/009/736.htm",
-    "https://www.ithome.com/1/009/734.htm",
-    "https://www.ithome.com/1/009/733.htm",
-    "https://www.ithome.com/1/009/732.htm",
-    "https://www.ithome.com/1/009/731.htm",
-    "https://www.ithome.com/1/009/730.htm",
-    "https://www.ithome.com/1/009/729.htm",
-    "https://www.ithome.com/1/009/728.htm",
-    "https://www.ithome.com/1/009/727.htm",
-    "https://www.ithome.com/1/009/726.htm",
-    "https://www.ithome.com/1/009/725.htm"
+    "https://www.ithome.com/1/009/736.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85635",
