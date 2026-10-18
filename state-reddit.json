@@ -3678,6 +3678,16 @@
     "https://simonwillison.net/2026/Aug/15/sighting-391300422/"
   ],
   "trending:all": [
+    "anthropics/claude-plugins-official@2026-10-18",
+    "madslorentzen/ai-job-search@2026-10-18",
+    "affaan-m/ecc@2026-10-18",
+    "hkuds/cli-anything@2026-10-18",
+    "k-dense-ai/scientific-agent-skills@2026-10-18",
+    "akitaonrails/ai-memory@2026-10-18",
+    "android/skills@2026-10-18",
+    "stablyai/orca@2026-10-18",
+    "anthropics/claude-code@2026-10-18",
+    "debpalash/voicestudio@2026-10-18",
     "anthropics/claude-plugins-official@2026-10-17",
     "k-dense-ai/scientific-agent-skills@2026-10-17",
     "affaan-m/ecc@2026-10-17",
@@ -4131,6 +4141,16 @@
     "demo/x"
   ],
   "radar:all": [
+    "deepseek-ai/deepseek-v4.1-flash-1017@2026-10-18",
+    "jialinyyzz/humanizer@2026-10-18",
+    "liquidai/lfm2.5-24b-a2b@2026-10-18",
+    "conwayresearch/underdog-saluki-27b-1.0@2026-10-18",
+    "liquidai/lfm2.5-24b-a2b-gguf@2026-10-18",
+    "tencent/hy-memory-30b-a3b@2026-10-18",
+    "deepseek-ai/deepseek-v4.1-flash@2026-10-18",
+    "dealignai/deepseek-v4.1-flash-uncensored-fp8@2026-10-18",
+    "reflection/beam-1.0-501b-a23b@2026-10-18",
+    "inclusionai/ling-3.1-flash@2026-10-18",
     "jialinyyzz/humanizer@2026-10-17",
     "liquidai/lfm2.5-24b-a2b@2026-10-17",
     "conwayresearch/underdog-saluki-27b-1.0@2026-10-17",
@@ -4594,6 +4614,7 @@
     "demo/m"
   ],
   "papers:daily": [
+    "hfpaper-2610.21439",
     "hfpaper-2610.21601",
     "hfpaper-2610.22200",
     "hfpaper-2610.22350",
