@@ -115,6 +115,12 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1xb6zds",
+    "1xb9ax1",
+    "1xb783i",
+    "1xb73q4",
+    "1xb70r1",
+    "1xb8hxg",
     "1xb5qxn",
     "1xb45bq",
     "1xb41jt",
@@ -608,13 +614,7 @@
     "1x4ii8e",
     "1x4h1c2",
     "1x4ly8i",
-    "1x4j70c",
-    "1x4h9k4",
-    "1x4kzv0",
-    "1x4h7od",
-    "1x4jeun",
-    "1x4akj7",
-    "1x4cm73"
+    "1x4j70c"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,11 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1xb9391",
+    "1xb750n",
+    "1xb96bs",
+    "1xb75t9",
+    "1xb6yu3",
     "1xb4uak",
     "1xb2cf6",
     "1xb58g9",
@@ -1149,14 +1154,11 @@
     "1x8f5gl",
     "1x8emfc",
     "1x8boen",
-    "1x8f0gm",
-    "1x8bq1w",
-    "1x8bp26",
-    "1x8dxt3",
-    "1x8fiuj",
-    "1x8e5oj"
+    "1x8f0gm"
   ],
   "reddit:LLMDevs": [
+    "1xb8som",
+    "1xb7u1r",
     "1xb48kg",
     "1xawud5",
     "1xavcex",
@@ -1654,11 +1656,14 @@
     "1wwiy54",
     "1wwdomh",
     "1wwdjf0",
-    "1ww992z",
-    "1ww5opx",
-    "1wvy4hl"
+    "1ww992z"
   ],
   "reddit:singularity": [
+    "1xb8hly",
+    "1xb7qtc",
+    "1xb7vec",
+    "1xb95gq",
+    "1xb8959",
     "1xb3hgg",
     "1xb5a4x",
     "1xb2pme",
@@ -2153,14 +2158,11 @@
     "1x0f7yn",
     "1x0jqae",
     "1x0inub",
-    "1x0hlj2",
-    "1x0lj2h",
-    "1x0kbvk",
-    "1x0kyue",
-    "1x0j1g9",
-    "1x0lcop"
+    "1x0hlj2"
   ],
   "hn:front": [
+    "50168357",
+    "50108717",
     "50170593",
     "50169707",
     "50166579",
@@ -2658,9 +2660,7 @@
     "49898050",
     "49901736",
     "49893157",
-    "49898778",
-    "49896586",
-    "49896604"
+    "49898778"
   ],
   "rss:arxiv-cs-cl": [
     "oai:arXiv.org:2610.22671v1",
@@ -3357,6 +3357,7 @@
     "https://huggingface.co/blog/real-world-voiceeq"
   ],
   "rss:openai": [
+    "https://openai.com/index/terminal-x",
     "https://openai.com/index/ted-taylor-restaurant",
     "https://openai.com/index/openai-to-acquire-orchestra-bio",
     "https://openai.com/index/low-resource-programming-languages",
@@ -3508,6 +3509,7 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Oct/20/emudhra-certificates/",
     "https://simonwillison.net/2026/Oct/20/battledrones/",
     "https://simonwillison.net/2026/Oct/19/my-obituary-for-programming/",
     "https://simonwillison.net/2026/Oct/18/llm-tools-datasette/",
@@ -4997,6 +4999,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/015/632.htm",
+    "https://www.ithome.com/1/015/631.htm",
+    "https://www.ithome.com/1/015/630.htm",
+    "https://www.ithome.com/1/015/629.htm",
+    "https://www.ithome.com/1/015/628.htm",
+    "https://www.ithome.com/1/015/627.htm",
+    "https://www.ithome.com/1/015/626.htm",
+    "https://www.ithome.com/1/015/625.htm",
+    "https://www.ithome.com/1/015/624.htm",
+    "https://www.ithome.com/1/015/623.htm",
     "https://www.ithome.com/1/015/607.htm",
     "https://www.ithome.com/1/015/606.htm",
     "https://www.ithome.com/1/015/603.htm",
@@ -5486,17 +5498,7 @@
     "https://www.ithome.com/1/011/701.htm",
     "https://www.ithome.com/1/011/700.htm",
     "https://www.ithome.com/1/011/699.htm",
-    "https://www.ithome.com/1/011/698.htm",
-    "https://www.ithome.com/1/011/697.htm",
-    "https://www.ithome.com/1/011/696.htm",
-    "https://www.ithome.com/1/011/695.htm",
-    "https://www.ithome.com/1/011/694.htm",
-    "https://www.ithome.com/1/011/693.htm",
-    "https://www.ithome.com/1/011/691.htm",
-    "https://www.ithome.com/1/011/690.htm",
-    "https://www.ithome.com/1/011/687.htm",
-    "https://www.ithome.com/1/011/686.htm",
-    "https://www.ithome.com/1/011/685.htm"
+    "https://www.ithome.com/1/011/698.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85668",
