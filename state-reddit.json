@@ -115,6 +115,16 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1xeim3m",
+    "1xeia9o",
+    "1xejv61",
+    "1xehs52",
+    "1xeipmm",
+    "1xehn3u",
+    "1xeicw2",
+    "1xejzuo",
+    "1xegx8o",
+    "1xefuy4",
     "1xed7a7",
     "1xedp2t",
     "1xeeorp",
@@ -604,17 +614,7 @@
     "1x82hoq",
     "1x7yxxl",
     "1x8278w",
-    "1x7zbwg",
-    "1x82lni",
-    "1x8104h",
-    "1x81z6r",
-    "1x7w7dp",
-    "1x7xbf0",
-    "1x7x1a6",
-    "1x7vp40",
-    "1x7v9zt",
-    "1x7sq8e",
-    "1x7sbxs"
+    "1x7zbwg"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,19 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1xehm9a",
+    "1xeiaqv",
+    "1xejo1i",
+    "1xek9hi",
+    "1xekuw1",
+    "1xek9bj",
+    "1xek90v",
+    "1xek2ni",
+    "1xeiuq1",
+    "1xehmfv",
+    "1xekgw7",
+    "1xeirbx",
+    "1xehvsk",
     "1xef9sl",
     "1xeed3b",
     "1xeeclc",
@@ -1141,22 +1154,12 @@
     "1xbpujg",
     "1xbpe35",
     "1xbp086",
-    "1xborag",
-    "1xbo97w",
-    "1xbmxo7",
-    "1xbmm9l",
-    "1xbme90",
-    "1xbj7jr",
-    "1xbgkdf",
-    "1xbl4fz",
-    "1xbfyi5",
-    "1xbirxe",
-    "1xbjxbk",
-    "1xbjzmz",
-    "1xbhlm5",
-    "1xbl9av"
+    "1xborag"
   ],
   "reddit:LLMDevs": [
+    "1xek87m",
+    "1xeht6g",
+    "1xehqb8",
     "1xeeoss",
     "1xefpte",
     "1xef7y9",
@@ -1653,12 +1656,14 @@
     "1wzs1hn",
     "1x039fk",
     "1x02y74",
-    "1x02doi",
-    "1wztoe2",
-    "1wzzscq",
-    "1wzz3we"
+    "1x02doi"
   ],
   "reddit:singularity": [
+    "1xekblx",
+    "1xek0va",
+    "1xek1op",
+    "1xeiq22",
+    "1xehq76",
     "1xeevz3",
     "1xeczu3",
     "1xeg0e9",
@@ -2153,14 +2158,13 @@
     "1x2t07p",
     "1x2uga9",
     "1x2w1ek",
-    "1x2uox9",
-    "1x2utxz",
-    "1x2swfk",
-    "1x2na8q",
-    "1x2q7sf",
-    "1x2rthw"
+    "1x2uox9"
   ],
   "hn:front": [
+    "50224463",
+    "50223844",
+    "50224916",
+    "50219700",
     "50186450",
     "50219177",
     "50222133",
@@ -2656,11 +2660,7 @@
     "49975619",
     "49973598",
     "49950653",
-    "49961057",
-    "49963171",
-    "49969183",
-    "49971846",
-    "49970667"
+    "49961057"
   ],
   "rss:arxiv-cs-cl": [
     "oai:arXiv.org:2610.30828v1",
@@ -5099,6 +5099,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/017/523.htm",
+    "https://www.ithome.com/1/017/522.htm",
+    "https://www.ithome.com/1/017/521.htm",
+    "https://www.ithome.com/1/017/520.htm",
+    "https://www.ithome.com/1/017/519.htm",
+    "https://www.ithome.com/1/017/518.htm",
+    "https://www.ithome.com/1/017/517.htm",
+    "https://www.ithome.com/1/017/512.htm",
+    "https://www.ithome.com/1/017/511.htm",
+    "https://www.ithome.com/1/017/510.htm",
     "https://www.ithome.com/1/017/509.htm",
     "https://www.ithome.com/1/017/508.htm",
     "https://www.ithome.com/1/017/507.htm",
@@ -5588,17 +5598,7 @@
     "https://www.ithome.com/1/014/110.htm",
     "https://www.ithome.com/1/014/109.htm",
     "https://www.ithome.com/1/014/108.htm",
-    "https://www.ithome.com/1/014/101.htm",
-    "https://www.ithome.com/1/013/800.htm",
-    "https://www.ithome.com/1/014/065.htm",
-    "https://www.ithome.com/1/013/844.htm",
-    "https://www.ithome.com/1/013/843.htm",
-    "https://www.ithome.com/1/013/842.htm",
-    "https://www.ithome.com/1/013/840.htm",
-    "https://www.ithome.com/1/013/839.htm",
-    "https://www.ithome.com/1/013/838.htm",
-    "https://www.ithome.com/1/013/837.htm",
-    "https://www.ithome.com/1/013/836.htm"
+    "https://www.ithome.com/1/014/101.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85702",
@@ -6220,6 +6220,11 @@
     "https://sspai.com/post/113827"
   ],
   "deals:radar": [
+    "tag:github.com,2008:Grit::Commit/5897a7ca049887e9e10149e638ec09e3519ba616",
+    "tag:github.com,2008:Grit::Commit/adbaa13033cb98bd69dae0ac96d3397a1a2a30cf",
+    "tag:github.com,2008:Grit::Commit/c51415176dee302d9caeb44ffad1a263aa541833",
+    "tag:github.com,2008:Grit::Commit/b534afea071bd7e2423b81baed01726cf724030e",
+    "tag:github.com,2008:Grit::Commit/63f9ae596f73900b7b8f79abc8cb8f54e4e59dab",
     "openrouter-recursive/flint-v1.0:free",
     "t3_1x5zkw6",
     "tag:github.com,2008:Grit::Commit/cf97c32fec1b2e96e9936746e2731a81bd5ea33f",
@@ -6267,7 +6272,8 @@
   ],
   "_zenwatch_known": {
     "opencode-go": [
-      "beam-free"
+      "beam-free",
+      "iceman-contributor-free"
     ]
   },
   "zenwatch:opencode": [
