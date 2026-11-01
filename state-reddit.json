@@ -115,6 +115,10 @@
     "1vvmly0"
   ],
   "reddit:LocalLLaMA": [
+    "1xkngat",
+    "1xkp6r5",
+    "1xkox4q",
+    "1xko42y",
     "1xkiuut",
     "1xklq96",
     "1xkibxw",
@@ -610,11 +614,7 @@
     "1xed2xx",
     "1xed2a8",
     "1xee31e",
-    "1xegina",
-    "1xe88ja",
-    "1xebdzl",
-    "1xe8x9c",
-    "1xebkti"
+    "1xegina"
   ],
   "reddit:programming": [
     "1vy1csq",
@@ -655,6 +655,30 @@
     "1vtih22"
   ],
   "reddit:ClaudeAI": [
+    "1xkn61s",
+    "1xkn3tc",
+    "1xkmzet",
+    "1xko2cs",
+    "1xkpsg4",
+    "1xko5jd",
+    "1xko2ir",
+    "1xknolj",
+    "1xknak5",
+    "1xkqeqq",
+    "1xkq9j8",
+    "1xkq3qh",
+    "1xkq2c4",
+    "1xkpolw",
+    "1xkpd4u",
+    "1xkozk8",
+    "1xkoyaq",
+    "1xkoumf",
+    "1xkokei",
+    "1xkngcv",
+    "1xkmppn",
+    "1xkmgsd",
+    "1xknrj3",
+    "1xkodnz",
     "1xkl6pl",
     "1xkl1sr",
     "1xkizra",
@@ -1130,33 +1154,10 @@
     "1xhr0xp",
     "1xhqqpc",
     "1xhpza1",
-    "1xhpxvl",
-    "1xhl5cb",
-    "1xhi21l",
-    "1xhjaqw",
-    "1xhm3o6",
-    "1xhjg4g",
-    "1xhnes6",
-    "1xhm56v",
-    "1xhlw2k",
-    "1xhj6k2",
-    "1xhmb35",
-    "1xhkfpl",
-    "1xhnioe",
-    "1xhngwc",
-    "1xhn6fl",
-    "1xhm2cc",
-    "1xhlkri",
-    "1xhiz86",
-    "1xhl4xw",
-    "1xhl3zz",
-    "1xhink5",
-    "1xhkq8k",
-    "1xhkos1",
-    "1xhgyrx",
-    "1xhkczg"
+    "1xhpxvl"
   ],
   "reddit:LLMDevs": [
+    "1xkq65s",
     "1xkmfr2",
     "1xklyaz",
     "1xklf5c",
@@ -1655,10 +1656,13 @@
     "1x6irdp",
     "1x6i0t5",
     "1x6dnrz",
-    "1x6bk9l",
-    "1x6712p"
+    "1x6bk9l"
   ],
   "reddit:singularity": [
+    "1xkoi9g",
+    "1xkq9vw",
+    "1xkpvc0",
+    "1xkq2cu",
     "1xkjmb3",
     "1xklpe5",
     "1xklfo1",
@@ -2154,13 +2158,12 @@
     "1x7tb02",
     "1x7udbi",
     "1x7ucce",
-    "1x7tavk",
-    "1x7uhl4",
-    "1x7nv4y",
-    "1x7p426",
-    "1x7mjdd"
+    "1x7tavk"
   ],
   "hn:front": [
+    "50320963",
+    "50320028",
+    "50320995",
     "50319510",
     "50319143",
     "50316100",
@@ -2657,10 +2660,7 @@
     "50083130",
     "50082470",
     "50072286",
-    "50054092",
-    "50078141",
-    "50077020",
-    "50072994"
+    "50054092"
   ],
   "rss:arxiv-cs-cl": [
     "oai:arXiv.org:2610.36582v1",
@@ -3579,6 +3579,8 @@
     "tag:www.ruanyifeng.com,2026:/blog//1.2552"
   ],
   "rss:simonwillison": [
+    "https://simonwillison.net/2026/Oct/31/how-we-took-over-chatgpt-accounts/",
+    "https://simonwillison.net/2026/Oct/31/datasette-llm/",
     "https://simonwillison.net/2026/Oct/30/nesformer/",
     "https://simonwillison.net/2026/Oct/29/api-credits/",
     "https://simonwillison.net/2026/Oct/29/how-i-built-the-most-ai-pilled-company-in-the-world/",
@@ -5199,6 +5201,16 @@
     "demo/p"
   ],
   "rss:ithome": [
+    "https://www.ithome.com/1/020/644.htm",
+    "https://www.ithome.com/1/020/643.htm",
+    "https://www.ithome.com/1/020/642.htm",
+    "https://www.ithome.com/1/020/641.htm",
+    "https://www.ithome.com/1/020/640.htm",
+    "https://www.ithome.com/1/020/639.htm",
+    "https://www.ithome.com/1/020/638.htm",
+    "https://www.ithome.com/1/020/637.htm",
+    "https://www.ithome.com/1/020/636.htm",
+    "https://www.ithome.com/1/020/635.htm",
     "https://www.ithome.com/1/020/622.htm",
     "https://www.ithome.com/1/020/621.htm",
     "https://www.ithome.com/1/020/620.htm",
@@ -5688,17 +5700,7 @@
     "https://www.ithome.com/1/016/517.htm",
     "https://www.ithome.com/1/016/516.htm",
     "https://www.ithome.com/1/016/515.htm",
-    "https://www.ithome.com/1/016/514.htm",
-    "https://www.ithome.com/1/016/279.htm",
-    "https://www.ithome.com/1/016/276.htm",
-    "https://www.ithome.com/1/016/275.htm",
-    "https://www.ithome.com/1/016/270.htm",
-    "https://www.ithome.com/1/016/269.htm",
-    "https://www.ithome.com/1/016/268.htm",
-    "https://www.ithome.com/1/016/267.htm",
-    "https://www.ithome.com/1/016/263.htm",
-    "https://www.ithome.com/1/016/261.htm",
-    "https://www.ithome.com/1/016/259.htm"
+    "https://www.ithome.com/1/016/514.htm"
   ],
   "rss:solidot": [
     "https://www.solidot.org/story?sid=85764",
